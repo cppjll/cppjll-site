@@ -1,0 +1,58 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { Image } from 'astro:assets';
+import logo from '../images/bun.png';
+import placeholder from '../images/placeholder.png';
+import squiggly from '../images/squiggly.svg';
+import BoardMemberCard from "../components/BoardMemberCard";
+---
+
+<Layout>
+    <!-- Top section -->
+    <div class="h-screen w-screen mb-7 bg-secondary flex justify-center items-center">  
+        <div class="text-center">
+            <Image src={logo} alt="logo" class="w-36 mx-auto mb-2" />
+            <h1 class="text-4xl font-bold text-accent mb-4 ">Japanese Language Learning Club</h1>
+            <button class="btn btn-accent btn-outline w-36">Events</button>
+        </div>
+    </div>
+    <!-- End top section -->
+    <!-- Content -->
+    <div class="flex flex-col">
+        <!-- Events -->
+        <div class="flex flex-col mb-6 mx-6">
+            <h1 class="text-5xl font-bold text-accent mb-4 font-display">Current Event</h1>
+                <div class="flex flex-col">     <!-- Placeholder for featured event. This will be dynamic later -->
+                    <Image src={placeholder} alt="placeholder" class="w-full mx-auto rounded-lg mb-2" />
+                    <h2 class="text-3xl font-bold text-accent mb-1 font-display">Meeting #9</h2>
+                    <p class="text-xl text-accent mb-4">...Do you ever get the feeling that someone is watching you...? It's okay! It's just me! 💖</p>
+                </div>
+            <button class="btn btn-accent btn-outline w-full mb-4">See All Events</button>
+        </div>
+        <!-- End Events -->
+
+        <!-- Squiggly -->
+        <div class="flex flex-col mb-6">
+            <img src={squiggly.src} alt="squiggly" class="w-full mb-2" />
+        </div>
+        <!-- End Squiggly -->
+        
+        <!-- About -->
+        <div class="flex flex-col mb-10 mx-6">
+            <h1 class="text-5xl font-bold text-accent mb-4 font-display">About</h1>
+            <div class="flex flex-col">
+                <p class="text-xl text-accent mb-4">The Cal Poly Pomona Japanese Language Learning Club (CPP JLL) is a community dedicated to exploring Japanese language and culture in a variety of ways, whether it be through assisting beginners, housing reading and viewing groups, hosting workshops, or meeting and socializing with fellow learners.</p>
+                <p class="text-xl text-accent mb-4">We are open to all skill-levels. Please feel free to join our community on our Japanese-learning journey! Check out our Discord server to learn more!</p>
+            </div>
+        </div>
+        <!-- End About -->
+        <!-- Board -->
+        <div class="flex flex-col mb-6 mx-6">
+            <h1 class="text-5xl font-bold text-accent mb-4 font-display">Board</h1>
+            <div class="flex flex-col">
+                <BoardMemberCard />
+            </div>
+        </div>
+    </div>
+    
+</Layout>
