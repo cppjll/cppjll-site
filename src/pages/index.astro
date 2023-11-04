@@ -6,6 +6,7 @@ import squiggly from '../images/squiggly.svg';
 import BoardMemberCard from "../components/BoardMemberCard";
 import EventCard from "../components/EventCard";
 import { getCollection } from "astro:content";
+import { slide } from "astro:transitions";
 
 const upcomingEvents = await getCollection("events", ({ data }) => {
     const eventDate = new Date(data.date);
@@ -17,14 +18,14 @@ const upcomingEvents = await getCollection("events", ({ data }) => {
 <Layout title="CPP Japanese Language Learners">
     <!-- Top section -->
     <div class="h-[70vh] w-screen mb-7 bg-secondary flex justify-center items-center">  
-        <div class="text-center">
+        <div transition:animate={slide ({ duration: '0.3s' })} class="text-center">
             <Image src={logo} alt="logo" class="w-36 mx-auto mb-2" />
             <h1 class="text-4xl font-bold text-accent mb-4 mx-4">CPP Japanese Language Learners</h1>
         </div>
     </div>
     <!-- End top section -->
     <!-- Content -->
-    <div class="flex flex-col ">
+    <div transition:animate={slide ({ duration: '0.5s' })} class="flex flex-col">
         <!-- About -->
         <div class="flex flex-col mb-10 mx-6">
             <h1 class="text-5xl font-bold text-accent mb-4 font-display">About</h1>
