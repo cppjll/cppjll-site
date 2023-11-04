@@ -1,4 +1,5 @@
 ---
+import { slide } from "astro:transitions";
 import EventCard from "../components/EventCard";
 import Layout from "../layouts/Layout.astro";
 import { getCollection } from "astro:content";
@@ -17,20 +18,24 @@ const previousEvents = await getCollection("events", ({ data }) => {
     <div class="flex flex-col">
         <!-- Events -->
         <div class="flex flex-col my-6 mx-6">
-            <h1 class="text-5xl font-bold text-accent mb-4 font-display">Upcoming Event</h1>
-            {
-                upcomingEvents.map((event) => (
-                    <EventCard event={event} />
-                ))
-            }
+            <h1 transition:animate={slide ({ duration: '0.3s' })} class="text-5xl font-bold text-accent mb-4 font-display">Upcoming Event</h1>
+            <div transition:animate={slide ({ duration: '0.4s' })}>
+                {
+                    upcomingEvents.map((event) => (
+                        <EventCard event={event} />
+                        ))
+                    }
+            </div>
         </div>
         <div class="flex flex-col my-6 mx-6">
-            <h1 class="text-5xl font-bold text-accent mb-4 font-display">Previous Events</h1>
-            {
-                previousEvents.map((event) => (
-                    <EventCard event={event} />
-                ))
-            }
+            <h1 transition:animate={slide ({ duration: '0.5s' })} class="text-5xl font-bold text-accent mb-4 font-display">Previous Events</h1>
+            <div transition:animate={slide ({ duration: '0.6s' })}>
+                {
+                    previousEvents.map((event) => (
+                        <EventCard event={event} />
+                    ))
+                }
+            </div>
         </div>
     </div>
 </Layout>
