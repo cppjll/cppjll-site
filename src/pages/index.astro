@@ -17,30 +17,15 @@ const upcomingEvents = await getCollection("events", ({ data }) => {
 
 <Layout title="CPP Japanese Language Learners">
     <!-- Top section -->
-    <div class="h-screen w-screen mb-7 bg-secondary flex justify-center items-center">  
+    <div class="h-[70vh] w-screen mb-7 bg-secondary flex justify-center items-center">  
         <div class="text-center">
             <Image src={logo} alt="logo" class="w-36 mx-auto mb-2" />
             <h1 class="text-4xl font-bold text-accent mb-4 mx-4">CPP Japanese Language Learners</h1>
-            <button class="btn btn-accent btn-outline w-36">Events</button>
         </div>
     </div>
     <!-- End top section -->
     <!-- Content -->
     <div class="flex flex-col ">
-        <!-- Events -->
-        <div class="flex flex-col mb-6 mx-6">
-            <h1 class="text-5xl font-bold text-accent mb-4 font-display">Current Event</h1>
-                <EventCard event={upcomingEvents[0]} />
-            <a href='/events' class="btn btn-accent btn-outline w-full mb-4">See All Events</a>
-        </div>
-        <!-- End Events -->
-
-        <!-- Squiggly -->
-        <div class="flex flex-col mb-6">
-            <img src={squiggly.src} alt="squiggly" class="w-full mb-2" />
-        </div>
-        <!-- End Squiggly -->
-        
         <!-- About -->
         <div class="flex flex-col mb-10 mx-6">
             <h1 class="text-5xl font-bold text-accent mb-4 font-display">About</h1>
@@ -50,6 +35,20 @@ const upcomingEvents = await getCollection("events", ({ data }) => {
             </div>
         </div>
         <!-- End About -->
+        
+        <!-- Squiggly -->
+        <div class="flex flex-col mb-6">
+            <img src={squiggly.src} alt="squiggly" class="w-full mb-2" />
+        </div>
+        <!-- End Squiggly -->
+        <!-- Events -->
+        <div class="flex flex-col mb-6 mx-6">
+            <h1 class="text-5xl font-bold text-accent mb-4 font-display">Current Event</h1>
+                <EventCard event={upcomingEvents[0]} />
+            <a href='/events' class="btn btn-accent btn-outline w-full mb-4">See All Events</a>
+        </div>
+        <!-- End Events -->
+        
         <!-- Board -->
         <div class="flex flex-col mb-6 mx-6">
             <h1 class="text-5xl font-bold text-accent mb-4 font-display">Board</h1>
