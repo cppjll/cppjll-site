@@ -1,0 +1,18 @@
+---
+import '../global.css';
+import Navbar from '../components/Navbar';
+const {frontmatter} = Astro.props;
+---
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>{frontmatter.title} - CPP Japanese Language Learners</title>
+    </head>
+    <body>
+        <div>
+            <Navbar />
+        </div>
+        <slot />
+    </body>
+</html>
