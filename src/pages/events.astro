@@ -1,6 +1,6 @@
 ---
 import { slide } from "astro:transitions";
-import EventCard from "../components/EventCard";
+import EventCard from "../components/EventCard.astro";
 import Layout from "../layouts/Layout.astro";
 import { getCollection } from "astro:content";
 const upcomingEvents = await getCollection("events", ({ data }) => {
