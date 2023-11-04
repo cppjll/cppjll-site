@@ -1,6 +1,7 @@
 ---
 import '../global.css';
 import Navbar from '../components/Navbar';
+import { Image } from 'astro:assets';
 const {frontmatter} = Astro.props;
 ---
 <html lang="en">
@@ -13,6 +14,8 @@ const {frontmatter} = Astro.props;
         <div>
             <Navbar />
         </div>
+        <h1>{frontmatter.title}</h1>
+        <Image src={frontmatter.image.src} alt={frontmatter.image.alt} width=905 height=905 />
         <slot />
     </body>
 </html>

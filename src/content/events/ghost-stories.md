@@ -8,7 +8,6 @@ image:
     alt: Ghost Stories
 ---
 
-## Ghost Stories (怪談) 👻
 **いちまい、にまい、さんまい…**
 What does this mean? Well, join us in the next meeting to find out!
 oooo you wanna know so bad what it means, *oooooo curiosity plagues your mind～* 😐
