@@ -1,0 +1,25 @@
+---
+import '../global.css';
+import Navbar from '../components/Navbar';
+import { Image } from 'astro:assets';
+const {frontmatter} = Astro.props;
+---
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>{frontmatter.title} - CPP Japanese Language Learners</title>
+    </head>
+    <body>
+        <div>
+            <Navbar />
+        </div> 
+        <div class="flex flex-col mt-4 mb-6 mx-6">    
+            <h1 class="text-4xl font-bold text-accent mb-4 font-display">{frontmatter.title}</h1>
+            <Image src={frontmatter.image.src} alt={frontmatter.image.alt} width=905 height=905 class="rounded-xl" />
+            <article class="prose mt-4">
+                <slot />
+            </article>
+        </div>
+    </body>
+</html>

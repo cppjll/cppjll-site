@@ -7,6 +7,25 @@ export default {
                 'sans': ['"DM Sans"', 'sans-serif'],
                 'display': ['"DM Serif Display"', 'serif'],
             },
+            typography: {
+                DEFAULT: {
+                    css: {
+                        color: '#204063',
+                        h1: {
+                            color: '#204063',
+                        },
+                        h2: {
+                            color: '#204063',
+                        },
+                        h3: {
+                            color: '#204063',
+                        },
+                        strong: {
+                            color: '#204063',
+                        },
+                    },
+                },
+            },
         },
 	},
 
@@ -22,5 +41,8 @@ export default {
         ],
     },
 
-	plugins: [require("daisyui")],
+	plugins: [
+        require("daisyui"),
+        require('@tailwindcss/typography'),
+    ],
 }
