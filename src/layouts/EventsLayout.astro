@@ -20,6 +20,13 @@ const {frontmatter} = Astro.props;
             <Navbar />
         </div> 
         <div class="flex flex-col mt-4 mb-6 mx-6">    
+            <div class="breadcrumbs text-accent mb-4">
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/events">Events</a></li>
+                    <li>{frontmatter.title}</li>
+                </ul>
+            </div>
             <h1 transition:animate={slide ({ duration: '0.3s' })} class="text-4xl font-bold text-accent mb-4 font-display">{frontmatter.title}</h1>
             <Image transition:animate={slide ({ duration: '0.4s' })} src={frontmatter.image.src} alt={frontmatter.image.alt} width=905 height=905 class="rounded-xl" />
             <article transition:animate={slide ({ duration: '0.5s' })} class="prose mt-4">
