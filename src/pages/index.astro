@@ -5,6 +5,14 @@ import logo from '../images/bun.png';
 import placeholder from '../images/placeholder.png';
 import squiggly from '../images/squiggly.svg';
 import BoardMemberCard from "../components/BoardMemberCard";
+import EventCard from "../components/EventCard";
+import { getCollection } from "astro:content";
+
+const upcomingEvents = await getCollection("events", ({ data }) => {
+    const eventDate = new Date(data.date);
+    const today = new Date();
+    return eventDate >= today;
+});
 ---
 
 <Layout title="CPP Japanese Language Learners">
@@ -22,14 +30,7 @@ import BoardMemberCard from "../components/BoardMemberCard";
         <!-- Events -->
         <div class="flex flex-col mb-6 mx-6">
             <h1 class="text-5xl font-bold text-accent mb-4 font-display">Current Event</h1>
-                <!-- PLACEHOLDER for featured event. This will be dynamic later -->
-                <div class="flex flex-col">
-                    <Image src={placeholder} alt="placeholder" class="w-full mx-auto rounded-lg mb-2" />
-                    <h2 class="text-3xl font-bold text-accent mb-1 font-display">Ghost Stories</h2>
-                    <p class="text-xl text-accent mb-4">Join us on a night of spooky stories, ft. plates, ghosts, and some other spooky stuff!</p>
-                </div>
-                <!-- PLACEHOLDER end -->
-            <!-- /events doesn't exist yet -->
+                <EventCard event={upcomingEvents[0]} />
             <a href='/events' class="btn btn-accent btn-outline w-full mb-4">See All Events</a>
         </div>
         <!-- End Events -->
