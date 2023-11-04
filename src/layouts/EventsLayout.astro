@@ -14,8 +14,10 @@ const {frontmatter} = Astro.props;
         <div>
             <Navbar />
         </div>
-        <h1>{frontmatter.title}</h1>
-        <Image src={frontmatter.image.src} alt={frontmatter.image.alt} width=905 height=905 />
-        <slot />
+        <div class="flex flex-col mb-6 mx-6">    
+            <h1>{frontmatter.title}</h1>
+            <Image src={frontmatter.image.src} alt={frontmatter.image.alt} width=905 height=905 class="rounded-xl" />
+            <slot />
+        </div>
     </body>
 </html>
