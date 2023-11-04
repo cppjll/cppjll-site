@@ -1,12 +1,28 @@
 ---
+import { Image } from "astro:assets";
 import Layout from "../layouts/Layout.astro";
+import { getCollection } from "astro:content";
+
+const events = await getCollection("events");
 ---
 <Layout title="Events - CPP Japanese Language Learners">
     <div class="flex flex-col">
         <!-- Events -->
         <div class="flex flex-col my-6 mx-6">
             <h1 class="text-5xl font-bold text-accent mb-4 font-display">Upcoming Event</h1>
-                
+            {
+                events.map((event) => (
+                    // TODO: move this to a component
+                    <a href={`events/${event.slug}`}>
+                        <div class="flex flex-col">
+                            <img src={event.data.image.src} alt={event.data.image.alt} class="w-full mx-auto rounded-lg mb-2" />
+                            <h2 class="text-3xl font-bold text-accent mb-2 font-display">{event.data.title}</h2>
+                            <p class="text-xl italic text-accent mb-2">Date: {event.data.date.toLocaleDateString()}</p>
+                            <p class="text-xl text-accent mb-4">{event.data.description}</p>  
+                        </div>
+                    </a>
+                ))
+            }
         </div>
         <div class="flex flex-col my-6 mx-6">
             <h1 class="text-5xl font-bold text-accent mb-4 font-display">Previous Events</h1>
