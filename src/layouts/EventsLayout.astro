@@ -2,7 +2,8 @@
 import '../global.css';
 import Navbar from '../components/Navbar';
 import { Image } from 'astro:assets';
-import icon from "../../public/favicon.ico";
+import icon from "/favicon.ico";
+import { ViewTransitions } from 'astro:transitions';
 const {frontmatter} = Astro.props;
 ---
 <html lang="en">
@@ -11,8 +12,9 @@ const {frontmatter} = Astro.props;
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href={icon} type="image/x-icon" />
         <title>{frontmatter.title} - CPP Japanese Language Learners</title>
+        <ViewTransitions />
     </head>
-    <body>
+    <body transition:animate="slide" >
         <div>
             <Navbar />
         </div> 
