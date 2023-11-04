@@ -2,12 +2,14 @@
 import '../global.css';
 import Navbar from '../components/Navbar';
 import { Image } from 'astro:assets';
+import icon from "../../public/favicon.ico";
 const {frontmatter} = Astro.props;
 ---
 <html lang="en">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" href={icon} type="image/x-icon" />
         <title>{frontmatter.title} - CPP Japanese Language Learners</title>
     </head>
     <body>
