@@ -18,6 +18,12 @@ const previousEvents = await getCollection("events", ({ data }) => {
     <div class="flex flex-col">
         <!-- Events -->
         <div class="flex flex-col my-6 mx-6">
+            <div class="breadcrumbs text-accent mb-4">
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/events">Events</a></li>
+                </ul>
+            </div>
             <h1 transition:animate={slide ({ duration: '0.3s' })} class="text-5xl font-bold text-accent mb-4 font-display">Upcoming Event</h1>
             <div transition:animate={slide ({ duration: '0.4s' })}>
                 {
