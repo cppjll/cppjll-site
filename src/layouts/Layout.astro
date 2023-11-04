@@ -1,14 +1,19 @@
 ---
 import "../global.css"
+import Navbar from "../components/Navbar";
+const { title } = Astro.props;
 ---
 
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width" />
-        <title>CPP Japanese Language Learning Club</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>{title}</title>
     </head>
     <body>
+        <div class="absolute top-0 left-0 w-full">
+            <Navbar />
+        </div>
         <slot />
     </body>
 </html>
