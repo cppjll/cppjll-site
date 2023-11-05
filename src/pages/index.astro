@@ -13,6 +13,7 @@ const upcomingEvents = await getCollection("events", ({ data }) => {
     const today = new Date();
     return eventDate >= today;
 });
+const boardMembers = await getCollection("board");
 ---
 
 <Layout title="CPP Japanese Language Learners">
@@ -54,7 +55,11 @@ const upcomingEvents = await getCollection("events", ({ data }) => {
             <!-- Make this look more clickable? -->
             <a href="/board"><h1 class="text-5xl font-bold text-accent mb-4 font-display">Board</h1></a>
             <div class="flex flex-col">
-                
+                {
+                    boardMembers.map((boardMember) => (
+                        <BoardMemberCard member={boardMember} />
+                    ))
+                }
             </div>
         </div>
     </div>
