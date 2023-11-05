@@ -53,8 +53,6 @@ const upcomingEvents = await getCollection("events", ({ data }) => {
         <div class="flex flex-col mb-6 mx-6">
             <h1 class="text-5xl font-bold text-accent mb-4 font-display">Board</h1>
             <div class="flex flex-col">
-                <!-- Maybe make this dynamic in the future, pulling from CMS? -->
-                <!-- Also make the cards do something on click, maybe a pop-up component or something that goes over top of the screen with more details about the board member? -->
                 <BoardMemberCard name="Leonard Woo" position="President" image='https://cdn.discordapp.com/avatars/354814344414101504/37e0fb23fe25d83dfdef19263d9ad3ee?size=256' />
                 <BoardMemberCard name="Alan Le" position="Vice President" image='https://cdn.discordapp.com/avatars/202902066891325440/0744875313f0115e246a78bbd5218f6f.webp?size=1024&width=0&height=256' />
                 <BoardMemberCard name="Brandon Tseng" position="Scheduler" image='https://cdn.discordapp.com/avatars/275462572197675008/173abb96b0535613f74b77cafdc12ead.webp?size=1024&width=0&height=256' />
