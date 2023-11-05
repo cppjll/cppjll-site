@@ -23,6 +23,7 @@ const boardCollection = defineCollection({
             src: z.string(),
             alt: z.string(),
         }),
+        bio: z.string(),
     }),
 });
 
