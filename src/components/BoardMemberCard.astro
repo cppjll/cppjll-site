@@ -2,7 +2,7 @@
 import { Image } from "astro:assets";
 const {member} = Astro.props;
 ---
-<a href="/board">
+<a href=`/board#${member.slug}`>
     <div class="flex items-center w-full h-48 rounded-xl bg-secondary mb-4">
         <div class="grid grid-cols-2 w-full h-full items-center">
             <div class='flex ml-6 w-36'>
