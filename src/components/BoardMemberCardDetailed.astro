@@ -3,7 +3,7 @@ import { Image } from "astro:assets";
 const {member} = Astro.props;
 ---
 
-<div class="card w-full shadow-2xl">
+<div class="card w-full shadow-2xl mb-6">
     <!-- The height/width here are arbitrary, figure out later -->
     <figure class="bg-secondary" ><Image transition:name={member.data.name} src={member.data.image.src} alt={member.data.image.alt} width=300 height=300 class="rounded-full my-4 w-36" /></figure>
     <div class="card-body">
