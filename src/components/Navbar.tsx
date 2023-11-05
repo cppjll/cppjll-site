@@ -1,5 +1,4 @@
 import logo from '../images/bun.png'
-import { AiOutlineMenu } from "react-icons/ai";
 
 export default function NavBar() {
     return (
@@ -8,7 +7,8 @@ export default function NavBar() {
             <div className='navbar-start'>
                 <details className='dropdown'>
                     <summary tabIndex={0} className='btn btn-ghost md:hidden'>
-                        <AiOutlineMenu color='black' className='w-6 h-6 text-secondary'></AiOutlineMenu>
+                        {/* Menu bar thing */}
+                        <svg className='w-6 h-6' xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
                     </summary>
                     <ul tabIndex={0} className='menu menu-sm dropdown-content mt-3 z-[1] p-2 bg-slate-100 text-accent rounded-box w-52'>
                         <li><a href="/events">Events</a></li>
