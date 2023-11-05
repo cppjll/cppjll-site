@@ -1,0 +1,17 @@
+---
+import { Image } from "astro:assets";
+const {member} = Astro.props;
+---
+<a href=`/board#${member.slug}`>
+    <div class="flex items-center w-full h-48 rounded-xl bg-secondary mb-4">
+        <div class="grid grid-cols-2 w-full h-full items-center">
+            <div class='flex ml-6 w-36'>
+                <Image src={member.data.image.src} alt={member.data.image.alt} width=256 height=256 class='rounded-full z-10' />
+            </div>
+            <div class="text-right mr-6" >
+                <h1 class="text-3xl text-accent font-display font-bold">{member.data.name}</h1>
+                <p class="text-lg text-accent">{member.data.position}</p>
+            </div>
+        </div>
+    </div>
+</a>

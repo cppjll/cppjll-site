@@ -1,0 +1,25 @@
+---
+import Layout from "../layouts/Layout.astro";
+import BoardMemberCardDetailed from "../components/BoardMemberCardDetailed.astro";
+import { getCollection } from "astro:content";
+import { slide } from "astro:transitions";
+const boardMembers = await getCollection("board");
+---
+<Layout title="Board - CPP Japanees Language Learners">
+    <div class="flex flex-col my-6 mx-6">
+        <div class="breadcrumbs text-accent mb-4">
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/board">Board</a></li>
+            </ul>
+        </div>
+        <h1 transition:animate={slide ({ duration: '0.3s' })} class="text-5xl font-bold text-accent mb-4 font-display">Board</h1>
+        <div transition:animate={slide ({ duration: '0.4s' })}>
+            {
+                boardMembers.map((boardMember) => (
+                    <BoardMemberCardDetailed member={boardMember} />
+                ))
+            }
+        </div>
+    </div>
+</Layout>

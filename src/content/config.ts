@@ -14,6 +14,20 @@ const eventsCollection = defineCollection({
     }),
 });
 
+const boardCollection = defineCollection({
+    type: 'content',
+    schema: z.object({
+        name: z.string(),
+        position: z.string(),
+        image: z.object({
+            src: z.string(),
+            alt: z.string(),
+        }),
+        bio: z.string(),
+    }),
+});
+
 export const collections = {
     events: eventsCollection,
+    board: boardCollection,
 };

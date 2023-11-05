@@ -3,7 +3,7 @@ import Layout from "../layouts/Layout.astro";
 import { Image } from 'astro:assets';
 import logo from '../images/bun.png';
 import squiggly from '../images/squiggly.svg';
-import BoardMemberCard from "../components/BoardMemberCard";
+import BoardMemberCard from "../components/BoardMemberCard.astro";
 import EventCard from "../components/EventCard.astro";
 import { getCollection } from "astro:content";
 import { slide } from "astro:transitions";
@@ -13,6 +13,7 @@ const upcomingEvents = await getCollection("events", ({ data }) => {
     const today = new Date();
     return eventDate >= today;
 });
+const boardMembers = await getCollection("board");
 ---
 
 <Layout title="CPP Japanese Language Learners">
@@ -51,15 +52,14 @@ const upcomingEvents = await getCollection("events", ({ data }) => {
         
         <!-- Board -->
         <div class="flex flex-col mb-6 mx-6">
-            <h1 class="text-5xl font-bold text-accent mb-4 font-display">Board</h1>
+            <!-- Make this look more clickable? -->
+            <a href="/board"><h1 class="text-5xl font-bold text-accent mb-4 font-display">Board</h1></a>
             <div class="flex flex-col">
-                <!-- Maybe make this dynamic in the future, pulling from CMS? -->
-                <!-- Also make the cards do something on click, maybe a pop-up component or something that goes over top of the screen with more details about the board member? -->
-                <BoardMemberCard name="Leonard Woo" position="President" image='https://cdn.discordapp.com/avatars/354814344414101504/37e0fb23fe25d83dfdef19263d9ad3ee?size=256' />
-                <BoardMemberCard name="Alan Le" position="Vice President" image='https://cdn.discordapp.com/avatars/202902066891325440/0744875313f0115e246a78bbd5218f6f.webp?size=1024&width=0&height=256' />
-                <BoardMemberCard name="Brandon Tseng" position="Scheduler" image='https://cdn.discordapp.com/avatars/275462572197675008/173abb96b0535613f74b77cafdc12ead.webp?size=1024&width=0&height=256' />
-                <BoardMemberCard name="Marissa" position="Treasurer" image='https://media.discordapp.net/attachments/730502676323762227/1169066725837373522/image.png?ex=65540d3b&is=6541983b&hm=08a4a9d2d2d0c91db60df351c503f6c3f282db65fd258def3f98e1fc161dbbc3&=' />
-                <BoardMemberCard name="Taehyuan Yoon" position="Events Manager" image='https://cdn.discordapp.com/avatars/442105074798297098/e74ab2037126c78bda0c278cca151318.webp?size=1024&width=0&height=256' />
+                {
+                    boardMembers.map((boardMember) => (
+                        <BoardMemberCard member={boardMember} />
+                    ))
+                }
             </div>
         </div>
     </div>
