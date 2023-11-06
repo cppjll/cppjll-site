@@ -32,16 +32,12 @@ const boardMembers = await getCollection("board");
             <h1 class="text-5xl font-bold text-accent mb-4 font-display">About</h1>
             <div class="flex flex-col">
                 <p class="text-accent mb-4">The Cal Poly Pomona Japanese Language Learning Club (CPP JLL) is a community dedicated to exploring Japanese language and culture in a variety of ways, whether it be through assisting beginners, housing reading and viewing groups, hosting workshops, or meeting and socializing with fellow learners.</p>
-                <p class="text-accent mb-4">We are open to all skill-levels. Please feel free to join our community on our Japanese-learning journey! Check out our <span class="text-indigo-500 hover:underline"><a href="https://discord.com/invite/W5kxJtE3a7">Discord</a></span> server to learn more!</p>
+                <p class="text-accent mb-4">We are open to all skill-levels. Please feel free to join our community on our Japanese-learning journey! Check out our <span class="text-indigo-500 font-bold hover:underline"><a href="https://discord.com/invite/W5kxJtE3a7">Discord</a></span> server to learn more!</p>
+                <a class="btn btn-outline btn-accent" href="https://discord.com/invite/W5kxJtE3a7"><iconify-icon icon="ic:baseline-discord" class="text-2xl"></iconify-icon> Join the Discord</a>
             </div>
         </div>
         <!-- End About -->
-        
-        <!-- Squiggly -->
-        <div class="flex flex-col mb-6">
-            <img src={squiggly.src} alt="squiggly" class="w-full mb-2" />
-        </div>
-        <!-- End Squiggly -->
+
         <!-- Events -->
         <div class="flex flex-col mb-6 mx-6">
             <a href='/events'>
