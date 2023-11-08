@@ -8,11 +8,7 @@ import EventCard from "../components/EventCard.astro";
 import { getCollection } from "astro:content";
 import { slide } from "astro:transitions";
 
-const upcomingEvents = await getCollection("events", ({ data }) => {
-    const eventDate = new Date(data.date);
-    const today = new Date();
-    return eventDate >= today;
-});
+const upcomingEvents = await getCollection("events");
 const boardMembers = await getCollection("board");
 ---
 
