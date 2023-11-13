@@ -8,6 +8,11 @@ import { getCollection } from "astro:content";
 import { slide } from "astro:transitions";
 
 const upcomingEvents = await getCollection("events");
+// Sort events by date
+upcomingEvents.sort((a, b) => {
+    return +new Date(b.data.date) - +new Date(a.data.date);
+}); // this might be slow down prod
+
 const boardMembers = await getCollection("board");
 ---
 
