@@ -2,7 +2,7 @@
 name: Brandon Tseng
 position: Scheduler
 image: 
-    src: https://cdn.discordapp.com/avatars/275462572197675008/173abb96b0535613f74b77cafdc12ead.webp?size=1024&width=0&height=256
+    src: https://media.discordapp.net/attachments/793939258318651392/1174303847833935892/l.jpg?ex=65671aae&is=6554a5ae&hm=8f3fd5fa259a009f13042bbcadf3d04b980760a5381ecc89490a76d10ca83216&=&width=1332&height=1332
     alt: Photo of Brandon
-bio: こんいちは皆さにゃん。Hello Everynyan. My name is Brandon and I am the club's scheduler! I am a first year CS major. I started learning Japanese 4-5ish months ago towards the end of summer break! I haven't been consistently studying when school went into session though, so I'm barely an N5...hehe. I got into learning mainly because of YouTube videos about speaking foreign languages, Japanese music, anime artworks, and Bocchi the Rock! Kanji also drew my interest because I know Mandarin (I am Taiwanese).
+bio: Hello everynyan. My name is Brandon! I am a first year CS major, serving as the club's scheduler. I started studying Japanese towards the end of summer break 2023, but school had kept me busy so I am barely an N5... I mainly got into Japanese through Japanese music from artists such as Kessoku Band, Minami, and TUYU. I do not watch anime often, but my favorite show is Bocchi the Rock and my favorite movie is Whisper of the Heart! Some past times I enjoy are video games (ofc), guitar, and rock climbing.
 ---
