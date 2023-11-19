@@ -4,10 +4,10 @@ export default function NavBar() {
     return (
         <div className='navbar bg-secondary-focus'>
             {/* The left of the navbar, has hamburger menu on mobile, logo and pages on desktop */}
-            <div className='navbar-start'>
+            <div className='navbar-start md:w-full'>
                 <div className='hidden md:flex'>
-                    <ul className='menu menu-horizontal px-2 text-accent text-justify'>
-                        <a href="/" className="btn btn-ghost normal-case text-xl text-accent hover:scale-[1.05]"><img src={logo.src} className="w-9 mr-1"></img></a>
+                    <ul className='menu menu-horizontal px-2 text-accent text-justify space-x-auto'>
+                        <a href="/" className="btn btn-ghost normal-case text-xl text-accent hover:scale-[1.05] justify-center"><img src={logo.src} className="w-7 mr-3"></img>CPP JLL</a>
                         <li><a className="text-2xl hover:text-green-100" href="/events">Events</a></li>
                         <li><a className="text-2xl hover:text-green-100" href="/board">Board</a></li>
                     </ul>
