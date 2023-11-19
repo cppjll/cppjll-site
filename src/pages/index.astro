@@ -8,51 +8,48 @@ import { getCollection } from "astro:content";
 import { slide } from "astro:transitions";
 
 const upcomingEvents = await getCollection("events");
-// Sort events by date
-upcomingEvents.sort((a, b) => {
-    return +new Date(b.data.date) - +new Date(a.data.date);
-}); // this might be slow down prod
-
 const boardMembers = await getCollection("board");
 ---
 
 <Layout title="CPP Japanese Language Learners">
     <!-- Top section -->
-    <div class="h-[70vh] w-screen mb-7 bg-secondary flex justify-center items-center">  
+    <div class="h-[70vh] w-auto mb-7 bg-secondary flex justify-center items-center">
         <div transition:animate={slide ({ duration: '0.3s' })} class="text-center">
-            <Image src={logo} alt="logo" class="w-36 mx-auto mb-2" />
-            <h1 class="text-4xl font-bold text-accent mb-4 mx-4">CPP Japanese Language Learners</h1>
+            <Image src={logo} alt="logo" class="w-36 mx-auto" />
+            <div class="xms:flex">
+                <h1 class="text-4xl font-bold text-accent mb-4 mx-4 mt-4 xsm:w-[350px] h-full">CPP Japanese Language Learners</h1>
+            </div>
         </div>
     </div>
     <!-- End top section -->
+    
     <!-- Content -->
     <div transition:animate={slide ({ duration: '0.5s' })} class="flex flex-col">
         <!-- About -->
-        <div class="flex flex-col mb-10 mx-6">
-            <h1 class="text-5xl font-bold text-accent mb-4 font-display">About</h1>
+        <div class="flex flex-col mb-10 mx-6 w-auto">
+            <h1 class="text-5xl font-bold text-accent mb-4 font-display md:max-w-3xl md:mx-auto md:pr-[768px]">About</h1>
             <div class="flex flex-col">
-                <p class="text-accent mb-4">The Cal Poly Pomona Japanese Language Learning Club (CPP JLL) is a community dedicated to exploring Japanese language and culture in a variety of ways, whether it be through assisting beginners, housing reading and viewing groups, hosting workshops, or meeting and socializing with fellow learners.</p>
-                <p class="text-accent mb-4">We are open to all skill-levels. Please feel free to join our community on our Japanese-learning journey! Check out our <span class="text-indigo-500 font-bold hover:underline"><a href="https://discord.com/invite/W5kxJtE3a7">Discord</a></span> server to learn more!</p>
-                <a class="btn btn-outline btn-accent" href="https://discord.com/invite/W5kxJtE3a7"><iconify-icon icon="ic:baseline-discord" class="text-2xl"></iconify-icon> Join the Discord</a>
+                <p class="text-accent mb-4 md:max-w-3xl mx-auto">The Cal Poly Pomona Japanese Language Learning Club (CPP JLL) is a community dedicated to exploring Japanese language and culture in a variety of ways, whether it be through assisting beginners, housing reading and viewing groups, hosting workshops, or meeting and socializing with fellow learners.</p>
+                <p class="text-accent mb-4 md:max-w-3xl mx-auto">We are open to all skill-levels. Please feel free to join our community on our Japanese-learning journey! Check out our <span class="text-indigo-500 font-bold hover:underline"><a href="https://discord.com/invite/W5kxJtE3a7">Discord</a></span> server to learn more!</p>
+                <a class="btn btn-outline btn-accent btn-block md:btn-[644px] md:max-w-3xl md:mx-auto" href="https://discord.com/invite/W5kxJtE3a7"><iconify-icon icon="ic:baseline-discord" class="text-2xl"></iconify-icon> Join the Discord</a>
             </div>
         </div>
         <!-- End About -->
 
         <!-- Events -->
         <div class="flex flex-col mb-6 mx-6">
-            <a class="w-min group" href='/events'>
-                <h1 class="text-5xl font-bold text-accent mb-4 font-display group-hover:translate-x-3 transition-transform">Events</h1>
+            <a class="md:max-w-3xl md:mx-auto md:pr-[768px] hover:translate-x-3 transition-transform" href='/events'>
+                <h1 class="text-5xl font-bold text-accent mb-4 font-display">Events</h1>
             </a>
                 <EventCard event={upcomingEvents[0]} />
-            <a href='/events' class="btn btn-accent btn-outline w-full mb-4">See All Events</a>
+            <a href='/events' class="btn btn-outline btn-accent btn-block w-full mb-4 md:btn-[644px] md:max-w-3xl md:mx-auto">See All Events</a>
         </div>
         <!-- End Events -->
         
         <!-- Board -->
         <div class="flex flex-col mb-6 mx-6">
-            <!-- Make this look more clickable? -->
-            <a class="w-min group" href="/board">
-                <h1 class="text-5xl font-bold text-accent mb-4 font-display group-hover:translate-x-3 transition-transform">Board</h1>
+            <a class="md:max-w-3xl md:mx-auto md:pr-[768px] hover:translate-x-3 transition-transform" href="/board">
+                <h1 class="text-5xl font-bold text-accent mb-4 font-display">Board</h1>
             </a>
             <div class="flex flex-col">
                 {
@@ -62,6 +59,7 @@ const boardMembers = await getCollection("board");
                 }
             </div>
         </div>
+        <!-- End Board -->
     </div>
     
 </Layout>

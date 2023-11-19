@@ -3,15 +3,13 @@ import { Image } from "astro:assets"
 const {event} = Astro.props
 ---
 
-<a class="group" href={`events/${event.slug}`}>
-    <div class="card w-full shadow-xl mb-6">
-        <figure>
-            <Image transition:name={event.data.title} src={event.data.image.src} alt={event.data.image.alt} class="w-full mx-auto rounded-lg mb-2" width=950 height=950 />
-        </figure>
-        <div class="py-4 px-6 group-hover:underline">
-            <h2 class="text-3xl font-bold text-accent mb-2 font-display">{event.data.title}</h2>
-            <p class="italic text-accent mb-2">Date: {event.data.date.toLocaleDateString()}</p>
-            <p class="text-accent mb-4">{event.data.description}</p>  
-        </div>
+<a class="card md:card-side w-full shadow-xl mb-6 mb-4 hover:scale-[1.02] transition-all md:max-w-3xl md:mx-auto" href={`events/${event.slug}`}>
+    <figure>
+        <Image transition:name={event.data.title} src={event.data.image.src} alt={event.data.image.alt} class="object-scale-down max-w-5 mx-auto rounded-lg" width=950 height=950 />
+    </figure>
+    <div class="py-4 px-6">
+        <h2 class="text-3xl font-bold text-accent mb-2 font-display">{event.data.title}</h2>
+        <p class="italic text-accent mb-2">Date: {event.data.date.toLocaleDateString()}</p>
+        <p class="text-accent mb-4">{event.data.description}</p>  
     </div>
 </a>
