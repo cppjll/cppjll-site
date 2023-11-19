@@ -11,6 +11,14 @@ export default {
             '2xl': '1536px'
         },
 		extend: {
+            colors:{
+                // Instagram Color Gradient (Orange, Red, Purple)
+                'igOrange': '#f9ce34',
+                'igRed': '#ee2a7b',
+                'igPurple': '#6228d7',
+                // Discord Blurple
+                'blurple': '#7289da',
+            },
             fontFamily: {
                 'sans': ['"DM Sans"', 'sans-serif'],
                 'display': ['"DM Serif Display"', 'serif'],
