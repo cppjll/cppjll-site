@@ -13,8 +13,8 @@ const boardMembers = await getCollection("board");
                 <li><a href="/board">Board</a></li>
             </ul>
         </div>
-        <h1 transition:animate={slide ({ duration: '0.3s' })} class="text-5xl font-bold text-accent mb-4 font-display">Board</h1>
-        <div transition:animate={slide ({ duration: '0.4s' })}>
+        <h1 transition:animate={slide ({ duration: '0.3s' })} class="text-5xl font-bold text-accent mb-4 font-display md:max-w-3xl md:mx-auto md:pr-[768px]">Board</h1>
+        <div class="md:max-w-3xl md:mx-auto" transition:animate={slide ({ duration: '0.4s' })}>
             {
                 boardMembers.map((boardMember) => (
                     <BoardMemberCardDetailed member={boardMember} />
