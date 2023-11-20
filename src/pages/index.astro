@@ -1,19 +1,21 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import { Image } from 'astro:assets';
+import { Image, getImage } from 'astro:assets';
 import logo from '../images/bun.png';
+import bg from '../images/bg.png';
 import BoardMemberCard from "../components/BoardMemberCard.astro";
 import EventCard from "../components/EventCard.astro";
 import { getCollection } from "astro:content";
 import { slide } from "astro:transitions";
 
+const optimizedBg = await getImage({ src: bg });
 const upcomingEvents = await getCollection("events");
 const boardMembers = await getCollection("board");
 ---
 
 <Layout title="CPP Japanese Language Learners">
     <!-- Top section -->
-    <div class="h-[50vh] w-auto mb-7 bg-secondary flex justify-center items-center">
+    <div style=`background-image: url(${optimizedBg.src})` class="h-[50vh] w-auto mb-7 bg-secondary flex justify-center items-center bg-cover bg-center">
         <div transition:animate={slide ({ duration: '0.3s' })} class="text-center">
             <Image src={logo} alt="logo" class="w-36 mx-auto" />
             <div class="xsm:flex">
