@@ -24,7 +24,7 @@ const previousEvents = await getCollection("events", ({ data }) => {
                     <li><a href="/events">Events</a></li>
                 </ul>
             </div>
-            <h1 transition:animate={slide ({ duration: '0.3s' })} class="text-5xl font-bold text-accent mb-4 font-display md:whitespace-nowrap md:mx-auto md:pr-[434px]">Upcoming Event</h1>
+            <h1 transition:animate={slide ({ duration: '0.3s' })} class="text-5xl font-bold text-accent mb-4 font-display md:max-w-3xl md:whitespace-nowrap md:mx-auto md:pr-[424px]">Upcoming Event</h1>
             <div transition:animate={slide ({ duration: '0.4s' })}>
                 {
                     upcomingEvents.map((event) => (
@@ -34,7 +34,7 @@ const previousEvents = await getCollection("events", ({ data }) => {
             </div>
         </div>
         <div class="flex flex-col my-6 mx-6">
-            <h1 transition:animate={slide ({ duration: '0.5s' })} class="text-5xl font-bold text-accent mb-4 font-display md:whitespace-nowrap md:mx-auto md:pr-[434px]">Previous Events</h1>
+            <h1 transition:animate={slide ({ duration: '0.5s' })} class="text-5xl font-bold text-accent mb-4 font-display md:max-w-3xl md:whitespace-nowrap md:mx-auto md:pr-[434px]">Previous Events</h1>
             <div transition:animate={slide ({ duration: '0.6s' })}>
                 {
                     previousEvents.map((event) => (
