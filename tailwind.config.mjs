@@ -24,9 +24,9 @@ export default {
                 'display': ['"DM Serif Display"', 'serif'],
             },
             fontSize:{
-                // Between Medium-Large
-                'mdlg': ['1.1rem', {
-                    lineHeight:1.6,
+                // Font size specifically for navbar
+                'nv': ['1.25rem', {
+                    lineHeight:1,
                 }],
             },
             typography: {
