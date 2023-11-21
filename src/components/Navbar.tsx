@@ -26,8 +26,8 @@ export default function NavBar() {
                             <svg className='w-6 h-6' xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
                         </summary>
                         <ul tabIndex={0} className='menu menu-sm dropdown-content right-0 items-end mt-3 z-[1] p-2 bg-slate-100 text-accent rounded-box w-auto pr-4'>
-                            <li><a className="text-nv my-1 hover:text-green-100" href="/events">Events</a></li>
-                            <li><a className="text-nv my-1 hover:text-green-100" href="/board">Board</a></li>
+                            <li><a className="my-1 hover:text-green-100" href="/events">Events</a></li>
+                            <li><a className="my-1 hover:text-green-100" href="/board">Board</a></li>
                         </ul>
                     </details> 
                 </div>
