@@ -23,6 +23,12 @@ export default {
                 'sans': ['"DM Sans"', 'sans-serif'],
                 'display': ['"DM Serif Display"', 'serif'],
             },
+            fontSize:{
+                // Between Medium-Large
+                'mdlg': ['1.1rem', {
+                    lineHeight:1.6,
+                }],
+            },
             typography: {
                 DEFAULT: {
                     css: {
