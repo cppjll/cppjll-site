@@ -22,7 +22,7 @@ export default function NavBar() {
                 </div>
                 {/* The center of the navbar, has logo on mobile, nothing on desktop */}
                 <div className='navbar-center md:hidden'>   
-                    <a href="/" className="btn btn-ghost normal-case text-xl text-accent mx-3"><img src={logo.src} className="w-7 mr-3"></img>CPP JLL</a>
+                    <a href="/" className="btn btn-ghost normal-case text-xl text-accent mx-3 pr-8"><img src={logo.src} className="w-7 mr-3"></img>CPP JLL</a>
                 </div>
                 <div className='navbar-end'>
                     <ul className='hidden md:flex menu menu-horizontal px-2 text-accent'>
