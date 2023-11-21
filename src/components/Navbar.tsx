@@ -2,7 +2,7 @@ import logo from '../images/bun.png'
 
 export default function NavBar() {
     return (
-        <div className='w-screen bg-secondary-focus'>
+        <div className='fixed z-10 top-0 w-screen bg-secondary-focus'>
             <div className='navbar md:max-w-4xl mx-auto bg-secondary-focus'>
                 {/* The left of the navbar, has hamburger menu on mobile, logo and pages on desktop */}
                 <div className='navbar-start'>
