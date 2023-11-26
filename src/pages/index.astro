@@ -9,7 +9,12 @@ import { getCollection } from "astro:content";
 import { slide } from "astro:transitions";
 
 const optimizedBg = await getImage({ src: bg });
+// get most recent event
 const upcomingEvents = await getCollection("events");
+upcomingEvents.sort((a, b) => {
+    return (new Date(b.data.date).getTime()) - (new Date(a.data.date).getTime());
+});
+
 const boardMembers = await getCollection("board");
 ---
 
