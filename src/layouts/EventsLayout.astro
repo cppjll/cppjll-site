@@ -1,6 +1,7 @@
 ---
 import '../global.css';
 import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
 import { Image } from 'astro:assets';
 import icon from "/favicon.ico";
 import { ViewTransitions } from 'astro:transitions';
@@ -34,5 +35,6 @@ const {frontmatter} = Astro.props;
                 <slot />
             </article>
         </div>
+        <Footer />
     </body>
 </html>
