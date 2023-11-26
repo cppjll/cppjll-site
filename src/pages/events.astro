@@ -8,10 +8,21 @@ const upcomingEvents = await getCollection("events", ({ data }) => {
     const today = new Date();
     return eventDate >= today;
 });
+upcomingEvents.sort((a, b) => { // Sort by date
+    const aDate = new Date(a.data.date);
+    const bDate = new Date(b.data.date);
+    return bDate.getTime() - aDate.getTime();
+});
+
 const previousEvents = await getCollection("events", ({ data }) => {
     const eventDate = new Date(data.date);
     const today = new Date();
     return eventDate < today;
+});
+previousEvents.sort((a, b) => { // Sort by date
+    const aDate = new Date(a.data.date);
+    const bDate = new Date(b.data.date);
+    return bDate.getTime() - aDate.getTime();
 });
 ---
 <Layout title="Events - CPP Japanese Language Learners">
@@ -26,11 +37,12 @@ const previousEvents = await getCollection("events", ({ data }) => {
             </div>
             <h1 transition:animate={slide ({ duration: '0.3s' })} class="text-5xl font-bold text-accent mb-4 font-display md:max-w-3xl md:whitespace-nowrap md:mx-auto md:pr-[424px]">Upcoming Event</h1>
             <div transition:animate={slide ({ duration: '0.4s' })}>
+                { <EventCard class="md:card-side" event={upcomingEvents[0]} soonest /> } 
                 {
-                    upcomingEvents.map((event) => (
-                        <EventCard event={event} />
-                        ))
-                    }
+                    upcomingEvents.map((event) => 
+                        event !== upcomingEvents[0] && <EventCard event={event} />
+                    )
+                }
             </div>
         </div>
         <div class="flex flex-col my-6 mx-6">

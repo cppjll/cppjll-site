@@ -1,10 +1,10 @@
 ---
 import { Image } from "astro:assets"
-const {event} = Astro.props
+const {event, soonest} = Astro.props
 ---
 
-<a class="card md:card-side w-full shadow-xl mb-6 hover:scale-[1.02] transition-all md:max-w-3xl md:mx-auto" href={`events/${event.slug}`}>
-    <figure class="max-w-sm" >
+<a class=`card ${soonest && 'md:card-side'} w-full shadow-xl mb-6 hover:scale-[1.02] transition-all md:max-w-3xl md:mx-auto` href={`events/${event.slug}`}>
+    <figure class=`${soonest && 'md:max-w-sm'}`>
         <Image transition:name={event.data.title} src={event.data.image.src} alt={event.data.image.alt} class="object-scale-down mx-auto rounded-lg" width=950 height=950 />
     </figure>
     <div class="py-4 px-6">
