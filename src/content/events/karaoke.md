@@ -4,6 +4,6 @@ description: Come join us for a night of singing and fun!
 date: 2023-11-21T18:00:00-08:00
 location: Round1 Puente Hills
 image: 
-    src: https://media.discordapp.net/attachments/1176752411671527434/1176757725204594718/IMG_3571.jpg?ex=65700808&is=655d9308&hm=e58f558711503c9ab1679f494ba3c2a35eb76497d5c1a6146a7e0a9c8b73b100&=&format=webp&width=679&height=905
+    src: https://media.discordapp.net/attachments/340705670158614529/1178138510922887198/2023_Fall_12-1.png?ex=65750dfd&is=656298fd&hm=f467fa171f4c01c29aded3ae3c218e58af876d1e86841bed01f8ab33608a4245&=&format=webp&width=905&height=905
     alt: Meeting photo
 ---
