@@ -51,7 +51,7 @@ const boardMembers = await getCollection("board");
             <a class="md:max-w-3xl md:mx-auto md:pr-[768px] hover:translate-x-3 transition-transform" href='/events'>
                 <h1 class="text-5xl font-bold text-accent mb-4 font-display">Events</h1>
             </a>
-                <EventCard event={upcomingEvents[0]} />
+                <EventCard event={upcomingEvents[0]} soonest />
             <a href='/events' class="btn btn-outline btn-accent w-full mb-4 md:btn-[644px] md:max-w-3xl md:mx-auto">See All Events</a>
         </div>
         <!-- End Events -->
