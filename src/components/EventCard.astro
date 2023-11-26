@@ -4,8 +4,8 @@ const {event} = Astro.props
 ---
 
 <a class="card md:card-side w-full shadow-xl mb-6 hover:scale-[1.02] transition-all md:max-w-3xl md:mx-auto" href={`events/${event.slug}`}>
-    <figure>
-        <Image transition:name={event.data.title} src={event.data.image.src} alt={event.data.image.alt} class="object-scale-down max-w-5 mx-auto rounded-lg" width=950 height=950 />
+    <figure class="max-w-sm" >
+        <Image transition:name={event.data.title} src={event.data.image.src} alt={event.data.image.alt} class="object-scale-down mx-auto rounded-lg" width=950 height=950 />
     </figure>
     <div class="py-4 px-6">
         <h2 class="text-3xl font-bold text-accent mb-2 font-display">{event.data.title}</h2>
