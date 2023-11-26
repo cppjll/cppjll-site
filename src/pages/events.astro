@@ -36,11 +36,11 @@ previousEvents.sort((a, b) => { // Sort by date
                 </ul>
             </div>
             <h1 transition:animate={slide ({ duration: '0.3s' })} class="text-5xl font-bold text-accent mb-4 font-display">Upcoming Events</h1>
-            <div transition:animate={slide ({ duration: '0.4s' })}>
+            <div>
                 <!-- { <EventCard class="md:card-side" event={upcomingEvents[0]} soonest /> }  -->
                 { upcomingEvents[0] ? <EventCard class="md:card-side" event={upcomingEvents[0]} soonest /> : <p class="text-accent">No upcoming events.</p> }
             </div>
-            <div class="columns sm:columns-2" transition:animate={slide ({ duration: '0.4s' })}>
+            <div class="columns sm:columns-2">
                 {
                     upcomingEvents.map((event) => 
                         event !== upcomingEvents[0] && <EventCard event={event} />
@@ -50,7 +50,7 @@ previousEvents.sort((a, b) => { // Sort by date
         </div>
         <div class="flex flex-col my-6 mx-6">
             <h1 transition:animate={slide ({ duration: '0.5s' })} class="text-5xl font-bold text-accent mb-4 font-display">Previous Events</h1>
-            <div class="columns sm:columns-2" transition:animate={slide ({ duration: '0.6s' })}>
+            <div class="columns sm:columns-2">
                 {
                     previousEvents.map((event) => (
                         <EventCard event={event} />
