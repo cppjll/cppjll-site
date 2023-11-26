@@ -14,13 +14,11 @@ const eventsCollection = defineCollection({
 
 const boardCollection = defineCollection({
     type: 'content',
-    schema: z.object({
+    schema: ({ image }) => z.object({
         name: z.string(),
         position: z.string(),
-        image: z.object({
-            src: z.string(),
-            alt: z.string(),
-        }),
+        image: image(),
+        imageAlt: z.string(),
         bio: z.string(),
     }),
 });

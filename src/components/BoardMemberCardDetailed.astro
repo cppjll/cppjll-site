@@ -3,7 +3,7 @@ import { Image } from "astro:assets";
 const {member} = Astro.props;
 ---
 <div id=`${member.slug}` class="card w-full shadow-2xl mb-6">
-    <figure class="bg-secondary" ><Image src={member.data.image.src} alt={member.data.image.alt} width=256 height=256 class="rounded-full my-4 w-36" /></figure>
+    <figure class="bg-secondary" ><Image src={member.data.image} alt={member.data.imageAlt} class="rounded-full my-4 w-36" /></figure>
     <div class="card-body">
         <h1 class="text-3xl font-bold font-display text-accent mx-auto">{member.data.name}</h1>
         <h2 class="text-xl text-accent mb-2 mx-auto">{member.data.position}</h2>
