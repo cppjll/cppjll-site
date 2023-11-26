@@ -3,7 +3,7 @@ import { Image } from "astro:assets"
 const {event, soonest} = Astro.props
 ---
 
-<a class=`card ${soonest && 'sm:card-side'} w-full shadow-xl mb-6 sm:hover:scale-[1.02] transition-all break-inside-avoid-column	` href={`events/${event.slug}`}>
+<a class=`card ${soonest && 'sm:card-side'} w-full shadow-xl mb-6 sm:hover:scale-[1.02] transition-all break-inside-avoid-column	` href={`/events/${event.slug}`}>
     <figure class=`${soonest && 'sm:max-w-sm'}`>
         <Image transition:name={event.data.title} src={event.data.image} alt={event.data.imageAlt} class="object-scale-down mx-auto rounded-lg" />
     </figure>
