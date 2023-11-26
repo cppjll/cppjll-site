@@ -26,7 +26,7 @@ previousEvents.sort((a, b) => { // Sort by date
 });
 ---
 <Layout title="Events - CPP Japanese Language Learners">
-    <div class="my-16 flex flex-col">
+    <div class="my-16 md:max-w-4xl mx-auto flex flex-col">
         <!-- Events -->
         <div class="flex flex-col my-6 mx-6">
             <div class="breadcrumbs text-accent mb-4 md:max-w-3xl md:mx-auto md:pr-[820px]">
@@ -35,9 +35,11 @@ previousEvents.sort((a, b) => { // Sort by date
                     <li>Events</li>
                 </ul>
             </div>
-            <h1 transition:animate={slide ({ duration: '0.3s' })} class="text-5xl font-bold text-accent mb-4 font-display md:max-w-3xl md:whitespace-nowrap md:mx-auto md:pr-[424px]">Upcoming Event</h1>
+            <h1 transition:animate={slide ({ duration: '0.3s' })} class="text-5xl font-bold text-accent mb-4 font-display">Upcoming Event</h1>
             <div transition:animate={slide ({ duration: '0.4s' })}>
                 { <EventCard class="md:card-side" event={upcomingEvents[0]} soonest /> } 
+            </div>
+            <div class="columns sm:columns-2" transition:animate={slide ({ duration: '0.4s' })}>
                 {
                     upcomingEvents.map((event) => 
                         event !== upcomingEvents[0] && <EventCard event={event} />
@@ -46,8 +48,8 @@ previousEvents.sort((a, b) => { // Sort by date
             </div>
         </div>
         <div class="flex flex-col my-6 mx-6">
-            <h1 transition:animate={slide ({ duration: '0.5s' })} class="text-5xl font-bold text-accent mb-4 font-display md:max-w-3xl md:whitespace-nowrap md:mx-auto md:pr-[434px]">Previous Events</h1>
-            <div transition:animate={slide ({ duration: '0.6s' })}>
+            <h1 transition:animate={slide ({ duration: '0.5s' })} class="text-5xl font-bold text-accent mb-4 font-display">Previous Events</h1>
+            <div class="columns sm:columns-2" transition:animate={slide ({ duration: '0.6s' })}>
                 {
                     previousEvents.map((event) => (
                         <EventCard event={event} />
