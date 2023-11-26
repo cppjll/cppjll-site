@@ -37,7 +37,8 @@ previousEvents.sort((a, b) => { // Sort by date
             </div>
             <h1 transition:animate={slide ({ duration: '0.3s' })} class="text-5xl font-bold text-accent mb-4 font-display">Upcoming Events</h1>
             <div transition:animate={slide ({ duration: '0.4s' })}>
-                { <EventCard class="md:card-side" event={upcomingEvents[0]} soonest /> } 
+                <!-- { <EventCard class="md:card-side" event={upcomingEvents[0]} soonest /> }  -->
+                { upcomingEvents[0] ? <EventCard class="md:card-side" event={upcomingEvents[0]} soonest /> : <p class="text-accent">No upcoming events.</p> }
             </div>
             <div class="columns sm:columns-2" transition:animate={slide ({ duration: '0.4s' })}>
                 {
