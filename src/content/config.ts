@@ -23,6 +23,7 @@ const boardCollection = defineCollection({
         discord: z.string().optional(),
         linkedin: z.string().optional(),
         instagram: z.string().optional(),
+        github: z.string().optional(),
     }),
 });
 
