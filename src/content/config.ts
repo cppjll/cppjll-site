@@ -20,6 +20,9 @@ const boardCollection = defineCollection({
         image: image(),
         imageAlt: z.string(),
         bio: z.string(),
+        discord: z.string().optional(),
+        linkedin: z.string().optional(),
+        instagram: z.string().optional(),
     }),
 });
 
