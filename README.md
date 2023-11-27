@@ -1,2 +1,1 @@
-# Cal Poly Pomona Japanese Language Learners
-## Website for CPP JLL
+# [Cal Poly Pomona Japanese Language Learners](https://cpp-jll.com/)
