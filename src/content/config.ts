@@ -24,6 +24,7 @@ const boardCollection = defineCollection({
         linkedin: z.string().optional(),
         instagram: z.string().optional(),
         github: z.string().optional(),
+        youtube: z.string().optional(),
     }),
 });
 
