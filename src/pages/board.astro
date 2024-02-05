@@ -6,6 +6,7 @@ import { slide } from "astro:transitions";
 const boardMembers = await getCollection("board");
 ---
 <Layout title="Board - CPP Japanees Language Learners">
+    </style>
     <div class="flex flex-col my-16 mx-6 md:max-w-2xl md:mx-auto">
         <div class="breadcrumbs text-accent my-6 mb-4">
             <ul>
@@ -23,3 +24,10 @@ const boardMembers = await getCollection("board");
         </div>
     </div>
 </Layout>
+<style>
+    @media (prefers-color-scheme: dark) {
+        body {
+            background-color: #ffffff;
+        }
+    }
+</style>
