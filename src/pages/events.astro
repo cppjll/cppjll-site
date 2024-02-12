@@ -24,6 +24,9 @@ previousEvents.sort((a, b) => { // Sort by date
     const bDate = new Date(b.data.date);
     return bDate.getTime() - aDate.getTime();
 });
+
+const oddPlacedEvents = previousEvents.filter((_, index) => index % 2 !== 0);
+const evenPlacedEvents = previousEvents.filter((_, index) => index % 2 === 0);
 ---
 <Layout title="Events - CPP Japanese Language Learners">
     <div class="my-16 md:max-w-4xl mx-auto flex flex-col">
@@ -50,13 +53,31 @@ previousEvents.sort((a, b) => { // Sort by date
         </div>
         <div class="flex flex-col my-6 mx-6">
             <h1 transition:animate={slide ({ duration: '0.5s' })} class="text-5xl font-bold text-accent mb-4 font-display">Previous Events</h1>
-            <div class="columns sm:columns-2">
+            <!-- Renders previous events on smaller devices, hidden on bigger screens -->
+            <div class="flex flex-col sm:hidden">
                 {
-                    previousEvents.map((event) => (
+                    previousEvents.map((event) => 
                         <EventCard event={event} />
-                    ))
+                    )
                 }
             </div>
+            <!-- Renders previous events within two columns on larger screen -->
+            <!-- It's jank but it WORKS and all the work happens at build time anyway so ITS FINE users wont notice -->
+            <div class="hidden sm:flex flex-row gap-4">
+                <div class="flex flex-col">
+                    {
+                        evenPlacedEvents.map((event) => 
+                            <EventCard event={event} />
+                        )
+                    }
+                </div>
+                <div class="flex flex-col">
+                    {
+                        oddPlacedEvents.map((event) => 
+                            <EventCard event={event} />
+                        )
+                    }
+                </div>
         </div>
     </div>
 </Layout>
