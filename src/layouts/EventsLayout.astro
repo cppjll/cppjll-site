@@ -18,6 +18,8 @@ const {frontmatter} = Astro.props;
         <meta property="og:title" content=`${frontmatter.title} - CPP Japanese Language Learners` />
         <meta property="og:description" content={frontmatter.description} />
         <meta property="og:image" content={frontmatter.image.src} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="theme-color" content="#204063">
 
         <ViewTransitions />
     </head>
