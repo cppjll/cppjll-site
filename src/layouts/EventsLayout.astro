@@ -15,6 +15,11 @@ const {frontmatter} = Astro.props;
         <meta name="description" content="Cal Poly Pomona's Japanese Learning Club" />
         <link rel="icon" href={icon} type="image/x-icon" />
         <title>{frontmatter.title} - CPP Japanese Language Learners</title>
+
+        <meta property="og:title" content=`${frontmatter.title} - CPP Japanese Language Learners` />
+        <meta property="og:description" content={frontmatter.description} />
+        <meta property="og:image" content={frontmatter.image.src} />
+
         <ViewTransitions />
     </head>
     <body >
