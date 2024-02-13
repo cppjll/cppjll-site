@@ -3,6 +3,7 @@ import "../global.css"
 import Navbar from "../components/Navbar.astro";
 import Footer from "../components/Footer.astro";
 import icon from "/favicon.ico";
+import bun from "../images/bun.png";
 import { ViewTransitions } from "astro:transitions";
 const { title } = Astro.props;
 ---
@@ -15,6 +16,10 @@ const { title } = Astro.props;
         <link rel="icon" href={icon} type="image/x-icon" />
         <link rel="sitemap" href="/sitemap-index.xml" />
         <title>{title}</title>
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content="Cal Poly Pomona's Japanese Learning Club. Learn Japanese with fellow Broncos." />
+        <meta property="og:image" content={bun.src} />
+        <meta name="theme-color" content="#204063" />
         <ViewTransitions />
         <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
     </head>
