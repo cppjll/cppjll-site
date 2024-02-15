@@ -5,6 +5,7 @@ date: 2024-1-30T17:30:00-08:00
 location: Bldg 24D Rm 1224
 image: './cover-images/spring-24-first-gen.png.png'
 imageAlt: Meeting photo
+slidesEmbed: 'https://docs.google.com/presentation/d/e/2PACX-1vRr7KGFeidomr2XOyOUZw0r1mfTDLKJbxugIf560eVBBjCrtjvDDe1UyZpp3IEpf81iqrFvLCaFw7gF/embed?start=false&loop=false&delayms=60000'
 ---
 
 Welcome back to another semester of JLL! We hope you had a great winter break and are ready to start the new semester with us. For our first general meeting, we'll be introducing the club and our officers, as well as discussing our plans for the semester. Whether you're a returning member or new to the club, we hope to see you there!

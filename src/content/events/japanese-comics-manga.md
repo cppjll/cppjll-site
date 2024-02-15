@@ -5,6 +5,7 @@ date: 2024-2-13T12:30:00-08:00
 location: Bldg 24D Rm 1224
 image: './cover-images/japanese-comics-manga.png'
 imageAlt: Meeting photo
+slidesEmbed: 'https://docs.google.com/presentation/d/e/2PACX-1vT6QeyNA9vmxyd4ImhKIjjfr-AuMi2NSR40kDjKFmW65xT5k8SENSIDx0Z50GMKUu9IX3HhAoiPzccj/embed?start=false&loop=false&delayms=60000'
 ---
 
 In Japanese, 'manga' refers to comics or cartooning in general. Outside of Japan, the word is typically used to refer to Japanese comics specifically. Manga has been significant in Japan for some time, and has now grown large enough to outsell even the most popular American comics. In this meeting we'll be discussing manga and how we can use it to learn Japanese. We'll also be practicing our Japanese by making our own simple manga! We look forward to seeing you there!
