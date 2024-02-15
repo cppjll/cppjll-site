@@ -39,6 +39,13 @@ const {frontmatter} = Astro.props;
             <Image transition:name={frontmatter.title} src={frontmatter.image} alt={frontmatter.imageAlt} class="rounded-xl" />
             <article transition:animate={slide ({ duration: '0.5s' })} class="prose mt-4">
                 <slot />
+                <div class=`${frontmatter.slidesEmbed ? '' : 'hidden'}`>
+                    <h2>Event Presentation</h1>
+                        <div class="aspect-video">    
+                            <iframe src={frontmatter.slidesEmbed} width="100%" height="100%" allowfullscreen="true" ></iframe>
+                        </div>
+                    <a class="btn btn-outline btn-accent w-full mt-4" href={frontmatter.slidesEmbed} target="_blank">Open Slides</a>
+                </div>
             </article>
         </div>
         <Footer />

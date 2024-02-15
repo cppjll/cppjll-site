@@ -9,6 +9,7 @@ const eventsCollection = defineCollection({
         location: z.string(),
         image: image(),
         imageAlt: z.string(),
+        slidesEmbed: z.string().optional(),
     }),
 });
 
