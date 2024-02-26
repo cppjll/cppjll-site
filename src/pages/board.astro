@@ -17,8 +17,16 @@ const boardMembers = await getCollection("board");
         <h1 transition:animate={slide ({ duration: '0.3s' })} class="text-5xl font-bold text-accent mb-4 font-display">Board</h1>
         <div transition:animate={slide ({ duration: '0.4s' })}>
             {
-                boardMembers.map((boardMember) => (
-                    <BoardMemberCardDetailed member={boardMember} />
+                boardMembers
+                    .sort((a, b) => {
+                        if (a.data.position === "President") return -1;
+                        if (b.data.position === "President") return 1;
+                        if (a.data.position === "Vice-President") return -1;
+                        if (b.data.position === "Vice-President") return 1;
+                        return 0;
+                    })
+                    .map((boardMember) => (
+                        <BoardMemberCardDetailed member={boardMember} />
                 ))
             }
         </div>
