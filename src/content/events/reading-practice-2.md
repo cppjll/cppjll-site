@@ -1,7 +1,7 @@
 ---
 title: Reading Practice
 description: Practice reading with some Tadoku graded readers!
-date: 2024-02-25T12:30:00-08:00
+date: 2024-02-27T12:30:00-08:00
 location: Bldg 6 Rm 216
 image: './cover-images/reading-practice.png'
 imageAlt: Meeting photo
