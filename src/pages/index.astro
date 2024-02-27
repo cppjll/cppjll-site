@@ -63,8 +63,16 @@ const boardMembers = await getCollection("board");
             </a>
             <div class="flex flex-col">
                 {
-                    boardMembers.map((boardMember) => (
-                        <BoardMemberCard member={boardMember} />
+                    boardMembers
+                        .sort((a, b) => {
+                            if (a.data.position === "President") return -1;
+                            if (b.data.position === "President") return 1;
+                            if (a.data.position === "Vice-President") return -1;
+                            if (b.data.position === "Vice-President") return 1;
+                            return 0;
+                        })
+                        .map((boardMember) => (
+                            <BoardMemberCard member={boardMember} />
                     ))
                 }
             </div>
