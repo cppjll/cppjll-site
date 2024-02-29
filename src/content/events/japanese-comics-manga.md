@@ -4,7 +4,7 @@ description: Learn about manga, how to read it, and its significance in Japan.
 date: 2024-2-13T12:30:00-08:00
 location: Bldg 24D Rm 1224
 image: './cover-images/japanese-comics-manga.png'
-imageAlt: Meeting photo
+imageAlt: Manga Meeting Cover Photo
 slidesEmbed: 'https://docs.google.com/presentation/d/e/2PACX-1vT6QeyNA9vmxyd4ImhKIjjfr-AuMi2NSR40kDjKFmW65xT5k8SENSIDx0Z50GMKUu9IX3HhAoiPzccj/embed?start=false&loop=false&delayms=60000'
 ---
 

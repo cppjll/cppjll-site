@@ -4,7 +4,7 @@ description: Kanji is one of the three scripts used in the Japanese language. Co
 date: 2024-02-20T12:30:00-08:00
 location: Bldg 24D Rm 1224
 image: './cover-images/kanji.png'
-imageAlt: Meeting photo
+imageAlt: Kanji Meeting Cover Photo
 slidesEmbed: 'https://docs.google.com/presentation/d/e/2PACX-1vRn5K9kTkGyW3vodhNbE1dv6p4dBTUQhgAHJKXHJzixeWipCps7anDb0roZh0lmrBzs2OIgYr3r10aE/embed?start=false&loop=false&delayms=60000'
 ---
 

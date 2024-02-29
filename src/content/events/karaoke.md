@@ -4,7 +4,7 @@ description: Come join us for a night of singing and fun!
 date: 2023-11-21T18:00:00-08:00
 location: Round1 Puente Hills
 image: './cover-images/karaoke-cover.png'
-imageAlt: Meeting photo
+imageAlt: Karaoke Social Meeting Cover Photo
 ---
 
 一緒に歌いましょう！

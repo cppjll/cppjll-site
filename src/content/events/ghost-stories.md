@@ -4,7 +4,7 @@ description: Join us on a night of spooky stories, ft. plates, ghosts, and some 
 date: 2023-10-31 17:30:00
 location: Bldg 6 Rm 216
 image: './cover-images/ghost-cover.png'
-imageAlt: Ghost Stories
+imageAlt: Ghost Stories Meeting Cover Photo
 ---
 
 **いちまい、にまい、さんまい…**

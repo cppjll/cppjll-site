@@ -4,7 +4,7 @@ description: Last meeting of the semester! Come join us for some fun Japanese ga
 date: 2023-11-28T17:30:00-08:00
 location: Bldg 6 Rm 216
 image: './cover-images/japanese-games.png'
-imageAlt: Meeting photo
+imageAlt: Japanese Games Meeting Cover Photo
 ---
 
 Our last meeting of the semester is here! To celebrate, we'll be playing some fun Japanese games and doing other activities that put our language skills to the test 💪! Think you know your vocab? Kanji? Come find out 👁️👁️!!

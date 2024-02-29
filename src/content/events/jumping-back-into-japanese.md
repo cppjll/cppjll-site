@@ -4,7 +4,7 @@ description: Get started, or get back into the swing of things with our first ge
 date: 2024-2-08T17:30:00-08:00
 location: Bldg 24D Rm 1224
 image: './cover-images/jumping-back-into-japanese.png'
-imageAlt: Meeting photo
+imageAlt: Jumping (Back) Into Japanese Meeting Cover Photo
 slidesEmbed: 'https://docs.google.com/presentation/d/e/2PACX-1vRs7cwKH90obfaJ-6N04QOp3z05KtE3hzDGwE7njCcF36SeXsQGVK8Bpsm1CZe0ywga5miaOe628CXN/embed?start=false&loop=false&delayms=60000'
 ---
 

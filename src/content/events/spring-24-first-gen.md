@@ -4,7 +4,7 @@ description: Come join us for our first general meeting of the semester!
 date: 2024-1-30T17:30:00-08:00
 location: Bldg 24D Rm 1224
 image: './cover-images/spring-24-first-gen.png.png'
-imageAlt: Meeting photo
+imageAlt: First General Meeting Cover Photo
 slidesEmbed: 'https://docs.google.com/presentation/d/e/2PACX-1vRr7KGFeidomr2XOyOUZw0r1mfTDLKJbxugIf560eVBBjCrtjvDDe1UyZpp3IEpf81iqrFvLCaFw7gF/embed?start=false&loop=false&delayms=60000'
 ---
 
