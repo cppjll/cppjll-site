@@ -7,17 +7,18 @@ import icon from "/favicon.ico";
 import { ViewTransitions } from 'astro:transitions';
 import { slide } from 'astro:transitions';
 const {frontmatter} = Astro.props;
+
 ---
 <html lang="en">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>{frontmatter.title} - CPP Japanese Language Learners</title>
+        <title>{frontmatter.data.title} - CPP Japanese Language Learners</title>
         <link rel="icon" href={icon} type="image/x-icon" />
 
         <meta property="og:title" content=`${frontmatter.title} - CPP Japanese Language Learners` />
-        <meta property="og:description" content={frontmatter.description} />
-        <meta property="og:image" content={frontmatter.image.src} />
+        <meta property="og:description" content={frontmatter.data.description} />
+        <meta property="og:image" content={frontmatter.data.image.src} />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="theme-color" content="#204063">
 
@@ -32,19 +33,19 @@ const {frontmatter} = Astro.props;
                 <ul>
                     <li><a href="/">Home</a></li>
                     <li><a href="/events">Events</a></li>
-                    <li>{frontmatter.title}</li>
+                    <li>{frontmatter.data.title}</li>
                 </ul>
             </div>
-            <h1 transition:animate={slide ({ duration: '0.3s' })} class="text-4xl font-bold text-accent mb-4 font-display">{frontmatter.title}</h1>
-            <Image transition:name={frontmatter.title} src={frontmatter.image} alt={frontmatter.imageAlt} class="rounded-xl" />
+            <h1 transition:animate={slide ({ duration: '0.3s' })} class="text-4xl font-bold text-accent mb-4 font-display">{frontmatter.data.title}</h1>
+            <Image transition:name={frontmatter.slug} src={frontmatter.data.image} alt={frontmatter.data.imageAlt} class="rounded-xl" />
             <article transition:animate={slide ({ duration: '0.5s' })} class="prose mt-4">
                 <slot />
-                <div class=`${frontmatter.slidesEmbed ? '' : 'hidden'}`>
+                <div class=`${frontmatter.data.slidesEmbed ? '' : 'hidden'}`>
                     <h2>Event Presentation</h1>
                         <div class="aspect-video">    
-                            <iframe src={frontmatter.slidesEmbed} width="100%" height="100%" allowfullscreen="true" ></iframe>
+                            <iframe src={frontmatter.data.slidesEmbed} width="100%" height="100%" allowfullscreen="true" ></iframe>
                         </div>
-                    <a class="btn btn-outline btn-accent w-full mt-4" href={frontmatter.slidesEmbed} target="_blank">Open Slides</a>
+                    <a class="btn btn-outline btn-accent w-full mt-4" href={frontmatter.data.slidesEmbed} target="_blank">Open Slides</a>
                 </div>
             </article>
         </div>
