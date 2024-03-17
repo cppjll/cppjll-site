@@ -2,7 +2,7 @@
 import { Image } from "astro:assets";
 const {member} = Astro.props;
 ---
-<a href=`/board#${member.slug}` class="flex items-center w-full h-48 rounded-xl bg-secondary mb-4 hover:scale-[1.02] transition-all md:max-w-3xl md:mx-auto">
+<a href=`https://cpp-jll.com/board/#${member.slug}` class="flex items-center w-full h-48 rounded-xl bg-secondary mb-4 hover:scale-[1.02] transition-all md:max-w-3xl md:mx-auto">
     <div class="grid grid-cols-2 w-full h-full items-center">
         <div class='flex ml-6 w-36'>
             <Image src={member.data.image} alt={member.data.imageAlt} class='rounded-full z-10' />
