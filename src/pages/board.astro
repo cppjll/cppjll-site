@@ -2,7 +2,6 @@
 import Layout from "../layouts/Layout.astro";
 import BoardMemberCardDetailed from "../components/BoardMemberCardDetailed.astro";
 import { getCollection } from "astro:content";
-import { slide } from "astro:transitions";
 const boardMembers = await getCollection("board");
 ---
 <Layout title="Board - CPP Japanese Language Learners">
@@ -14,7 +13,7 @@ const boardMembers = await getCollection("board");
                 <li>Board</li>
             </ul>
         </div>
-        <h1 transition:animate={slide ({ duration: '0.3s' })} class="text-5xl font-bold text-accent mb-4 font-display">Board</h1>
+        <h1 class="text-5xl font-bold text-accent mb-4 font-display">Board</h1>
         <div>
             {
                 boardMembers
