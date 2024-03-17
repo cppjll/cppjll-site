@@ -9,7 +9,7 @@ imageAlt: open study table cover
 
 Times and locations change week-to-week, so be sure to check here or on the [Discord](https://discord.com/invite/W5kxJtE3a7) for the most up-to-date information.
 
-**Open Study Table** is a weekly event hosted by [Leo](/board#leonardwoo) in the library. As opposed to our regular meetings, this is more casual and less structured. Bring books, manga, or anything else you'd like to study with, and join us for a relaxed study session. Hope to see you there! 🫂📚
+**Open Study Table** is a weekly event hosted by [Leo](/board#leonard-woo) in the library. As opposed to our regular meetings, this is more casual and less structured. Bring books, manga, or anything else you'd like to study with, and join us for a relaxed study session. Hope to see you there! 🫂📚
 
 ## Details
 **Date**: Thursday, 3/21
