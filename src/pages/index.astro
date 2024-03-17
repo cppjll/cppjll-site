@@ -9,11 +9,17 @@ import { getCollection } from "astro:content";
 import { slide } from "astro:transitions";
 
 const optimizedBg = await getImage({ src: bg });
-// get most recent event
+
+// Sort ensures upcoming events are in chronological order
 const upcomingEvents = await getCollection("events");
 upcomingEvents.sort((a, b) => {
-    return (new Date(b.data.date).getTime()) - (new Date(a.data.date).getTime());
+    return (new Date(a.data.date).getTime()) - (new Date(b.data.date).getTime());
 });
+// Since the events are sorted, the first event with a date in the future is the next event. If no future events, feature the last event.
+const featuredEvent = upcomingEvents.find((event) => {
+    return new Date(event.data.date).getTime() > Date.now();
+}) || upcomingEvents.slice(-1)[0];
+
 
 const boardMembers = await getCollection("board");
 ---
@@ -51,7 +57,7 @@ const boardMembers = await getCollection("board");
             <a class="hover:translate-x-3 transition-transform" href='/events'>
                 <h1 class="text-5xl font-bold text-accent mb-4 font-display">Events</h1>
             </a>
-                <EventCard event={upcomingEvents[0]} soonest />
+                <EventCard event={featuredEvent} soonest />
             <a href='/events' class="btn btn-outline btn-accent w-full mb-4 md:btn-[644px] md:max-w-3xl md:mx-auto">See All Events</a>
         </div>
         <!-- End Events -->

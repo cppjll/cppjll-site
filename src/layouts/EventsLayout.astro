@@ -38,7 +38,7 @@ const {frontmatter} = Astro.props;
             </div>
             <h1 transition:animate={slide ({ duration: '0.3s' })} class="text-4xl font-bold text-accent mb-4 font-display">{frontmatter.data.title}</h1>
             <Image transition:name={frontmatter.slug} src={frontmatter.data.image} alt={frontmatter.data.imageAlt} class="rounded-xl" />
-            <article transition:animate={slide ({ duration: '0.5s' })} class="prose mt-4">
+            <article transition:animate={slide ({ duration: '0.5s' })} class="prose mt-4 prose-a:text-accent">
                 <slot />
                 <div class=`${frontmatter.data.slidesEmbed ? '' : 'hidden'}`>
                     <h2>Event Presentation</h1>

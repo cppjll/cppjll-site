@@ -11,8 +11,11 @@ const upcomingEvents = await getCollection("events", ({ data }) => {
 upcomingEvents.sort((a, b) => { // Sort by date
     const aDate = new Date(a.data.date);
     const bDate = new Date(b.data.date);
-    return bDate.getTime() - aDate.getTime();
+    return aDate.getTime() - bDate.getTime();
 });
+
+const oddPlacedFuture = upcomingEvents.filter((_, index) => index % 2 !== 0);
+const evenPlacedFuture = upcomingEvents.filter((_, index) => index % 2 === 0);
 
 const previousEvents = await getCollection("events", ({ data }) => {
     const eventDate = new Date(data.date);
@@ -39,16 +42,38 @@ const evenPlacedEvents = previousEvents.filter((_, index) => index % 2 === 0);
                 </ul>
             </div>
             <h1 transition:animate={slide ({ duration: '0.3s' })} class="text-5xl font-bold text-accent mb-4 font-display">Upcoming Events</h1>
-            <div>
-                <!-- { <EventCard class="md:card-side" event={upcomingEvents[0]} soonest /> }  -->
-                { upcomingEvents[0] ? <EventCard class="md:card-side" event={upcomingEvents[0]} soonest /> : <p class="text-accent">No upcoming events.</p> }
+            <!-- No upcoming events case -->
+            <div class=`${upcomingEvents.length === 0 ? "flex flex-col items-center" : "hidden"}`>
+                <h2 class="text-2xl font-bold text-accent mb-4 font-display">No upcoming events</h2>
             </div>
-            <div class="columns sm:columns-2">
+            <!-- Render upcoming events in a single column on smaller devices -->
+            <div class="flex flex-col sm:hidden">
                 {
                     upcomingEvents.map((event) => 
-                        event !== upcomingEvents[0] && <EventCard event={event} />
+                        <EventCard event={event} />
                     )
                 }
+            </div>
+            <!-- One upcoming event case -->
+            <div class=`${upcomingEvents.length === 1 ? "flex flex-col items-center" : "hidden"}`>
+                <EventCard event={upcomingEvents[0]} soonest />
+            </div>
+            <!-- Multiple upcoming events case -->
+            <div class=`${upcomingEvents.length > 1 ? "hidden sm:flex flex-row gap-4" : "hidden"}`}>
+                <div class="flex flex-col w-1/2">
+                    {
+                        evenPlacedFuture.map((event) => 
+                            <EventCard event={event} />
+                        )
+                    }
+                </div>
+                <div class="flex flex-col w-1/2">
+                    {
+                        oddPlacedFuture.map((event) => 
+                            <EventCard event={event} />
+                        )
+                    }
+                </div>
             </div>
         </div>
         <div class="flex flex-col my-6 mx-6">
