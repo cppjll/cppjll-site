@@ -4,7 +4,7 @@ description: Need a place to study with fellow Japanese learners? Come join us i
 date: 2024-03-21T12:30:00-08:00
 location: Bldg 24D Rm 1224
 image: './cover-images/open study tabble.png'
-imageAlt: open study table cover
+imageAlt: Open Study Table Cover Photo
 ---
 
 Times and locations change week-to-week, so be sure to check here or on the [Discord](https://discord.com/invite/W5kxJtE3a7) for the most up-to-date information.
