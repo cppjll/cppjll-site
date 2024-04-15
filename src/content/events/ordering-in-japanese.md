@@ -12,7 +12,7 @@ Ordering something from a cafe and a restaurant, although simple, can be dauntin
 ## Details
 **Date**: Tuesday, 4/16
 
-**Location**: Building 24D, Room 1244
+**Location**: Building 24D, Room 1224
 
 4:00    Open Study Room
 
