@@ -1,8 +1,8 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import { Image, getImage } from 'astro:assets';
-import logo from '../images/bun.png';
-import bg from '../images/bg.png';
+import { Image, getImage } from "astro:assets";
+import logo from "../images/bun.png";
+import bg from "../images/bg.png";
 import BoardMemberCard from "../components/BoardMemberCard.astro";
 import EventCard from "../components/EventCard.astro";
 import { getCollection } from "astro:content";
@@ -13,84 +13,133 @@ const optimizedBg = await getImage({ src: bg });
 // Sort ensures upcoming events are in chronological order
 const upcomingEvents = await getCollection("events");
 upcomingEvents.sort((a, b) => {
-    return (new Date(a.data.date).getTime()) - (new Date(b.data.date).getTime());
+  return new Date(a.data.date).getTime() - new Date(b.data.date).getTime();
 });
 // Since the events are sorted, the first event with a date in the future is the next event. If no future events, feature the last event.
-const featuredEvent = upcomingEvents.find((event) => {
+const featuredEvent =
+  upcomingEvents.find((event) => {
     return new Date(event.data.date).getTime() > Date.now();
-}) || upcomingEvents.slice(-1)[0];
-
+  }) || upcomingEvents.slice(-1)[0];
 
 const boardMembers = await getCollection("board");
 ---
 
 <Layout title="CPP Japanese Language Learners">
-    <!-- Top section -->
-    <div style=`background-image: url(${optimizedBg.src})` class="my-16 h-[50vh] w-auto mb-7 bg-secondary flex justify-center items-center bg-cover bg-center">
-        <div transition:animate={slide ({ duration: '0.3s' })} class="text-center">
-            <Image src={logo} alt="logo" class="w-36 mx-auto" />
-            <div class="xsm:flex">
-                <h1 class="text-4xl font-bold text-accent mx-4 mt-4 xsm:w-[350px] h-full">CPP Japanese Language Learners</h1>
-            </div>
-        </div>
+  <!-- Top section -->
+  <div
+    style=`background-image: url(${optimizedBg.src})`
+    class="my-16 h-[50vh] w-auto mb-7 bg-secondary flex justify-center items-center bg-cover bg-center"
+  >
+    <div transition:animate={slide({ duration: "0.3s" })} class="text-center">
+      <Image src={logo} alt="logo" class="w-36 mx-auto" />
+      <div class="xsm:flex">
+        <h1
+          class="text-4xl font-bold text-accent mx-4 mt-4 xsm:w-[350px] h-full"
+        >
+          CPP Japanese Language Learners
+        </h1>
+      </div>
     </div>
-    <!-- End top section -->
-    
-    <!-- Content -->
-    <div transition:animate={slide ({ duration: '0.5s' })} class="flex flex-col md:max-w-3xl mx-auto my-16">
-        <!-- About -->
-        <div class="flex flex-col mb-10 mx-6 w-auto">
-            <h1 class="text-5xl font-bold text-accent mb-4 font-display md:max-w-3xl md:mx-auto md:pr-[768px]">About</h1>
-            <div class="flex flex-col">
-                <p class="text-accent mb-4 md:max-w-3xl mx-auto">The Cal Poly Pomona Japanese Language Learning Club (CPP JLL) is a community dedicated to exploring Japanese language and culture in a variety of ways, whether it be through assisting beginners, housing reading and viewing groups, hosting workshops, or meeting and socializing with fellow learners. All skill-levels are welcome to join us on our Japanese-learning journey!</p>
-                <p class="text-accent mb-4 md:max-w-3xl text-left w-full mx-auto">Contact us or check us out through our <span class="text-blurple font-bold hover:underline"><a href="https://discord.com/invite/W5kxJtE3a7" target="_blank">Discord</a></span> server or <span class="bg-gradient-to-r from-igOrange via-igRed to-igPurple bg-clip-text text-transparent font-bold decoration-igRed hover:underline"><a href="https://www.instagram.com/cppjll/" target="_blank">Instagram</a></span> page!</p>
-                <div class="flex flex-col space-y-4">
-                    <a class="btn btn-outline btn-accent btn-block md:btn-[644px] md:max-w-3xl md:mx-auto hover:bg-gradient-to-r from-blurple to-blurple" href="https://discord.com/invite/W5kxJtE3a7" target="_blank"><iconify-icon icon="simple-icons:discord" class="text-2xl"></iconify-icon> Join the Discord</a>
-                    <a class="btn btn-outline btn-accent btn-block md:btn-[644px] md:max-w-3xl md:mx-auto hover:bg-gradient-to-r from-igOrange via-igRed to-igPurple" href="https://www.instagram.com/cppjll/" target="_blank"><iconify-icon icon="simple-icons:instagram" class="text-2xl"></iconify-icon> Follow our Instagram</a>
-                </div>
-            </div>
-        </div>
-        <!-- End About -->
+  </div>
+  <!-- End top section -->
 
-        <!-- Events -->
-        <div class="flex flex-col mb-6 mx-6">
-            <a class="hover:translate-x-3 transition-transform" href='/events'>
-                <h1 class="text-5xl font-bold text-accent mb-4 font-display">Events</h1>
-            </a>
-                <EventCard event={featuredEvent} soonest />
-            <a href='/events' class="btn btn-outline btn-accent w-full mb-4 md:btn-[644px] md:max-w-3xl md:mx-auto">See All Events</a>
+  <!-- Content -->
+  <div
+    transition:animate={slide({ duration: "0.5s" })}
+    class="flex flex-col md:max-w-3xl mx-auto my-16"
+  >
+    <!-- About -->
+    <div class="flex flex-col mb-10 mx-6 w-auto">
+      <h1
+        class="text-5xl font-bold text-accent mb-4 font-display md:max-w-3xl md:mx-auto md:pr-[768px]"
+      >
+        About
+      </h1>
+      <div class="flex flex-col">
+        <p class="text-accent mb-4 md:max-w-3xl mx-auto">
+          The Cal Poly Pomona Japanese Language Learners Club (CPP JLL) is a
+          community dedicated to exploring Japanese language and culture in a
+          variety of ways, whether it be through assisting beginners, housing
+          reading and viewing groups, hosting workshops, or meeting and
+          socializing with fellow learners. All skill-levels are welcome to join
+          us on our Japanese-learning journey!
+        </p>
+        <p class="text-accent mb-4 md:max-w-3xl text-left w-full mx-auto">
+          Contact us or check us out through our <span
+            class="text-blurple font-bold hover:underline"
+            ><a href="https://discord.com/invite/W5kxJtE3a7" target="_blank"
+              >Discord</a
+            ></span
+          > server or <span
+            class="bg-gradient-to-r from-igOrange via-igRed to-igPurple bg-clip-text text-transparent font-bold decoration-igRed hover:underline"
+            ><a href="https://www.instagram.com/cppjll/" target="_blank"
+              >Instagram</a
+            ></span
+          > page!
+        </p>
+        <div class="flex flex-col space-y-4">
+          <a
+            class="btn btn-outline btn-accent btn-block md:btn-[644px] md:max-w-3xl md:mx-auto hover:bg-gradient-to-r from-blurple to-blurple"
+            href="https://discord.com/invite/W5kxJtE3a7"
+            target="_blank"
+            ><iconify-icon icon="simple-icons:discord" class="text-2xl"
+            ></iconify-icon> Join the Discord</a
+          >
+          <a
+            class="btn btn-outline btn-accent btn-block md:btn-[644px] md:max-w-3xl md:mx-auto hover:bg-gradient-to-r from-igOrange via-igRed to-igPurple"
+            href="https://www.instagram.com/cppjll/"
+            target="_blank"
+            ><iconify-icon icon="simple-icons:instagram" class="text-2xl"
+            ></iconify-icon> Follow our Instagram</a
+          >
         </div>
-        <!-- End Events -->
-        
-        <!-- Board -->
-        <div class="flex flex-col mb-6 mx-6">
-            <a class="md:max-w-3xl md:mx-auto md:pr-[768px] hover:translate-x-3 transition-transform" href="/board">
-                <h1 class="text-5xl font-bold text-accent mb-4 font-display">Board</h1>
-            </a>
-            <div class="flex flex-col">
-                {
-                    boardMembers
-                        .sort((a, b) => {
-                            if (a.data.position === "President") return -1;
-                            if (b.data.position === "President") return 1;
-                            if (a.data.position === "Vice-President") return -1;
-                            if (b.data.position === "Vice-President") return 1;
-                            return 0;
-                        })
-                        .map((boardMember) => (
-                            <BoardMemberCard member={boardMember} />
-                    ))
-                }
-            </div>
-        </div>
-        <!-- End Board -->
+      </div>
     </div>
-    
+    <!-- End About -->
+
+    <!-- Events -->
+    <div class="flex flex-col mb-6 mx-6">
+      <a class="hover:translate-x-3 transition-transform" href="/events">
+        <h1 class="text-5xl font-bold text-accent mb-4 font-display">Events</h1>
+      </a>
+      <EventCard event={featuredEvent} soonest />
+      <a
+        href="/events"
+        class="btn btn-outline btn-accent w-full mb-4 md:btn-[644px] md:max-w-3xl md:mx-auto"
+        >See All Events</a
+      >
+    </div>
+    <!-- End Events -->
+
+    <!-- Board -->
+    <div class="flex flex-col mb-6 mx-6">
+      <a
+        class="md:max-w-3xl md:mx-auto md:pr-[768px] hover:translate-x-3 transition-transform"
+        href="/board"
+      >
+        <h1 class="text-5xl font-bold text-accent mb-4 font-display">Board</h1>
+      </a>
+      <div class="flex flex-col">
+        {
+          boardMembers
+            .sort((a, b) => {
+              if (a.data.position === "President") return -1;
+              if (b.data.position === "President") return 1;
+              if (a.data.position === "Vice-President") return -1;
+              if (b.data.position === "Vice-President") return 1;
+              return 0;
+            })
+            .map((boardMember) => <BoardMemberCard member={boardMember} />)
+        }
+      </div>
+    </div>
+    <!-- End Board -->
+  </div>
 </Layout>
 <style>
-    @media (prefers-color-scheme: dark) {
-        body {
-            background-color: #ffffff;
-        }
+  @media (prefers-color-scheme: dark) {
+    body {
+      background-color: #ffffff;
     }
+  }
 </style>
