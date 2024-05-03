@@ -5,7 +5,8 @@ date: 2024-03-12T12:30:00-08:00
 location: Bldg 24D Rm 1224
 image: "./cover-images/hanami.png"
 imageAlt: Hanami Meeting Cover Photo
-slidesEmbed: "https://docs.google.com/presentation/d/1aJ8i2jErdDLkn0Fux58mhAOLZ1dwpIaNKYSaCl5vmnE/edit?usp=sharing"
+slidesEmbed: "https://docs.google.com/presentation/d/e/2PACX-1vQfTJJb5cYEAAzti_gdKj0bCdf0mf45xSQ9TgpC_IplafuSo92d95iHHnzcME7niLXuKHq_n286-j9G/pub?start=false&
+loop=false&delayms=3000"
 ---
 
 Hanami (花見), literally meaning "flower viewing", is the Japanese custom of enjoying the transient beauty of flowers, particularly cherry blossoms. The practice of Hanami is more than a thousand years old, and is still very popular in Japan today. We'll be discussing what the custom is, how it's celebrated, and its significance in Japanese culture. We look forward to seeing you there! 🌸
