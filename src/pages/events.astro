@@ -4,112 +4,115 @@ import EventCard from "../components/EventCard.astro";
 import Layout from "../layouts/Layout.astro";
 import { getCollection } from "astro:content";
 const upcomingEvents = await getCollection("events", ({ data }) => {
-    const eventDate = new Date(data.date);
-    const today = new Date();
-    return eventDate >= today;
+  const eventDate = new Date(data.date);
+  const today = new Date();
+  return eventDate >= today;
 });
-upcomingEvents.sort((a, b) => { // Sort by date
-    const aDate = new Date(a.data.date);
-    const bDate = new Date(b.data.date);
-    return aDate.getTime() - bDate.getTime();
+upcomingEvents.sort((a, b) => {
+  // Sort by date
+  const aDate = new Date(a.data.date);
+  const bDate = new Date(b.data.date);
+  return aDate.getTime() - bDate.getTime();
 });
 
 const oddPlacedFuture = upcomingEvents.filter((_, index) => index % 2 !== 0);
 const evenPlacedFuture = upcomingEvents.filter((_, index) => index % 2 === 0);
 
 const previousEvents = await getCollection("events", ({ data }) => {
-    const eventDate = new Date(data.date);
-    const today = new Date();
-    return eventDate < today;
+  const eventDate = new Date(data.date);
+  const today = new Date();
+  return eventDate < today;
 });
-previousEvents.sort((a, b) => { // Sort by date
-    const aDate = new Date(a.data.date);
-    const bDate = new Date(b.data.date);
-    return bDate.getTime() - aDate.getTime();
+previousEvents.sort((a, b) => {
+  // Sort by date
+  const aDate = new Date(a.data.date);
+  const bDate = new Date(b.data.date);
+  return bDate.getTime() - aDate.getTime();
 });
 
 const oddPlacedEvents = previousEvents.filter((_, index) => index % 2 !== 0);
 const evenPlacedEvents = previousEvents.filter((_, index) => index % 2 === 0);
 ---
+
 <Layout title="Events - CPP Japanese Language Learners">
-    <div class="my-16 md:max-w-4xl mx-auto flex flex-col">
-        <!-- Events -->
-        <div class="flex flex-col my-6 mx-6">
-            <div class="breadcrumbs text-accent mb-4">
-                <ul>
-                    <li><a href="/">Home</a></li>
-                    <li>Events</li>
-                </ul>
-            </div>
-            <h1 transition:animate={slide ({ duration: '0.3s' })} class="text-5xl font-bold text-accent mb-4 font-display">Upcoming Events</h1>
-            <!-- No upcoming events case -->
-            <div class=`${upcomingEvents.length === 0 ? "flex flex-col" : "hidden"}`>
-                <h2 class="text-accent mb-4">No upcoming events</h2>
-            </div>
-            <!-- Render upcoming events in a single column on smaller devices -->
-            <div class={`${upcomingEvents.length != 0 ? "flex flex-col items-center" : "hidden"} sm:hidden`}>
-                {   
-                    upcomingEvents.map((event) => 
-                        <EventCard event={event} />
-                    )
-                }
-            </div>
-            <!-- One upcoming event case -->
-            <div class=`${upcomingEvents.length === 1 ? "flex flex-col items-center" : "hidden"}`>
-                { upcomingEvents[0] ? <EventCard event={upcomingEvents[0]} soonest /> : null }
-            </div>
-            <!-- Multiple upcoming events case -->
-            <div class=`${upcomingEvents.length > 1 ? "hidden sm:flex flex-row gap-4" : "hidden"}`}>
-                <div class="flex flex-col w-1/2">
-                    {
-                        evenPlacedFuture.map((event) => 
-                            <EventCard event={event} />
-                        )
-                    }
-                </div>
-                <div class="flex flex-col w-1/2">
-                    {
-                        oddPlacedFuture.map((event) => 
-                            <EventCard event={event} />
-                        )
-                    }
-                </div>
-            </div>
-        </div>
-        <div class="flex flex-col my-6 mx-6">
-            <h1 transition:animate={slide ({ duration: '0.5s' })} class="text-5xl font-bold text-accent mb-4 font-display">Previous Events</h1>
-            <!-- Renders previous events on smaller devices, hidden on bigger screens -->
-            <div class="flex flex-col sm:hidden">
-                {
-                    previousEvents.map((event) => 
-                        <EventCard event={event} />
-                    )
-                }
-            </div>
-            <!-- Renders previous events within two columns on larger screen -->
-            <!-- It's jank but it WORKS and all the work happens at build time anyway so ITS FINE users wont notice -->
-            <div class="hidden sm:flex flex-row gap-4">
-                <div class="flex flex-col w-1/2">
-                    {
-                        evenPlacedEvents.map((event) => 
-                            <EventCard event={event} />
-                        )
-                    }
-                </div>
-                <div class="flex flex-col w-1/2">
-                    {
-                        oddPlacedEvents.map((event) => 
-                            <EventCard event={event} />
-                        )
-                    }
-                </div>
-        </div>
-    </div>
-</Layout>
-<style>
-    @media (prefers-color-scheme: dark) {
-        body {
-            background-color: #ffffff;
+  <div class="my-16 md:max-w-4xl mx-auto flex flex-col">
+    <!-- Events -->
+    <div class="flex flex-col my-6 mx-6">
+      <div class="breadcrumbs text-accent mb-4">
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li>Events</li>
+        </ul>
+      </div>
+      <h1
+        transition:animate={slide({ duration: "0.3s" })}
+        class="text-5xl font-bold text-accent mb-4 font-display"
+      >
+        Upcoming Events
+      </h1>
+      <!-- No upcoming events case -->
+      <div class=`${upcomingEvents.length === 0 ? "flex flex-col" : "hidden"}`>
+        <h2 class="text-accent mb-4">
+          No upcoming events. Stay tuned! ٩(๑´∀ `๑ )
+        </h2>
+      </div>
+      <!-- Render upcoming events in a single column on smaller devices -->
+      <div
+        class={`${upcomingEvents.length != 0 ? "flex flex-col items-center" : "hidden"} sm:hidden`}
+      >
+        {upcomingEvents.map((event) => <EventCard event={event} />)}
+      </div>
+      <!-- One upcoming event case -->
+      <div
+        class=`${upcomingEvents.length === 1 ? "flex flex-col items-center" : "hidden"}`
+      >
+        {
+          upcomingEvents[0] ? (
+            <EventCard event={upcomingEvents[0]} soonest />
+          ) : null
         }
+      </div>
+      <!-- Multiple upcoming events case -->
+      <div
+        class=`${upcomingEvents.length > 1 ? "hidden sm:flex flex-row gap-4" : "hidden"}`
+        }
+      >
+        <div class="flex flex-col w-1/2">
+          {evenPlacedFuture.map((event) => <EventCard event={event} />)}
+        </div>
+        <div class="flex flex-col w-1/2">
+          {oddPlacedFuture.map((event) => <EventCard event={event} />)}
+        </div>
+      </div>
+    </div>
+    <div class="flex flex-col my-6 mx-6">
+      <h1
+        transition:animate={slide({ duration: "0.5s" })}
+        class="text-5xl font-bold text-accent mb-4 font-display"
+      >
+        Previous Events
+      </h1>
+      <!-- Renders previous events on smaller devices, hidden on bigger screens -->
+      <div class="flex flex-col sm:hidden">
+        {previousEvents.map((event) => <EventCard event={event} />)}
+      </div>
+      <!-- Renders previous events within two columns on larger screen -->
+      <!-- It's jank but it WORKS and all the work happens at build time anyway so ITS FINE users wont notice -->
+      <div class="hidden sm:flex flex-row gap-4">
+        <div class="flex flex-col w-1/2">
+          {evenPlacedEvents.map((event) => <EventCard event={event} />)}
+        </div>
+        <div class="flex flex-col w-1/2">
+          {oddPlacedEvents.map((event) => <EventCard event={event} />)}
+        </div>
+      </div>
+    </div>
+  </div>
+  <style>
+    @media (prefers-color-scheme: dark) {
+      body {
+        background-color: #ffffff;
+      }
     }
-</style>
+  </style></Layout
+>

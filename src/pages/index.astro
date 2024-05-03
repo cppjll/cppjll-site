@@ -102,7 +102,17 @@ const boardMembers = await getCollection("board");
       <a class="hover:translate-x-3 transition-transform" href="/events">
         <h1 class="text-5xl font-bold text-accent mb-4 font-display">Events</h1>
       </a>
-      <EventCard event={featuredEvent} soonest />
+      {
+        featuredEvent.data.date.getTime() > Date.now() ? (
+          <EventCard event={featuredEvent} soonest />
+        ) : (
+          <div class="flex flex-col">
+            <h2 class="text-accent mb-4">
+              No upcoming events. Stay tuned! ٩(๑´∀ `๑ )
+            </h2>
+          </div>
+        )
+      }
       <a
         href="/events"
         class="btn btn-outline btn-accent w-full mb-4 md:btn-[644px] md:max-w-3xl md:mx-auto"
