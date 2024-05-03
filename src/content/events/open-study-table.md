@@ -1,7 +1,7 @@
 ---
 title: Open Study Table
 description: Need a place to study with fellow Japanese learners? Come join us in the library for our weekly open study table!
-date: 2024-05-02T12:30:00-08:00
+date: 2024-05-02T12:00:00-07:00
 location: Bldg 24D Rm 1224
 image: "./cover-images/open study tabble.png"
 imageAlt: Open Study Table Cover Photo
