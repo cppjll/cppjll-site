@@ -1,15 +1,27 @@
 ---
-import { Image } from "astro:assets"
-const {event, soonest} = Astro.props
+import { Image } from "astro:assets";
+const { event, soonest } = Astro.props;
 ---
 
-<a class=`card ${soonest && 'sm:card-side'} w-full shadow-xl mb-6 sm:hover:scale-[1.02] transition-all break-inside-avoid-column	` href={`/events/${event.slug}`}>
-    <figure class=`${soonest && 'sm:max-w-sm'}`>
-        <Image transition:name={event.slug} src={event.data.image} alt={event.data.imageAlt} class="object-scale-down mx-auto rounded-lg" />
-    </figure>
-    <div class="py-4 px-6">
-        <h2 class="text-3xl font-bold text-accent mb-2 font-display">{event.data.title}</h2>
-        <p class="italic text-accent mb-2">Date: {event.data.date.toLocaleDateString()}</p>
-        <p class="text-accent mb-4">{event.data.description}</p>  
-    </div>
+<a
+  class=`card ${soonest && 'sm:card-side'} w-full shadow-xl mb-6 sm:hover:scale-[1.02] transition-all break-inside-avoid-column md:h-[610px]`
+  href={`/events/${event.slug}`}
+>
+  <figure class=`${soonest && 'sm:max-w-sm'}`>
+    <Image
+      transition:name={event.slug}
+      src={event.data.image}
+      alt={event.data.imageAlt}
+      class="object-scale-down mx-auto rounded-lg"
+    />
+  </figure>
+  <div class="py-4 px-6">
+    <h2 class="text-3xl font-bold text-accent mb-2 font-display">
+      {event.data.title}
+    </h2>
+    <p class="italic text-accent mb-2">
+      Date: {event.data.date.toLocaleDateString()}
+    </p>
+    <p class="text-accent mb-4">{event.data.description}</p>
+  </div>
 </a>
