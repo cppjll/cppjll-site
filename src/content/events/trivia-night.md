@@ -1,16 +1,16 @@
 ---
 title: 'Trivia Night'
 description: Last meeting of the semester! Come unwind before finals with Japanese snacks and trivia!
-date: 2024-05-06T12:30:00-08:00
+date: 2024-05-07T12:30:00-08:00
 location: Bldg 24D Rm 1224
-image: './cover-images/ordering in japanese.png'
-imageAlt: Title and date of the meeting with barista ready to take an order
+image: './cover-images/trivia night.png'
+imageAlt: Title and date of the meeting with smug illustrated woman earning $100 in Jeopardy, green, distorted background
 ---
 
-Ordering something from a cafe and a restaurant, although simple, can be daunting when you're unfamiliar with the language. In this meeting, we'll be going over how a typical exchange goes when ordering food or drinks in Japan. We'll then put our knowledge to the test by practicing ordering from a cafe and a restaurant in Japanese. Hope to see you there!
+As we wrap up the semester, we'll be hosting a trivia night, Jeopardy-style! We'll have Japanese snacks and drinks available, so whether you want you want to test your knowledge or just hang out and enjoy company, we hope to see you there!
 
 ## Details
-**Date**: Tuesday, 4/16
+**Date**: Tuesday, 5/7
 
 **Location**: Building 24D, Room 1224
 
