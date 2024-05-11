@@ -139,6 +139,7 @@ const boardMembers = await getCollection("board");
               if (b.data.position === "Vice-President") return 1;
               return 0;
             })
+            .filter((boardMember) => !boardMember.data.retired)
             .map((boardMember) => <BoardMemberCard member={boardMember} />)
         }
       </div>

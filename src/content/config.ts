@@ -20,6 +20,8 @@ const boardCollection = defineCollection({
         position: z.string(),
         image: image(),
         imageAlt: z.string(),
+        retired: z.boolean().optional(),
+        service: z.string().optional(),
         bio: z.string().optional(),
         discord: z.string().optional(),
         linkedin: z.string().optional(),
