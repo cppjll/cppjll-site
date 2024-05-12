@@ -1,7 +1,7 @@
 ---
 name: Leonard Woo
-position: Vice-President
+position: President
 image: "./board-images/leo.png"
 imageAlt: Photo of Leo
-bio: Leo doesn't seem to want to make a bio. 馬鹿!
+bio: Leo doesn't seem to want to make a bio.
 ---
