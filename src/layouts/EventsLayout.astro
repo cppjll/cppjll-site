@@ -21,7 +21,9 @@ const {frontmatter} = Astro.props;
         <meta property="og:image" content={frontmatter.data.image.src} />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="theme-color" content="#204063">
-
+        <!-- Cloudflare Web Analytics -->
+        <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "3882184c8c9f429bb3bb04e4f5b4b669"}'></script>
+        <!-- End Cloudflare Web Analytics -->
         <ViewTransitions />
     </head>
     <body >
