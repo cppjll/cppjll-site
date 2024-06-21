@@ -4,7 +4,7 @@ const { event, soonest } = Astro.props;
 ---
 
 <a
-  class=`card ${soonest && 'sm:card-side'} w-full shadow-xl mb-6 sm:hover:scale-[1.02] transition-all break-inside-avoid-column ${!soonest && 'sm:h-[575px] md:h-[645px]'}`
+  class=`card ${soonest && 'sm:card-side'} w-full shadow-xl mb-6 sm:hover:scale-[1.02] transition-all break-inside-avoid-column`
   href={`/events/${event.slug}`}
 >
   <figure class=`${soonest && 'sm:max-w-sm'}`>
