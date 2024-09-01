@@ -12,14 +12,14 @@ const { member } = Astro.props;
     />
   </figure>
   <div class="card-body">
-    <h1 class="text-3xl font-bold font-display text-accent mx-auto">
+    <h1 class="text-3xl font-bold font-display mx-auto">
       {member.data.name}
     </h1>
-    <h2 class="text-center text-xl text-accent mb-2 mx-auto">
+    <h2 class="text-center text-xl mb-2 mx-auto">
       {member.data.position}
       {member.data.service && <p>{member.data.service}</p>}
     </h2>
-    <p class="text-lg font-body text-accent mb-2 mx-auto">
+    <p class="text-lg font-body mb-2 mx-auto">
       {member.data.bio}
     </p>
     <div class="row-auto mx-auto space-x-2">
@@ -27,7 +27,7 @@ const { member } = Astro.props;
         href={member.data.discord}
         target="_blank"
         style={member.data.discord ? " " : "display:none"}
-        class="btn btn-ghost hover:btn-accent w-12 normal-case text-xl text-accent hover:scale-[1.05]"
+        class="btn btn-ghost hover:btn-accent w-12 normal-case text-xl hover:scale-[1.05]"
         ><iconify-icon icon="simple-icons:discord" class="text-4xl"
         ></iconify-icon></a
       >
@@ -35,7 +35,7 @@ const { member } = Astro.props;
         href={member.data.instagram}
         target="_blank"
         style={member.data.instagram ? " " : "display:none"}
-        class="btn btn-ghost hover:btn-accent w-12 normal-case text-xl text-accent hover:scale-[1.05]"
+        class="btn btn-ghost hover:btn-accent w-12 normal-case text-xl hover:scale-[1.05]"
         ><iconify-icon icon="simple-icons:instagram" class="text-4xl"
         ></iconify-icon></a
       >
@@ -43,7 +43,7 @@ const { member } = Astro.props;
         href={member.data.github}
         target="_blank"
         style={member.data.github ? " " : "display:none"}
-        class="btn btn-ghost hover:btn-accent w-12 normal-case text-xl text-accent hover:scale-[1.05]"
+        class="btn btn-ghost hover:btn-accent w-12 normal-case text-xl hover:scale-[1.05]"
         ><iconify-icon icon="simple-icons:github" class="text-4xl"
         ></iconify-icon></a
       >
@@ -51,7 +51,7 @@ const { member } = Astro.props;
         href={member.data.linkedin}
         target="_blank"
         style={member.data.linkedin ? " " : "display:none"}
-        class="btn btn-ghost hover:btn-accent w-12 normal-case text-xl text-accent hover:scale-[1.05]"
+        class="btn btn-ghost hover:btn-accent w-12 normal-case text-xl hover:scale-[1.05]"
         ><iconify-icon icon="simple-icons:linkedin" class="text-4xl"
         ></iconify-icon></a
       >
@@ -59,7 +59,7 @@ const { member } = Astro.props;
         href={member.data.youtube}
         target="_blank"
         style={member.data.youtube ? " " : "display:none"}
-        class="btn btn-ghost hover:btn-accent w-12 normal-case text-xl text-accent hover:scale-[1.05]"
+        class="btn btn-ghost hover:btn-accent w-12 normal-case text-xl hover:scale-[1.05]"
         ><iconify-icon icon="simple-icons:youtube" class="text-4xl"
         ></iconify-icon></a
       >
