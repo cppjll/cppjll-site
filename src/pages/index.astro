@@ -2,7 +2,7 @@
 import Layout from "../layouts/Layout.astro";
 import { Image, getImage } from "astro:assets";
 import logo from "../images/bun.png";
-import bg from "../images/bg.png";
+import bg from "../images/test.jpg";
 import BoardMemberCard from "../components/BoardMemberCard.astro";
 import EventCard from "../components/EventCard.astro";
 import { getCollection } from "astro:content";
@@ -28,18 +28,49 @@ const boardMembers = await getCollection("board");
 <Layout title="CPP Japanese Language Learners">
   <!-- Top section -->
   <div
-    style=`background-image: url(${optimizedBg.src})`
-    class="my-16 h-[50vh] w-auto mb-7 bg-secondary flex justify-center items-center bg-cover bg-center"
+    class="h-[65vh] w-full mb-7 bg-secondary flex justify-center items-center"
   >
-    <div transition:animate={slide({ duration: "0.3s" })} class="text-center">
-      <Image src={logo} alt="logo" class="w-36 mx-auto" />
-      <div class="xsm:flex">
-        <h1
-          class="text-4xl font-bold text-foreground mx-4 mt-4 xsm:w-[350px] h-full"
+    <div class="relative w-full h-full bg-secondary">
+      <!-- Parent container for absolute content -->
+      <div class="absolute inset-0 z-10 opacity-100">
+        <div
+          class="flex flex-col md:flex-row h-full max-w-screen-md mx-6 md:mx-auto items-center justify-center md:justify-between"
         >
-          CPP Japanese Language Learners
-        </h1>
+          <Image src={logo} alt="logo" class="w-36 mb-6 md:hidden" />
+
+          <div class="flex flex-col gap-6 max-w-md">
+            <div class="gap-2">
+              <h3 class="text-3xl">Read, Listen, Speak,</h3>
+              <h1 class="text-5xl font-bold text-foreground">
+                Learn Japanese.
+              </h1>
+            </div>
+            <p class="">
+              Join the <span class="font-bold"
+                >Cal Poly Pomona Japanese Language Learners</span
+              >. Whether you&apos;re just starting out or are years into
+              studying the language, the Japanese Language Learners are always
+              welcoming new members.
+            </p>
+            <div class="flex flex-row gap-1">
+              <a href="" target="_blank">
+                <Button variant={"default"}> Register </Button>
+              </a>
+              <a href="" target="_blank">
+                <Button
+                  className="bg-transparent border-foreground hover:bg-accent hover:text-accent-foreground"
+                  variant={"outline"}
+                >
+                  See events
+                </Button>
+              </a>
+            </div>
+          </div>
+          <Image src={logo} alt="logo" class="hidden md:flex w-36" />
+        </div>
       </div>
+      <!-- Background image with opacity -->
+      <Image src={bg} alt="bg" class="w-full h-full object-cover opacity-10" />
     </div>
   </div>
   <!-- End top section -->
