@@ -50,7 +50,7 @@ const boardMembers = await getCollection("board");
     class="flex flex-col md:max-w-3xl mx-auto my-16"
   >
     <!-- About -->
-    <div class="flex flex-col mb-10 mx-6 w-auto">
+    <div class="flex flex-col pb-10 px-6 w-auto">
       <h1
         class="text-5xl font-bold text-foreground mb-4 font-display md:max-w-3xl md:mx-auto md:pr-[768px]"
       >
@@ -85,9 +85,8 @@ const boardMembers = await getCollection("board");
             target="_blank"
           >
             <Button
-              size={"lg"}
               variant={"outline"}
-              className="border-foreground hover:bg-blurple w-full"
+              className="border-foreground hover:bg-blurple w-full h-10"
             >
               <iconify-icon icon="simple-icons:discord" class="text-2xl mr-2"
               ></iconify-icon>
@@ -101,9 +100,8 @@ const boardMembers = await getCollection("board");
             target="_blank"
           >
             <Button
-              size={"lg"}
               variant={"outline"}
-              className="border-foreground hover:bg-gradient-to-r from-igOrange via-igRed to-igPurple w-full"
+              className="border-foreground hover:bg-gradient-to-r from-igOrange via-igRed to-igPurple w-full h-10"
             >
               <iconify-icon icon="simple-icons:instagram" class="text-xl mr-2"
               ></iconify-icon>
@@ -133,11 +131,15 @@ const boardMembers = await getCollection("board");
           </div>
         )
       }
-      <a
-        href="/events"
-        class="btn btn-outline btn-foreground w-full mb-4 md:btn-[644px] md:max-w-3xl md:mx-auto"
-        >See All Events</a
-      >
+      <a href="/events">
+        <Button
+          size={"lg"}
+          variant={"outline"}
+          className="border-foreground w-full mb-4"
+        >
+          See All Events
+        </Button>
+      </a>
     </div>
     <!-- End Events -->
 
