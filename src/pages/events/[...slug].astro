@@ -1,24 +1,19 @@
 ---
-import { getCollection } from 'astro:content';
-import EventsLayout from '../../layouts/EventsLayout.astro';
+import { getCollection } from "astro:content";
+import EventsLayout from "../../layouts/EventsLayout.astro";
 
 export async function getStaticPaths() {
-    const eventEntries = await getCollection('events');
-    return eventEntries.map(entry => ({
-        params: { slug: entry.slug }, props: { entry },
-    }));
+  const eventEntries = await getCollection("events");
+  return eventEntries.map((entry) => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
 }
 
 const { entry } = Astro.props;
 const { Content } = await entry.render();
 ---
+
 <EventsLayout frontmatter={entry}>
-    <Content />
+  <Content />
 </EventsLayout>
-<style>
-    @media (prefers-color-scheme: dark) {
-        body {
-            background-color: #ffffff;
-        }
-    }
-</style>

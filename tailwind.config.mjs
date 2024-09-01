@@ -62,25 +62,6 @@ export default {
         sans: ["DM Sans"],
         display: ["DM Serif Display"],
       },
-      typography: {
-        DEFAULT: {
-          css: {
-            color: "#204063",
-            h1: {
-              color: "#204063",
-            },
-            h2: {
-              color: "#204063",
-            },
-            h3: {
-              color: "#204063",
-            },
-            strong: {
-              color: "#204063",
-            },
-          },
-        },
-      },
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",

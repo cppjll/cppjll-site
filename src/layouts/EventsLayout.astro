@@ -6,6 +6,7 @@ import { Image } from "astro:assets";
 import icon from "/favicon.ico";
 import { ViewTransitions } from "astro:transitions";
 import { slide } from "astro:transitions";
+import Navbar from "@/components/Navbar.astro";
 const { frontmatter } = Astro.props;
 ---
 
@@ -68,13 +69,11 @@ const { frontmatter } = Astro.props;
     <ViewTransitions />
   </head>
   <body>
-    <div>
-      <HomeNavbar />
-    </div>
+    <Navbar />
     <div
-      class="flex flex-col mt-4 mb-20 mx-6 min-h-screen md:max-w-2xl md:mx-auto"
+      class="flex flex-col mb-20 mx-6 min-h-screen md:max-w-2xl md:mx-auto"
     >
-      <div class="breadcrumbs mb-4 my-16">
+      <div class="breadcrumbs my-4">
         <ul>
           <li><a href="/">Home</a></li>
           <li><a href="/events">Events</a></li>
@@ -93,9 +92,10 @@ const { frontmatter } = Astro.props;
         alt={frontmatter.data.imageAlt}
         class="rounded-xl"
       />
+      <!-- i have no idea why the important is needed here but it only works with it-->
       <article
         transition:animate={slide({ duration: "0.5s" })}
-        class="prose mt-4 prose-a:"
+        class="prose !prose-neutral dark:!prose-invert mt-4"
       >
         <slot />
         <div class=`${frontmatter.data.slidesEmbed ? '' : 'hidden'}`>
