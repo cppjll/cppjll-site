@@ -16,12 +16,12 @@ const { event, soonest } = Astro.props;
     />
   </figure>
   <div class="py-4 px-6">
-    <h2 class="text-3xl font-bold text-accent mb-2 font-display">
+    <h2 class="text-3xl font-bold  mb-2 font-display">
       {event.data.title}
     </h2>
-    <p class="italic text-accent mb-2">
+    <p class="italic  mb-2">
       Date: {event.data.date.toLocaleDateString()}
     </p>
-    <p class="text-accent mb-4">{event.data.description}</p>
+    <p class=" mb-4">{event.data.description}</p>
   </div>
 </a>

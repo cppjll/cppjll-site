@@ -15,7 +15,6 @@ upcomingEvents.sort((a, b) => {
   return aDate.getTime() - bDate.getTime();
 });
 
-
 const previousEvents = await getCollection("events", ({ data }) => {
   const eventDate = new Date(data.date);
   const today = new Date();
@@ -27,14 +26,13 @@ previousEvents.sort((a, b) => {
   const bDate = new Date(b.data.date);
   return bDate.getTime() - aDate.getTime();
 });
-
 ---
 
 <Layout title="Events - CPP Japanese Language Learners">
-  <div class="my-16 md:max-w-4xl mx-auto flex flex-col">
+  <div class="mb-16 md:max-w-4xl mx-auto flex flex-col">
     <!-- Events -->
-    <div class="flex flex-col my-6 mx-6">
-      <div class="breadcrumbs text-accent mb-4">
+    <div class="flex flex-col mt-12 mb-6 mx-6">
+      <div class="breadcrumbs mb-4">
         <ul>
           <li><a href="/">Home</a></li>
           <li>Events</li>
@@ -42,15 +40,13 @@ previousEvents.sort((a, b) => {
       </div>
       <h1
         transition:animate={slide({ duration: "0.3s" })}
-        class="text-5xl font-bold text-accent mb-4 font-display"
+        class="text-5xl font-bold mb-4 font-display"
       >
         Upcoming Events
       </h1>
       <!-- No upcoming events case -->
       <div class=`${upcomingEvents.length === 0 ? "flex flex-col" : "hidden"}`>
-        <h2 class="text-accent mb-4">
-          No upcoming events. Stay tuned! ٩(๑´∀ `๑ )
-        </h2>
+        <h2 class="mb-4">No upcoming events. Stay tuned! ٩(๑´∀ `๑ )</h2>
       </div>
       <!-- Render upcoming events in a single column on smaller devices -->
       <div
@@ -69,7 +65,9 @@ previousEvents.sort((a, b) => {
         }
       </div>
       <!-- Multiple upcoming events case -->
-      <div class={`${upcomingEvents.length > 1 ? "hidden sm:grid grid-cols-2 gap-4" : "hidden"}`}>
+      <div
+        class={`${upcomingEvents.length > 1 ? "hidden sm:grid grid-cols-2 gap-4" : "hidden"}`}
+      >
         {upcomingEvents.map((event) => <EventCard event={event} />)}
       </div>
     </div>
@@ -77,7 +75,8 @@ previousEvents.sort((a, b) => {
     <div class="flex flex-col my-6 mx-6">
       <h1
         transition:animate={slide({ duration: "0.5s" })}
-        class="text-5xl font-bold text-accent mb-4 font-display">
+        class="text-5xl font-bold mb-4 font-display"
+      >
         Previous Events
       </h1>
       <!-- Single column on smaller devices, two column grid on larger screens -->
