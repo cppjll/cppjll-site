@@ -59,10 +59,8 @@ export default {
     			}
     		},
     		fontFamily: {
-    			sans: [DM Sans", sans-serif],\n    			display: [DM Serif Display", serif]
-    		},
-    		fontSize: {
-    			nv: [1.25rem, {\\r\\n                    lineHeight:1,\\r\\n                }]
+    			sans: ["DM Sans"],
+                display: ["DM Serif Display"]
     		},
     		typography: {
     			DEFAULT: {
