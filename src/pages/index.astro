@@ -1,6 +1,5 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import { Image, getImage } from "astro:assets";
+import { Image } from "astro:assets";
 import logo from "../images/bun.png";
 import bg from "../images/test.jpg";
 import BoardMemberCard from "../components/BoardMemberCard.astro";
@@ -8,8 +7,7 @@ import EventCard from "../components/EventCard.astro";
 import { getCollection } from "astro:content";
 import { slide } from "astro:transitions";
 import { Button } from "@/components/ui/button";
-
-const optimizedBg = await getImage({ src: bg });
+import HomeLayout from "@/layouts/HomeLayout.astro";
 
 // Sort ensures upcoming events are in chronological order
 const upcomingEvents = await getCollection("events");
@@ -25,7 +23,7 @@ const featuredEvent =
 const boardMembers = await getCollection("board");
 ---
 
-<Layout title="CPP Japanese Language Learners">
+<HomeLayout title="CPP Japanese Language Learners">
   <!-- Top section -->
   <div
     class="h-[65vh] w-full mb-7 bg-secondary flex justify-center items-center"
@@ -201,7 +199,7 @@ const boardMembers = await getCollection("board");
     </div>
     <!-- End Board -->
   </div>
-</Layout>
+</HomeLayout>
 <!-- <style>
   @media (prefers-color-scheme: dark) {
     body {

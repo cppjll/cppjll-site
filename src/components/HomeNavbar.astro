@@ -6,7 +6,7 @@ import NavHamburger from "./NavHamburger";
 import { buttonVariants } from "./ui/button";
 ---
 
-<div class="md:max-w-4xl mx-auto mt-2 p-2 outline outline-1 rounded-lg z-20">
+<div class="absolute w-full p-2 z-20" transition:name="nav">
   <div class="md:max-w-4xl mx-auto">
     <div class="md:hidden absolute left-4 top-2">
       <ModeToggle client:load />
@@ -16,17 +16,14 @@ import { buttonVariants } from "./ui/button";
       <div class="flex flex-row items-center">
         <a
           href="/"
-          class={`${buttonVariants({ variant: "ghost" })} text-xl text-primary `}
+          class={`${buttonVariants({ variant: "ghost" })} text-xl text-primary hover:bg-secondary-focus dark:hover:bg-secondary`}
           ><Image src={logo} alt="logo" class="w-7 mr-3" />CPP JLL</a
         >
       </div>
       <div class="hidden md:flex flex-row items-center gap-4">
-        <a class={`${buttonVariants({ variant: "ghost" })}`} href="/events"
-          >Events</a
+        <a class={`hover:bg-secondary-focus dark:hover:bg-secondary ${buttonVariants({ variant: "ghost" })}`} href="/events">Events</a
         >
-        <a class={`${buttonVariants({ variant: "ghost" })}`} href="/board"
-          >Board</a
-        >
+        <a class={`hover:bg-secondary-focus dark:hover:bg-secondary ${buttonVariants({ variant: "ghost" })}`} href="/board">Board</a>
         <ModeToggle client:load />
       </div>
     </div>
