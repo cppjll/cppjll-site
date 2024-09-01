@@ -3,7 +3,7 @@ import { Image } from "astro:assets";
 const { member } = Astro.props;
 ---
 
-<div id=`${member.slug}` class="card w-full shadow-2xl mb-6">
+<div id=`${member.slug}` class="card w-full border mb-6">
   <figure class="bg-secondary">
     <Image
       src={member.data.image}

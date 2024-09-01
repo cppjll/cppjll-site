@@ -70,7 +70,9 @@ import { MapPin, Calendar } from "lucide-react";
   </head>
   <body>
     <Navbar />
-    <div class="flex flex-col mb-16 mx-6 min-h-screen md:max-w-4xl md:mx-auto">
+    <div
+      class="flex flex-col mb-16 px-4 mx-6 min-h-screen md:max-w-4xl md:mx-auto"
+    >
       <div class="breadcrumbs my-4">
         <ul>
           <li><a href="/">Home</a></li>
@@ -78,27 +80,25 @@ import { MapPin, Calendar } from "lucide-react";
           <li>{frontmatter.data.title}</li>
         </ul>
       </div>
-      <!-- <h1
-        transition:animate={slide({ duration: "0.3s" })}
-        class="text-4xl font-bold mb-4 font-display"
+      <div
+        class="flex flex-col md:flex-row md:justify-between w-full pb-6 border-b md:h-64"
       >
-        {frontmatter.data.title}
-      </h1> -->
-      <!-- <Image
-        transition:name={frontmatter.slug}
-        src={frontmatter.data.image}
-        alt={frontmatter.data.imageAlt}
-        class="rounded-xl w-80 mx-auto"
-      /> -->
-      <div class="flex flex-row justify-between w-full pb-6 border-b">
-        <div class="prose !prose-neutral dark:!prose-invert max-w-lg">
-          <h1 class="font-display">
-            {frontmatter.data.title}
-          </h1>
+        <Image
+          transition:name={frontmatter.slug}
+          src={frontmatter.data.image}
+          alt={frontmatter.data.imageAlt}
+          class="md:hidden rounded-xl mb-6"
+        />
+        <div class="flex flex-col justify-between h-full">
+          <div class="prose !prose-neutral dark:!prose-invert max-w-lg">
+            <h1 class="font-display">
+              {frontmatter.data.title}
+            </h1>
 
-          <p>
-            {frontmatter.data.description}
-          </p>
+            <p>
+              {frontmatter.data.description}
+            </p>
+          </div>
           <div class="flex flex-col gap-2 not-prose">
             <div class="flex flex-row items-center gap-2">
               <MapPin className="h-4 w-4" />
@@ -114,9 +114,8 @@ import { MapPin, Calendar } from "lucide-react";
           src={frontmatter.data.image}
           alt={frontmatter.data.imageAlt}
           transition:name={frontmatter.slug}
-          class="rounded-xl w-64"
+          class="hidden md:flex rounded-xl w-auto"
         />
-
       </div>
       <!-- i have no idea why the important is needed here but it only works with it-->
       <article

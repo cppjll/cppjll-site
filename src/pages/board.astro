@@ -6,8 +6,8 @@ const boardMembers = await getCollection("board");
 ---
 
 <Layout title="Board - CPP Japanese Language Learners">
-  <div class="flex flex-col mx-6 md:max-w-2xl md:mx-auto">
-    <div class="breadcrumbs my-6">
+  <div class="flex flex-col px-4 mx-6 md:max-w-4xl md:mx-auto">
+    <div class="breadcrumbs my-4">
       <ul>
         <li><a href="/">Home</a></li>
         <li>Board</li>
@@ -15,7 +15,7 @@ const boardMembers = await getCollection("board");
     </div>
     <!-- Current Board -->
     <h1 class="text-5xl font-bold mb-4 font-display">Board</h1>
-    <div>
+    <div class="grid md:grid-cols-2 gap-4">
       {
         boardMembers
           .sort((a, b) => {
@@ -33,7 +33,7 @@ const boardMembers = await getCollection("board");
     </div>
     <!-- Past Board -->
     <h1 class="text-5xl font-bold mb-4 my-4 font-display">Past Board</h1>
-    <div>
+    <div class="grid md:grid-cols-2 gap-4">
       {
         boardMembers
           .sort((a, b) => {
@@ -51,10 +51,3 @@ const boardMembers = await getCollection("board");
     </div>
   </div>
 </Layout>
-<style>
-  @media (prefers-color-scheme: dark) {
-    body {
-      background-color: #ffffff;
-    }
-  }
-</style>
