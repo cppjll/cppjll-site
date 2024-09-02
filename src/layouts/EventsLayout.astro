@@ -8,10 +8,8 @@ import { slide } from "astro:transitions";
 import Navbar from "@/components/Navbar.astro";
 const { event } = Astro.props;
 import { API_URL } from "@/lib/directus";
-import { MapPin, Calendar } from "lucide-react";
+import { Calendar, Clock, MapPin } from "lucide-react";
 import BannerCarousel from "@/components/BannerCarousel";
-
-// console.log(event);
 ---
 
 <html lang="en">
@@ -114,12 +112,16 @@ import BannerCarousel from "@/components/BannerCarousel";
           </div>
           <div class="flex flex-col gap-2 not-prose">
             <div class="flex flex-row items-center gap-2">
-              {event.locaton && <MapPin className="h-4 w-4" />}
-              <p>{event.location}</p>
-            </div>
-            <div class="flex flex-row items-center gap-2">
               <Calendar className="h-4 w-4" />
               <p>{new Date(event.start_datetime).toLocaleDateString()}</p>
+            </div>
+            <div class="flex flex-row items-center gap-2">
+              <Clock className="h-4 w-4" />
+              <p>{new Date(event.start_datetime).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })} — {new Date(event.end_datetime).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}</p>
+            </div>
+            <div class="flex flex-row items-center gap-2">
+              {<MapPin className="h-4 w-4" />}
+              <p>{event.location}</p>
             </div>
           </div>
         </div>
