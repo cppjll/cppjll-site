@@ -1,5 +1,7 @@
 import { createDirectus, rest, type CoreSchema, } from "@directus/sdk";
 
+export const API_URL = "https://api.cpp-jll.com";
+
 type Global = {
     title: string;
     description: string;
@@ -24,6 +26,4 @@ type Event = {
     slug: string;
 }
 
-const directus = createDirectus('https://api.cpp-jll.com').with(rest());
-
-export default directus;
+export const directus = createDirectus(API_URL).with(rest());

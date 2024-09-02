@@ -2,7 +2,17 @@
 import Layout from "../layouts/Layout.astro";
 import BoardMemberCardDetailed from "../components/BoardMemberCardDetailed.astro";
 import { getCollection } from "astro:content";
-const boardMembers = await getCollection("board");
+import { directus } from "@/lib/directus";
+import { readItems } from "@directus/sdk";
+
+// const boardMembers = await getCollection("board");
+
+const members = await directus.request(
+  readItems("board", {
+    fields: ["*"],
+    sort: ["sort", "name"],
+  })
+);
 ---
 
 <Layout title="Board - CPP Japanese Language Learners">
@@ -17,36 +27,18 @@ const boardMembers = await getCollection("board");
     <h1 class="text-5xl font-bold mb-4 font-display">Board</h1>
     <div class="grid md:grid-cols-2 gap-4">
       {
-        boardMembers
-          .sort((a, b) => {
-            if (a.data.position === "President") return -1;
-            if (b.data.position === "President") return 1;
-            if (a.data.position === "Vice-President") return -1;
-            if (b.data.position === "Vice-President") return 1;
-            return 0;
-          })
-          .filter((boardMember) => !boardMember.data.retired)
-          .map((boardMember) => (
-            <BoardMemberCardDetailed member={boardMember} />
-          ))
+        members
+          .filter((member) => member.status === "active")
+          .map((member) => <BoardMemberCardDetailed member={member} />)
       }
     </div>
     <!-- Past Board -->
     <h1 class="text-5xl font-bold mb-4 my-4 font-display">Past Board</h1>
     <div class="grid md:grid-cols-2 gap-4">
       {
-        boardMembers
-          .sort((a, b) => {
-            if (a.data.position === "President") return -1;
-            if (b.data.position === "President") return 1;
-            if (a.data.position === "Vice-President") return -1;
-            if (b.data.position === "Vice-President") return 1;
-            return 0;
-          })
-          .filter((boardMember) => boardMember.data.retired)
-          .map((boardMember) => (
-            <BoardMemberCardDetailed member={boardMember} />
-          ))
+        members
+          .filter((member) => member.status === "inactive")
+          .map((member) => <BoardMemberCardDetailed member={member} />)
       }
     </div>
   </div>
