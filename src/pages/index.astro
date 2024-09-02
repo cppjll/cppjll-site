@@ -24,7 +24,7 @@ const featuredEvent =
 
 const board = await directus.request(
   readItems("board", {
-    fields: ["name", "position", "image", "status"],
+    fields: ["name", "position", "image", "status", "slug"],
     sort: ["sort", "name"],
   })
 )
