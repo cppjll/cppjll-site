@@ -8,7 +8,17 @@ import { slide } from "astro:transitions";
 import { Button } from "@/components/ui/button";
 import HomeLayout from "@/layouts/HomeLayout.astro";
 import { directus } from "@/lib/directus";
-import { readItems } from "@directus/sdk";
+import { readFiles, readItems } from "@directus/sdk";
+import BannerCarousel from "@/components/BannerCarousel";
+
+const banner_photos = await directus.request(
+  readFiles({
+    fields: ["*"],
+    filter: {
+      folder: "214085bf-4479-41f4-995b-80d39a148182",
+    },
+  })
+);
 
 const events = await directus.request(
   readItems("events", {
@@ -16,8 +26,8 @@ const events = await directus.request(
     sort: ["-start_datetime"],
     limit: 1,
     filter: {
-      status: "published"
-    }
+      status: "published",
+    },
   })
 );
 
@@ -28,7 +38,9 @@ const board = await directus.request(
     fields: ["name", "position", "image", "status", "slug"],
     sort: ["sort", "name"],
   })
-)
+);
+
+console.log(banner_photos);
 ---
 
 <HomeLayout title="CPP Japanese Language Learners">
@@ -77,6 +89,7 @@ const board = await directus.request(
       </div>
       <!-- Background image with opacity -->
       <Image src={bg} alt="bg" class="w-full h-full object-cover opacity-10" />
+      <!-- <BannerCarousel banners={banner_photos} client:load /> -->
     </div>
   </div>
   <!-- End top section -->
@@ -168,11 +181,15 @@ const board = await directus.request(
           </div>
         )
       }
+      <!-- TODO: Make this look good, don't show as is -->
+      <!-- Banner Carousel -->
+      <!-- <BannerCarousel banners={banner_photos} client:load /> -->
+      <!-- End Banner Carousel -->
       <a href="/events">
         <Button
           size={"lg"}
           variant={"outline"}
-          className="border-foreground w-full mb-4"
+          className="border-foreground w-full my-4"
         >
           See All Events
         </Button>
@@ -192,7 +209,9 @@ const board = await directus.request(
       </a>
       <div class="flex flex-col">
         {
-          board.filter((boardMember) => boardMember.status === "active").map((boardMember) => <BoardMemberCard member={boardMember} />)
+          board
+            .filter((boardMember) => boardMember.status === "active")
+            .map((boardMember) => <BoardMemberCard member={boardMember} />)
         }
       </div>
     </div>
