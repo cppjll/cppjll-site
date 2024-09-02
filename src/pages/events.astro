@@ -9,6 +9,9 @@ const events = await directus.request(
   readItems("events", {
     fields: ["*"],
     sort: ["-start_datetime"],
+    filter: {
+      status: "published"// only show published events
+    }
   })
 );
 

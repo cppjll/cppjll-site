@@ -15,6 +15,9 @@ const events = await directus.request(
     fields: ["*"],
     sort: ["-start_datetime"],
     limit: 1,
+    filter: {
+      status: "published"
+    }
   })
 );
 
