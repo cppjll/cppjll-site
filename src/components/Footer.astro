@@ -1,23 +1,35 @@
 ---
-import logo from '../images/bun.png'
-import { Image } from 'astro:assets';
-import { Button } from './ui/button';
+import logo from "../images/bun.png";
+import { Image } from "astro:assets";
+import { Button } from "./ui/button";
 ---
 
-<footer class="footer footer-center p-8 bg-secondary">
-    <aside>
-        <Image src={logo} alt="logo" class="h-10 w-auto mt-4 mb-2" />
-        <p>Cal Poly Pomona Japanese Language Learners</p>
-        <p>Website made by <a class="font-bold" href="https://github.com/mikumino" target="_blank">Alan Le</a> and <a class="font-bold" href="https://github.com/PlainOlSoapBar" target="_blank">Brandon Tseng</a></p>
-    </aside> 
-    <nav>
-        <div class="grid grid-flow-col gap-4 -my-8 pb-8">
-            <a title="mail" href="mailto:calpolyJLL@gmail.com" target="_blank">
-                <Button variant="ghost" className='text-2xl hover:bg-secondary-focus dark:hover:bg-secondary'>
-                    <iconify-icon icon="ic:baseline-email"></iconify-icon>
-                    <span class="sr-only">Email</span>
-                </Button>
-            </a>
-        </div>
-    </nav>
+<footer class="footer footer-center p-8 border-t">
+  <aside>
+    <Image src={logo} alt="logo" class="h-10 w-auto mt-4 mb-2" />
+    <p>Cal Poly Pomona Japanese Language Learners</p>
+    <p>
+      Website made by <a
+        class="font-bold"
+        href="https://github.com/mikumino"
+        target="_blank">Alan Le</a
+      > and <a
+        class="font-bold"
+        href="https://github.com/PlainOlSoapBar"
+        target="_blank">Brandon Tseng</a>
+    </p>
+  </aside>
+  <nav>
+    <div class="grid grid-flow-col gap-4 -my-8 pb-8">
+      <a title="mail" href="mailto:calpolyJLL@gmail.com" target="_blank">
+        <Button
+          variant="ghost"
+          className="text-2xl hover:bg-secondary-focus dark:hover:bg-secondary"
+        >
+          <iconify-icon icon="ic:baseline-email"></iconify-icon>
+          <span class="sr-only">Email</span>
+        </Button>
+      </a>
+    </div>
+  </nav>
 </footer>
