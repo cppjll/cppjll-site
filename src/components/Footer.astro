@@ -2,6 +2,8 @@
 import logo from "../images/bun.png";
 import { Image } from "astro:assets";
 import { Button } from "./ui/button";
+import { Mail } from "lucide-react";
+import { GitHubLogoIcon } from "@radix-ui/react-icons";
 ---
 
 <footer class="footer footer-center p-8 border-t">
@@ -16,19 +18,31 @@ import { Button } from "./ui/button";
       > and <a
         class="font-bold"
         href="https://github.com/PlainOlSoapBar"
-        target="_blank">Brandon Tseng</a>
+        target="_blank">Brandon Tseng</a
+      >
     </p>
   </aside>
   <nav>
     <div class="grid grid-flow-col gap-4 -my-8 pb-8">
       <a title="mail" href="mailto:calpolyJLL@gmail.com" target="_blank">
-        <Button
-          variant="ghost"
-          className="text-2xl hover:bg-secondary-focus dark:hover:bg-secondary"
+        <button
+          class="btn text-2xl hover:bg-secondary-focus dark:hover:bg-secondary"
         >
-          <iconify-icon icon="ic:baseline-email"></iconify-icon>
+          <Mail className="h-6 w-6" />
           <span class="sr-only">Email</span>
-        </Button>
+        </button>
+      </a>
+      <a
+        title="github"
+        href="https://github.com/cppjll/cppjll-site"
+        target="_blank"
+      >
+        <button
+          class="btn text-xl hover:bg-secondary-focus dark:hover:bg-secondary"
+        >
+          <GitHubLogoIcon className="h-6 w-6" />
+          <span class="sr-only">Github</span>
+        </button>
       </a>
     </div>
   </nav>
