@@ -2,33 +2,8 @@
 import { slide } from "astro:transitions";
 import EventCard from "../components/EventCard.astro";
 import Layout from "../layouts/Layout.astro";
-import { getCollection } from "astro:content";
 import { directus } from "@/lib/directus";
 import { readItems } from "@directus/sdk";
-const upcomingEvents = await getCollection("events", ({ data }) => {
-  const eventDate = new Date(data.date);
-  const today = new Date();
-  return eventDate >= today;
-});
-upcomingEvents.sort((a, b) => {
-  // Sort by date
-  const aDate = new Date(a.data.date);
-  const bDate = new Date(b.data.date);
-  return aDate.getTime() - bDate.getTime();
-});
-
-const previousEvents = await getCollection("events", ({ data }) => {
-  const eventDate = new Date(data.date);
-  const today = new Date();
-  return eventDate < today;
-});
-previousEvents.sort((a, b) => {
-  // Sort by date
-  const aDate = new Date(a.data.date);
-  const bDate = new Date(b.data.date);
-  return bDate.getTime() - aDate.getTime();
-});
-
 // TODO: Add pagination
 const events = await directus.request(
   readItems("events", {
@@ -36,6 +11,8 @@ const events = await directus.request(
     sort: ["-start_datetime"],
   })
 );
+
+const upcomingEvents = events.filter((event) => new Date(event.end_datetime) > new Date());
 ---
 
 <Layout title="Events - CPP Japanese Language Learners">
