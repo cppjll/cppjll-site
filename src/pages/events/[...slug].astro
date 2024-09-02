@@ -1,19 +1,19 @@
 ---
-import { getCollection } from "astro:content";
 import EventsLayout from "../../layouts/EventsLayout.astro";
 import { directus } from "@/lib/directus";
 import { readItems } from "@directus/sdk";
 
-export async function getStaticPaths() {
-  const events = await directus.request(readItems("events"));
+const { slug } = Astro.params;
 
-  return events.map((event) => ({
-    params: { slug: event.slug },
-    props: { event },
-  }));
+const events = await directus.request(readItems("events", {
+  fields: ["*"]
+}));
+
+const event = events.find((event) => event.slug === slug);
+
+if (!event) {
+  return Astro.redirect("/events");
 }
-
-const event = Astro.props.event;
 ---
 
 <EventsLayout event={event}>
