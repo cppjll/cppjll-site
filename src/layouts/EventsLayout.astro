@@ -117,10 +117,22 @@ import BannerCarousel from "@/components/BannerCarousel";
             </div>
             <div class="flex flex-row items-center gap-2">
               <Clock className="h-4 w-4" />
-              <p>{new Date(event.start_datetime).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })} — {new Date(event.end_datetime).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}</p>
+              <p>
+                {
+                  new Date(event.start_datetime).toLocaleTimeString([], {
+                    hour: "2-digit",
+                    minute: "2-digit",
+                  })
+                } — {
+                  new Date(event.end_datetime).toLocaleTimeString([], {
+                    hour: "2-digit",
+                    minute: "2-digit",
+                  })
+                }
+              </p>
             </div>
             <div class="flex flex-row items-center gap-2">
-              {<MapPin className="h-4 w-4" />}
+              {(<MapPin className="h-4 w-4" />)}
               <p>{event.location}</p>
             </div>
           </div>
