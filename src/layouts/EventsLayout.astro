@@ -23,7 +23,10 @@ import { MapPin, Calendar } from "lucide-react";
       content=`${event.title} - CPP Japanese Language Learners`
     />
     <meta property="og:description" content={event.description} />
-    <meta property="og:image" content={`${API_URL}/assets/${event.image}?width=512`} />
+    <meta
+      property="og:image"
+      content={`${API_URL}/assets/${event.image}?width=512`}
+    />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="theme-color" content="#204063" />
     <!-- Cloudflare Web Analytics -->
@@ -84,14 +87,18 @@ import { MapPin, Calendar } from "lucide-react";
       <div
         class="flex flex-col md:flex-row md:justify-between w-full pb-6 border-b md:h-64"
       >
-        <Image
-          transition:name={event.slug}
-          src={`${API_URL}/assets/${event.image}?width=512`}
-          width={512}
-          height={512}
-          alt={event.title}
-          class="md:hidden rounded-xl mb-6"
-        />
+        {
+          event.image && (
+            <Image
+              transition:name={event.slug}
+              src={`${API_URL}/assets/${event.image}?width=512`}
+              width={512}
+              height={512}
+              alt={event.title}
+              class="md:hidden rounded-xl mb-6"
+            />
+          )
+        }
         <div class="flex flex-col justify-between h-full">
           <div class="prose !prose-neutral dark:!prose-invert max-w-lg">
             <h1 class="font-display">
@@ -113,14 +120,18 @@ import { MapPin, Calendar } from "lucide-react";
             </div>
           </div>
         </div>
-        <Image
-          src={`${API_URL}/assets/${event.image}?width=512`}
-          alt={event.title}
-          transition:name={event.slug}
-          width={512}
-          height={512}
-          class="hidden md:flex rounded-xl w-auto"
-        />
+        {
+          event.image && (
+            <Image
+              src={`${API_URL}/assets/${event.image}?width=512`}
+              alt={event.title}
+              transition:name={event.slug}
+              width={512}
+              height={512}
+              class="hidden md:flex rounded-xl w-auto"
+            />
+          )
+        }
       </div>
       <!-- i have no idea why the important is needed here but it only works with it-->
       <article

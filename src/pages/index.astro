@@ -4,7 +4,6 @@ import logo from "../images/bun.png";
 import bg from "../images/test.jpg";
 import BoardMemberCard from "../components/BoardMemberCard.astro";
 import EventCard from "../components/EventCard.astro";
-import { getCollection } from "astro:content";
 import { slide } from "astro:transitions";
 import { Button } from "@/components/ui/button";
 import HomeLayout from "@/layouts/HomeLayout.astro";
@@ -15,12 +14,11 @@ const events = await directus.request(
   readItems("events", {
     fields: ["*"],
     sort: ["-start_datetime"],
+    limit: 1,
   })
 );
 
 const featuredEvent = events[0];
-
-console.log(featuredEvent);
 
 const board = await directus.request(
   readItems("board", {

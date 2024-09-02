@@ -10,22 +10,27 @@ import { Calendar } from "lucide-react";
   href={`/events/${event.slug}`}
 >
   <figure class=`${soonest && 'sm:max-w-sm'}`>
-    <Image
-      transition:name={event.slug}
-      src={`${API_URL}/assets/${event.image}?width=512`}
-      alt={event.title} 
-      width='512'
-      height='512'
-      class="object-scale-down mx-auto rounded-lg"
-    />
+    {
+      event.image && (
+        <Image
+          transition:name={event.slug}
+          src={`${API_URL}/assets/${event.image}?width=512`}
+          alt={event.title}
+          width="512"
+          height="512"
+          class="object-scale-down mx-auto rounded-lg"
+        />
+      )
+    }
   </figure>
   <div class="py-4 px-6">
-    <h2 class="text-3xl font-bold  mb-2 font-display">
+    <h2 class="text-3xl font-bold mb-2 font-display">
       {event.title}
     </h2>
     <div class="flex flex-row items-center gap-2 mb-2">
-      <Calendar className="h-4 w-4" /> {new Date(event.start_datetime).toLocaleDateString()}
+      <Calendar className="h-4 w-4" />
+      {new Date(event.start_datetime).toLocaleDateString()}
     </div>
-    <p class=" mb-4">{event.description}</p>
+    <p class="mb-4">{event.description}</p>
   </div>
 </a>
