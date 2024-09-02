@@ -25,24 +25,20 @@ import { GitHubLogoIcon } from "@radix-ui/react-icons";
   <nav>
     <div class="grid grid-flow-col gap-4 -my-8 pb-8">
       <a title="mail" href="mailto:calpolyJLL@gmail.com" target="_blank">
-        <button
-          class="btn text-2xl hover:bg-secondary-focus dark:hover:bg-secondary"
-        >
+        <Button variant={"ghost"} className="">
           <Mail className="h-6 w-6" />
           <span class="sr-only">Email</span>
-        </button>
+        </Button>
       </a>
       <a
         title="github"
         href="https://github.com/cppjll/cppjll-site"
         target="_blank"
       >
-        <button
-          class="btn text-xl hover:bg-secondary-focus dark:hover:bg-secondary"
-        >
+        <Button variant={"ghost"} className="">
           <GitHubLogoIcon className="h-6 w-6" />
           <span class="sr-only">Github</span>
-        </button>
+        </Button>
       </a>
     </div>
   </nav>
