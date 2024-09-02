@@ -3,6 +3,8 @@ import { slide } from "astro:transitions";
 import EventCard from "../components/EventCard.astro";
 import Layout from "../layouts/Layout.astro";
 import { getCollection } from "astro:content";
+import { directus } from "@/lib/directus";
+import { readItems } from "@directus/sdk";
 const upcomingEvents = await getCollection("events", ({ data }) => {
   const eventDate = new Date(data.date);
   const today = new Date();
@@ -26,6 +28,16 @@ previousEvents.sort((a, b) => {
   const bDate = new Date(b.data.date);
   return bDate.getTime() - aDate.getTime();
 });
+
+// TODO: Add pagination
+const events = await directus.request(
+  readItems("events", {
+    fields: ["*"],
+    sort: ["-start_datetime"],
+  })
+);
+
+console.log(events);
 ---
 
 <Layout title="Events - CPP Japanese Language Learners">
@@ -81,7 +93,7 @@ previousEvents.sort((a, b) => {
       </h1>
       <!-- Single column on smaller devices, two column grid on larger screens -->
       <div class="flex flex-col sm:grid sm:grid-cols-2 sm:gap-4">
-        {previousEvents.map((event) => <EventCard event={event} />)}
+        {events.filter((event) => new Date(event.end_datetime) < new Date()).map((event) => <EventCard event={event} />)}
       </div>
     </div>
   </div>
