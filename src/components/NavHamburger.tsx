@@ -12,7 +12,7 @@ export default function NavHamburger() {
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <Button className="md:hidden absolute right-4 top-2" variant="ghost">
+        <Button className="md:hidden absolute right-4 top-2" variant="ghost" aria-label="Open hamburger menu">
           <Menu />
         </Button>
       </SheetTrigger>

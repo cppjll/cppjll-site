@@ -15,13 +15,13 @@ import { API_URL } from "@/lib/directus";
     />
   </figure>
   <div class="card-body">
-    <h1 class="text-3xl font-bold font-display mx-auto">
+    <h2 class="text-3xl font-bold font-display mx-auto">
       {member.name}
-    </h1>
-    <h2 class="text-center text-xl mb-2 mx-auto">
+    </h2>
+    <h3 class="text-center text-xl mb-2 mx-auto">
       {member.position}
       {member.service && <p>{member.service}</p>}
-    </h2>
+    </h3>
     <p class="text-lg font-body mb-2 mx-auto">
       {member.biography}
     </p>
@@ -31,6 +31,7 @@ import { API_URL } from "@/lib/directus";
         target="_blank"
         style={member.discord ? " " : "display:none"}
         class="btn btn-ghost hover:btn-accent w-12 normal-case text-xl hover:scale-[1.05]"
+        aria-label="Discord Profile"
         ><iconify-icon icon="simple-icons:discord" class="text-4xl"
         ></iconify-icon></a
       >
@@ -39,6 +40,7 @@ import { API_URL } from "@/lib/directus";
         target="_blank"
         style={member.instagram ? " " : "display:none"}
         class="btn btn-ghost hover:btn-accent w-12 normal-case text-xl hover:scale-[1.05]"
+        aria-label="Instagram Profile"
         ><iconify-icon icon="simple-icons:instagram" class="text-4xl"
         ></iconify-icon></a
       >
@@ -47,6 +49,7 @@ import { API_URL } from "@/lib/directus";
         target="_blank"
         style={member.github ? " " : "display:none"}
         class="btn btn-ghost hover:btn-accent w-12 normal-case text-xl hover:scale-[1.05]"
+        aria-label="GitHub Profile"
         ><iconify-icon icon="simple-icons:github" class="text-4xl"
         ></iconify-icon></a
       >
@@ -55,6 +58,7 @@ import { API_URL } from "@/lib/directus";
         target="_blank"
         style={member.linkedin ? " " : "display:none"}
         class="btn btn-ghost hover:btn-accent w-12 normal-case text-xl hover:scale-[1.05]"
+        aria-label="LinkedIn Profile"
         ><iconify-icon icon="simple-icons:linkedin" class="text-4xl"
         ></iconify-icon></a
       >
@@ -63,6 +67,7 @@ import { API_URL } from "@/lib/directus";
         target="_blank"
         style={member.youtube ? " " : "display:none"}
         class="btn btn-ghost hover:btn-accent w-12 normal-case text-xl hover:scale-[1.05]"
+        aria-label="YouTube Profile"
         ><iconify-icon icon="simple-icons:youtube" class="text-4xl"
         ></iconify-icon></a
       >
