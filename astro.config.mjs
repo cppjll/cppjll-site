@@ -1,4 +1,4 @@
-import { defineConfig } from 'astro/config';
+import { defineConfig, passthroughImageService } from 'astro/config';
 import tailwind from "@astrojs/tailwind";
 import react from '@astrojs/react';
 
@@ -12,11 +12,10 @@ export default defineConfig({
   integrations: [react(), tailwind(), sitemap()],
 
   image: {
-    domains: ["https://api.cpp-jll.com"]
+    domains: ["https://api.cpp-jll.com"],
+    service: passthroughImageService(),
   },
 
   output: "server",
-  adapter: cloudflare({
-    imageService: 'cloudflare'
-  })
+  adapter: cloudflare()
 });
