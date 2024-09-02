@@ -1,15 +1,16 @@
 ---
 import { Image } from "astro:assets";
 const {member} = Astro.props;
+import { API_URL } from "@/lib/directus";
 ---
 <a href=`https://cpp-jll.com/board/#${member.slug}` class="flex items-center w-full h-48 rounded-xl bg-secondary mb-4 hover:scale-[1.02] transition-all md:max-w-3xl md:mx-auto">
     <div class="grid grid-cols-2 w-full h-full items-center">
         <div class='flex ml-6 w-36'>
-            <Image src={member.data.image} alt={member.data.imageAlt} class='rounded-full z-10' />
+            <Image src={`${API_URL}/assets/${member.image}?width=256`} width="256" height="256" alt={member.name} class='rounded-full z-10' />
         </div>
         <div class="text-right mr-6" >
-            <h1 class="text-3xl text-foreground font-display font-bold">{member.data.name}</h1>
-            <p class="text-lg text-foreground">{member.data.position}</p>
+            <h1 class="text-3xl text-foreground font-display font-bold">{member.name}</h1>
+            <p class="text-lg text-foreground">{member.position}</p>
         </div>
     </div>
 </a>
