@@ -4,11 +4,14 @@ import Footer from "../components/Footer.astro";
 import icon from "/favicon.ico";
 import bun from "../images/bun.png";
 import { ViewTransitions } from "astro:transitions";
-import Navbar from "@/components/Navbar.astro";
+import HomeNavbar from "../components/HomeNavbar.astro";
 const { title } = Astro.props;
 ---
 
-<html lang="en" class="bg-background">
+<!-- There are two layouts cus I forgot props existed lol -->
+ <!-- After build there's no difference but might be worth cleaning up in the future -->
+
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -73,7 +76,7 @@ const { title } = Astro.props;
     </script>
   </head>
   <body>
-    <Navbar />
+    <HomeNavbar />
     <slot />
     <Footer />
   </body>

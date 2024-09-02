@@ -1,27 +1,36 @@
 ---
 import { Image } from "astro:assets";
 const { event, soonest } = Astro.props;
+import { API_URL } from "@/lib/directus";
+import { Calendar } from "lucide-react";
 ---
 
 <a
-  class=`card ${soonest && 'sm:card-side'} w-full shadow-xl mb-6 sm:hover:scale-[1.02] transition-all break-inside-avoid-column`
+  class=`card ${soonest && 'sm:card-side'} w-full border mb-6 sm:hover:scale-[1.02] transition-all break-inside-avoid-column`
   href={`/events/${event.slug}`}
 >
   <figure class=`${soonest && 'sm:max-w-sm'}`>
-    <Image
-      transition:name={event.slug}
-      src={event.data.image}
-      alt={event.data.imageAlt}
-      class="object-scale-down mx-auto rounded-lg"
-    />
+    {
+      event.image && (
+        <Image
+          transition:name={event.slug}
+          src={`${API_URL}/assets/${event.image}?width=512`}
+          alt={event.title}
+          width="512"
+          height="512"
+          class="object-scale-down mx-auto rounded-lg"
+        />
+      )
+    }
   </figure>
   <div class="py-4 px-6">
-    <h2 class="text-3xl font-bold text-accent mb-2 font-display">
-      {event.data.title}
+    <h2 class="text-3xl font-bold mb-2 font-display">
+      {event.title}
     </h2>
-    <p class="italic text-accent mb-2">
-      Date: {event.data.date.toLocaleDateString()}
-    </p>
-    <p class="text-accent mb-4">{event.data.description}</p>
+    <div class="flex flex-row items-center gap-2 mb-2">
+      <Calendar className="h-4 w-4" />
+      {new Date(event.start_datetime).toLocaleDateString()}
+    </div>
+    <p class="mb-4">{event.description}</p>
   </div>
 </a>

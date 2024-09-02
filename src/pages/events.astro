@@ -2,39 +2,27 @@
 import { slide } from "astro:transitions";
 import EventCard from "../components/EventCard.astro";
 import Layout from "../layouts/Layout.astro";
-import { getCollection } from "astro:content";
-const upcomingEvents = await getCollection("events", ({ data }) => {
-  const eventDate = new Date(data.date);
-  const today = new Date();
-  return eventDate >= today;
-});
-upcomingEvents.sort((a, b) => {
-  // Sort by date
-  const aDate = new Date(a.data.date);
-  const bDate = new Date(b.data.date);
-  return aDate.getTime() - bDate.getTime();
-});
+import { directus } from "@/lib/directus";
+import { readItems } from "@directus/sdk";
+// TODO: Add pagination
+const events = await directus.request(
+  readItems("events", {
+    fields: ["*"],
+    sort: ["-start_datetime"],
+    filter: {
+      status: "published"// only show published events
+    }
+  })
+);
 
-
-const previousEvents = await getCollection("events", ({ data }) => {
-  const eventDate = new Date(data.date);
-  const today = new Date();
-  return eventDate < today;
-});
-previousEvents.sort((a, b) => {
-  // Sort by date
-  const aDate = new Date(a.data.date);
-  const bDate = new Date(b.data.date);
-  return bDate.getTime() - aDate.getTime();
-});
-
+const upcomingEvents = events.filter((event) => new Date(event.end_datetime) > new Date());
 ---
 
 <Layout title="Events - CPP Japanese Language Learners">
-  <div class="my-16 md:max-w-4xl mx-auto flex flex-col">
+  <div class="mb-16 md:max-w-4xl px-4 mx-6 md:mx-auto flex flex-col">
     <!-- Events -->
-    <div class="flex flex-col my-6 mx-6">
-      <div class="breadcrumbs text-accent mb-4">
+    <div class="flex flex-col">
+      <div class="breadcrumbs my-4">
         <ul>
           <li><a href="/">Home</a></li>
           <li>Events</li>
@@ -42,15 +30,13 @@ previousEvents.sort((a, b) => {
       </div>
       <h1
         transition:animate={slide({ duration: "0.3s" })}
-        class="text-5xl font-bold text-accent mb-4 font-display"
+        class="text-5xl font-bold mb-4 font-display"
       >
         Upcoming Events
       </h1>
       <!-- No upcoming events case -->
       <div class=`${upcomingEvents.length === 0 ? "flex flex-col" : "hidden"}`>
-        <h2 class="text-accent mb-4">
-          No upcoming events. Stay tuned! ٩(๑´∀ `๑ )
-        </h2>
+        <h2 class="mb-4">No upcoming events. Stay tuned! ٩(๑´∀ `๑ )</h2>
       </div>
       <!-- Render upcoming events in a single column on smaller devices -->
       <div
@@ -69,28 +55,24 @@ previousEvents.sort((a, b) => {
         }
       </div>
       <!-- Multiple upcoming events case -->
-      <div class={`${upcomingEvents.length > 1 ? "hidden sm:grid grid-cols-2 gap-4" : "hidden"}`}>
+      <div
+        class={`${upcomingEvents.length > 1 ? "hidden sm:grid grid-cols-2 gap-4" : "hidden"}`}
+      >
         {upcomingEvents.map((event) => <EventCard event={event} />)}
       </div>
     </div>
     <!-- Previous Events -->
-    <div class="flex flex-col my-6 mx-6">
+    <div class="flex flex-col my-6">
       <h1
         transition:animate={slide({ duration: "0.5s" })}
-        class="text-5xl font-bold text-accent mb-4 font-display">
+        class="text-5xl font-bold mb-4 font-display"
+      >
         Previous Events
       </h1>
       <!-- Single column on smaller devices, two column grid on larger screens -->
       <div class="flex flex-col sm:grid sm:grid-cols-2 sm:gap-4">
-        {previousEvents.map((event) => <EventCard event={event} />)}
+        {events.filter((event) => new Date(event.end_datetime) < new Date()).map((event) => <EventCard event={event} />)}
       </div>
     </div>
   </div>
-  <style>
-    @media (prefers-color-scheme: dark) {
-      body {
-        background-color: #ffffff;
-      }
-    }
-  </style></Layout
->
+</Layout>

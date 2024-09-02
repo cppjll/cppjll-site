@@ -1,56 +1,161 @@
 ---
-import '../global.css';
-import Navbar from '../components/Navbar.astro';
-import Footer from '../components/Footer.astro';
-import { Image } from 'astro:assets';
+import "../global.css";
+import Footer from "../components/Footer.astro";
+import { Image } from "astro:assets";
 import icon from "/favicon.ico";
-import { ViewTransitions } from 'astro:transitions';
-import { slide } from 'astro:transitions';
-const {frontmatter} = Astro.props;
-
+import { ViewTransitions } from "astro:transitions";
+import { slide } from "astro:transitions";
+import Navbar from "@/components/Navbar.astro";
+const { event } = Astro.props;
+import { API_URL } from "@/lib/directus";
+import { MapPin, Calendar } from "lucide-react";
 ---
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>{frontmatter.data.title} - CPP Japanese Language Learners</title>
-        <link rel="icon" href={icon} type="image/x-icon" />
 
-        <meta property="og:title" content=`${frontmatter.title} - CPP Japanese Language Learners` />
-        <meta property="og:description" content={frontmatter.data.description} />
-        <meta property="og:image" content={frontmatter.data.image.src} />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="theme-color" content="#204063">
-        <!-- Cloudflare Web Analytics -->
-        <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "3882184c8c9f429bb3bb04e4f5b4b669"}'></script>
-        <!-- End Cloudflare Web Analytics -->
-        <ViewTransitions />
-    </head>
-    <body >
-        <div>
-            <Navbar />
-        </div> 
-        <div class="flex flex-col mt-4 mb-20 mx-6 min-h-screen md:max-w-2xl md:mx-auto">    
-            <div class="breadcrumbs text-accent mb-4 my-16">
-                <ul>
-                    <li><a href="/">Home</a></li>
-                    <li><a href="/events">Events</a></li>
-                    <li>{frontmatter.data.title}</li>
-                </ul>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{event.title} - CPP Japanese Language Learners</title>
+    <link rel="icon" href={icon} type="image/x-icon" />
+
+    <meta
+      property="og:title"
+      content=`${event.title} - CPP Japanese Language Learners`
+    />
+    <meta property="og:description" content={event.description} />
+    <meta
+      property="og:image"
+      content={`${API_URL}/assets/${event.image}?width=512`}
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="theme-color" content="#204063" />
+    <!-- Cloudflare Web Analytics -->
+    <script
+      defer
+      src="https://static.cloudflareinsights.com/beacon.min.js"
+      data-cf-beacon='{"token": "3882184c8c9f429bb3bb04e4f5b4b669"}'></script>
+    <!-- End Cloudflare Web Analytics -->
+    <script is:inline>
+      function setDarkMode(document) {
+        const getThemePreference = () => {
+          if (
+            typeof localStorage !== "undefined" &&
+            localStorage.getItem("theme")
+          ) {
+            return localStorage.getItem("theme");
+          }
+          return window.matchMedia("(prefers-color-scheme: dark)").matches
+            ? "dark"
+            : "theme-light";
+        };
+        const isDark = getThemePreference() === "dark";
+        document.documentElement.classList[isDark ? "add" : "remove"]("dark");
+
+        if (typeof localStorage !== "undefined") {
+          const observer = new MutationObserver(() => {
+            const isDark = document.documentElement.classList.contains("dark");
+            localStorage.setItem("theme", isDark ? "dark" : "theme-light");
+          });
+          observer.observe(document.documentElement, {
+            attributes: true,
+            attributeFilter: ["class"],
+          });
+        }
+      }
+
+      setDarkMode(document);
+
+      document.addEventListener("astro:before-swap", (ev) => {
+        // Pass the incoming document to set the theme on it
+        setDarkMode(ev.newDocument);
+      });
+    </script>
+    <ViewTransitions />
+  </head>
+  <body>
+    <Navbar />
+    <div
+      class="flex flex-col mb-16 px-4 mx-6 min-h-screen md:max-w-4xl md:mx-auto"
+    >
+      <div class="breadcrumbs my-4">
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/events">Events</a></li>
+          <li>{event.title}</li>
+        </ul>
+      </div>
+      <div
+        class="flex flex-col md:flex-row md:justify-between w-full pb-6 border-b md:h-64"
+      >
+        {
+          event.image && (
+            <Image
+              transition:name={event.slug}
+              src={`${API_URL}/assets/${event.image}?width=512`}
+              width={512}
+              height={512}
+              alt={event.title}
+              class="md:hidden rounded-xl mb-6"
+            />
+          )
+        }
+        <div class="flex flex-col justify-between h-full">
+          <div class="prose !prose-neutral dark:!prose-invert max-w-lg">
+            <h1 class="font-display">
+              {event.title}
+            </h1>
+
+            <p>
+              {event.description}
+            </p>
+          </div>
+          <div class="flex flex-col gap-2 not-prose">
+            <div class="flex flex-row items-center gap-2">
+              {event.locaton && <MapPin className="h-4 w-4" />}
+              <p>{event.location}</p>
             </div>
-            <h1 transition:animate={slide ({ duration: '0.3s' })} class="text-4xl font-bold text-accent mb-4 font-display">{frontmatter.data.title}</h1>
-            <Image transition:name={frontmatter.slug} src={frontmatter.data.image} alt={frontmatter.data.imageAlt} class="rounded-xl" />
-            <article transition:animate={slide ({ duration: '0.5s' })} class="prose mt-4 prose-a:text-accent">
-                <slot />
-                <div class=`${frontmatter.data.slidesEmbed ? '' : 'hidden'}`>
-                    <h2>Event Presentation</h1>
-                        <div class="aspect-video">    
-                            <iframe src={frontmatter.data.slidesEmbed} width="100%" height="100%" allowfullscreen="true" ></iframe>
-                        </div>
-                    <a class="btn btn-outline btn-accent w-full mt-4" href={frontmatter.data.slidesEmbed} target="_blank">Open Slides</a>
-                </div>
-            </article>
+            <div class="flex flex-row items-center gap-2">
+              <Calendar className="h-4 w-4" />
+              <p>{new Date(event.start_datetime).toLocaleDateString()}</p>
+            </div>
+          </div>
         </div>
-        <Footer />
-    </body>
+        {
+          event.image && (
+            <Image
+              src={`${API_URL}/assets/${event.image}?width=512`}
+              alt={event.title}
+              transition:name={event.slug}
+              width={512}
+              height={512}
+              class="hidden md:flex rounded-xl w-auto"
+            />
+          )
+        }
+      </div>
+      <!-- i have no idea why the important is needed here but it only works with it-->
+      <article
+        transition:animate={slide({ duration: "0.5s" })}
+        class="prose !prose-neutral dark:!prose-invert mt-4 max-w-none prose-img:rounded-lg"
+      >
+        <slot />
+        <!-- <div class=`${event.slidesEmbed ? '' : 'hidden'}`>
+          <h2>Event Presentation</h2>
+          <div class="aspect-video">
+            <iframe
+              src={event.slidesEmbed}
+              width="100%"
+              height="100%"
+              allowfullscreen="true"></iframe>
+          </div>
+          <a
+            class="btn btn-outline btn-accent w-full mt-4"
+            href={event.slidesEmbed}
+            target="_blank">Open Slides</a
+          >
+        </div> -->
+      </article>
+    </div>
+    <Footer />
+  </body>
 </html>

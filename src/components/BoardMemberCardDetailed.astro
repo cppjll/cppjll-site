@@ -1,65 +1,68 @@
 ---
 import { Image } from "astro:assets";
 const { member } = Astro.props;
+import { API_URL } from "@/lib/directus";
 ---
 
-<div id=`${member.slug}` class="card w-full shadow-2xl mb-6">
+<div id=`${member.slug}` class="card w-full border mb-6">
   <figure class="bg-secondary">
     <Image
-      src={member.data.image}
-      alt={member.data.imageAlt}
+      src={`${API_URL}/assets/${member.image}?width=256`}
+      alt={member.name}
+      width="128"
+      height="128"
       class="rounded-full my-4 w-36"
     />
   </figure>
   <div class="card-body">
-    <h1 class="text-3xl font-bold font-display text-accent mx-auto">
-      {member.data.name}
+    <h1 class="text-3xl font-bold font-display mx-auto">
+      {member.name}
     </h1>
-    <h2 class="text-center text-xl text-accent mb-2 mx-auto">
-      {member.data.position}
-      {member.data.service && <p>{member.data.service}</p>}
+    <h2 class="text-center text-xl mb-2 mx-auto">
+      {member.position}
+      {member.service && <p>{member.service}</p>}
     </h2>
-    <p class="text-lg font-body text-accent mb-2 mx-auto">
-      {member.data.bio}
+    <p class="text-lg font-body mb-2 mx-auto">
+      {member.biography}
     </p>
     <div class="row-auto mx-auto space-x-2">
       <a
-        href={member.data.discord}
+        href={member.discord}
         target="_blank"
-        style={member.data.discord ? " " : "display:none"}
-        class="btn btn-ghost hover:btn-accent w-12 normal-case text-xl text-accent hover:scale-[1.05]"
+        style={member.discord ? " " : "display:none"}
+        class="btn btn-ghost hover:btn-accent w-12 normal-case text-xl hover:scale-[1.05]"
         ><iconify-icon icon="simple-icons:discord" class="text-4xl"
         ></iconify-icon></a
       >
       <a
-        href={member.data.instagram}
+        href={member.instagram}
         target="_blank"
-        style={member.data.instagram ? " " : "display:none"}
-        class="btn btn-ghost hover:btn-accent w-12 normal-case text-xl text-accent hover:scale-[1.05]"
+        style={member.instagram ? " " : "display:none"}
+        class="btn btn-ghost hover:btn-accent w-12 normal-case text-xl hover:scale-[1.05]"
         ><iconify-icon icon="simple-icons:instagram" class="text-4xl"
         ></iconify-icon></a
       >
       <a
-        href={member.data.github}
+        href={member.github}
         target="_blank"
-        style={member.data.github ? " " : "display:none"}
-        class="btn btn-ghost hover:btn-accent w-12 normal-case text-xl text-accent hover:scale-[1.05]"
+        style={member.github ? " " : "display:none"}
+        class="btn btn-ghost hover:btn-accent w-12 normal-case text-xl hover:scale-[1.05]"
         ><iconify-icon icon="simple-icons:github" class="text-4xl"
         ></iconify-icon></a
       >
       <a
-        href={member.data.linkedin}
+        href={member.linkedin}
         target="_blank"
-        style={member.data.linkedin ? " " : "display:none"}
-        class="btn btn-ghost hover:btn-accent w-12 normal-case text-xl text-accent hover:scale-[1.05]"
+        style={member.linkedin ? " " : "display:none"}
+        class="btn btn-ghost hover:btn-accent w-12 normal-case text-xl hover:scale-[1.05]"
         ><iconify-icon icon="simple-icons:linkedin" class="text-4xl"
         ></iconify-icon></a
       >
       <a
-        href={member.data.youtube}
+        href={member.youtube}
         target="_blank"
-        style={member.data.youtube ? " " : "display:none"}
-        class="btn btn-ghost hover:btn-accent w-12 normal-case text-xl text-accent hover:scale-[1.05]"
+        style={member.youtube ? " " : "display:none"}
+        class="btn btn-ghost hover:btn-accent w-12 normal-case text-xl hover:scale-[1.05]"
         ><iconify-icon icon="simple-icons:youtube" class="text-4xl"
         ></iconify-icon></a
       >
