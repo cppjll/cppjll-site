@@ -9,6 +9,9 @@ import Navbar from "@/components/Navbar.astro";
 const { event } = Astro.props;
 import { API_URL } from "@/lib/directus";
 import { MapPin, Calendar } from "lucide-react";
+import BannerCarousel from "@/components/BannerCarousel";
+
+// console.log(event);
 ---
 
 <html lang="en">
@@ -80,7 +83,7 @@ import { MapPin, Calendar } from "lucide-react";
       <div class="breadcrumbs my-4">
         <ul>
           <li><a href="/">Home</a></li>
-          <li><a href="/events">Events</a></li>
+          <li><a href={`/events#${event.slug}`}>Events</a></li>
           <li>{event.title}</li>
         </ul>
       </div>

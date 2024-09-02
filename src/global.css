@@ -5,7 +5,7 @@
 
 @layer base {
   html {
-    @apply scroll-smooth;
+    /* @apply scroll-smooth; */
     /* reapply the rule below before prod */
     @apply scroll-pt-20;
   }

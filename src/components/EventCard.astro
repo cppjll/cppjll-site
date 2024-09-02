@@ -6,6 +6,7 @@ import { Calendar } from "lucide-react";
 ---
 
 <a
+  id={event.slug}
   class=`card ${soonest && 'sm:card-side'} w-full border mb-6 sm:hover:scale-[1.02] transition-all break-inside-avoid-column`
   href={`/events/${event.slug}`}
 >
