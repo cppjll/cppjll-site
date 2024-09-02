@@ -6,7 +6,8 @@ import icon from "/favicon.ico";
 import { ViewTransitions } from "astro:transitions";
 import { slide } from "astro:transitions";
 import Navbar from "@/components/Navbar.astro";
-const { frontmatter } = Astro.props;
+const { event } = Astro.props;
+import { API_URL } from "@/lib/directus";
 import { MapPin, Calendar } from "lucide-react";
 ---
 
@@ -14,15 +15,15 @@ import { MapPin, Calendar } from "lucide-react";
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{frontmatter.data.title} - CPP Japanese Language Learners</title>
+    <title>{event.title} - CPP Japanese Language Learners</title>
     <link rel="icon" href={icon} type="image/x-icon" />
 
     <meta
       property="og:title"
-      content=`${frontmatter.title} - CPP Japanese Language Learners`
+      content=`${event.title} - CPP Japanese Language Learners`
     />
-    <meta property="og:description" content={frontmatter.data.description} />
-    <meta property="og:image" content={frontmatter.data.image.src} />
+    <meta property="og:description" content={event.description} />
+    <meta property="og:image" content={`${API_URL}/assets/${event.image}?width=512`} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="theme-color" content="#204063" />
     <!-- Cloudflare Web Analytics -->
@@ -77,67 +78,71 @@ import { MapPin, Calendar } from "lucide-react";
         <ul>
           <li><a href="/">Home</a></li>
           <li><a href="/events">Events</a></li>
-          <li>{frontmatter.data.title}</li>
+          <li>{event.title}</li>
         </ul>
       </div>
       <div
         class="flex flex-col md:flex-row md:justify-between w-full pb-6 border-b md:h-64"
       >
         <Image
-          transition:name={frontmatter.slug}
-          src={frontmatter.data.image}
-          alt={frontmatter.data.imageAlt}
+          transition:name={event.slug}
+          src={`${API_URL}/assets/${event.image}?width=512`}
+          width={512}
+          height={512}
+          alt={event.title}
           class="md:hidden rounded-xl mb-6"
         />
         <div class="flex flex-col justify-between h-full">
           <div class="prose !prose-neutral dark:!prose-invert max-w-lg">
             <h1 class="font-display">
-              {frontmatter.data.title}
+              {event.title}
             </h1>
 
             <p>
-              {frontmatter.data.description}
+              {event.description}
             </p>
           </div>
           <div class="flex flex-col gap-2 not-prose">
             <div class="flex flex-row items-center gap-2">
               <MapPin className="h-4 w-4" />
-              <p>{frontmatter.data.location}</p>
+              <p>{event.location}</p>
             </div>
             <div class="flex flex-row items-center gap-2">
               <Calendar className="h-4 w-4" />
-              <p>{frontmatter.data.date.toLocaleDateString()}</p>
+              <p>{new Date(event.start_datetime).toLocaleDateString()}</p>
             </div>
           </div>
         </div>
         <Image
-          src={frontmatter.data.image}
-          alt={frontmatter.data.imageAlt}
-          transition:name={frontmatter.slug}
+          src={`${API_URL}/assets/${event.image}?width=512`}
+          alt={event.title}
+          transition:name={event.slug}
+          width={512}
+          height={512}
           class="hidden md:flex rounded-xl w-auto"
         />
       </div>
       <!-- i have no idea why the important is needed here but it only works with it-->
       <article
         transition:animate={slide({ duration: "0.5s" })}
-        class="prose !prose-neutral dark:!prose-invert mt-4 max-w-none"
+        class="prose !prose-neutral dark:!prose-invert mt-4 max-w-none prose-img:rounded-lg"
       >
         <slot />
-        <div class=`${frontmatter.data.slidesEmbed ? '' : 'hidden'}`>
+        <!-- <div class=`${event.slidesEmbed ? '' : 'hidden'}`>
           <h2>Event Presentation</h2>
           <div class="aspect-video">
             <iframe
-              src={frontmatter.data.slidesEmbed}
+              src={event.slidesEmbed}
               width="100%"
               height="100%"
               allowfullscreen="true"></iframe>
           </div>
           <a
             class="btn btn-outline btn-accent w-full mt-4"
-            href={frontmatter.data.slidesEmbed}
+            href={event.slidesEmbed}
             target="_blank">Open Slides</a
           >
-        </div>
+        </div> -->
       </article>
     </div>
     <Footer />
