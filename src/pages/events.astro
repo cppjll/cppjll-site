@@ -1,21 +1,26 @@
 ---
-import { slide } from "astro:transitions";
-import EventCard from "../components/EventCard.astro";
-import Layout from "../layouts/Layout.astro";
-import { directus } from "@/lib/directus";
-import { readItems } from "@directus/sdk";
+import { slide } from 'astro:transitions';
+import EventCard from '../components/EventCard.astro';
+import Layout from '../layouts/Layout.astro';
+import { directus } from '@/lib/directus';
+import { readItems } from '@directus/sdk';
+
+const isDev = import.meta.env.DEV;
+
 // TODO: Add pagination
 const events = await directus.request(
-  readItems("events", {
-    fields: ["*"],
-    sort: ["-start_datetime"],
-    filter: {
-      status: "published"// only show published events
-    }
+  readItems('events', {
+    fields: ['*'],
+    sort: ['-start_datetime'],
+    filter: isDev
+      ? { status: { _in: ['draft', 'published'] } }
+      : { status: 'published' },
   })
 );
 
-const upcomingEvents = events.filter((event) => new Date(event.end_datetime) > new Date());
+const upcomingEvents = events.filter(
+  (event) => new Date(event.end_datetime) > new Date()
+);
 ---
 
 <Layout title="Events - CPP Japanese Language Learners">
@@ -29,7 +34,7 @@ const upcomingEvents = events.filter((event) => new Date(event.end_datetime) > n
         </ul>
       </div>
       <h1
-        transition:animate={slide({ duration: "0.3s" })}
+        transition:animate={slide({ duration: '0.3s' })}
         class="text-5xl font-bold mb-4 font-display"
       >
         Upcoming Events
@@ -40,7 +45,7 @@ const upcomingEvents = events.filter((event) => new Date(event.end_datetime) > n
       </div>
       <!-- Render upcoming events in a single column on smaller devices -->
       <div
-        class={`${upcomingEvents.length != 0 ? "flex flex-col items-center" : "hidden"} sm:hidden`}
+        class={`${upcomingEvents.length != 0 ? 'flex flex-col items-center' : 'hidden'} sm:hidden`}
       >
         {upcomingEvents.map((event) => <EventCard event={event} />)}
       </div>
@@ -50,13 +55,16 @@ const upcomingEvents = events.filter((event) => new Date(event.end_datetime) > n
       >
         {
           upcomingEvents[0] ? (
-            <EventCard event={upcomingEvents[0]} soonest />
+            <EventCard
+              event={upcomingEvents[0]}
+              soonest
+            />
           ) : null
         }
       </div>
       <!-- Multiple upcoming events case -->
       <div
-        class={`${upcomingEvents.length > 1 ? "hidden sm:grid grid-cols-2 gap-4" : "hidden"}`}
+        class={`${upcomingEvents.length > 1 ? 'hidden sm:grid grid-cols-2 gap-4' : 'hidden'}`}
       >
         {upcomingEvents.map((event) => <EventCard event={event} />)}
       </div>
@@ -64,14 +72,18 @@ const upcomingEvents = events.filter((event) => new Date(event.end_datetime) > n
     <!-- Previous Events -->
     <div class="flex flex-col my-6">
       <h1
-        transition:animate={slide({ duration: "0.5s" })}
+        transition:animate={slide({ duration: '0.5s' })}
         class="text-5xl font-bold mb-4 font-display"
       >
         Previous Events
       </h1>
       <!-- Single column on smaller devices, two column grid on larger screens -->
       <div class="flex flex-col sm:grid sm:grid-cols-2 sm:gap-4">
-        {events.filter((event) => new Date(event.end_datetime) < new Date()).map((event) => <EventCard event={event} />)}
+        {
+          events
+            .filter((event) => new Date(event.end_datetime) < new Date())
+            .map((event) => <EventCard event={event} />)
+        }
       </div>
     </div>
   </div>
