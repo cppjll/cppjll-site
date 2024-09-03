@@ -5,14 +5,12 @@ import Layout from '../layouts/Layout.astro';
 import { directus } from '@/lib/directus';
 import { readItems } from '@directus/sdk';
 
-const isDev = import.meta.env.DEV;
-
 // TODO: Add pagination
 const events = await directus.request(
   readItems('events', {
     fields: ['*'],
     sort: ['-start_datetime'],
-    filter: isDev
+    filter: import.meta.env.DEV // Only show published events in prod. Drafted events can be previewed in localhost.
       ? { status: { _in: ['draft', 'published'] } }
       : { status: 'published' },
   })

@@ -1,42 +1,42 @@
 ---
-import { Image } from "astro:assets";
-import logo from "../images/bun.png";
-import bg from "../images/test.jpg";
-import BoardMemberCard from "../components/BoardMemberCard.astro";
-import EventCard from "../components/EventCard.astro";
-import { slide } from "astro:transitions";
-import { Button } from "@/components/ui/button";
-import HomeLayout from "@/layouts/HomeLayout.astro";
-import { directus } from "@/lib/directus";
-import { readFiles, readItems } from "@directus/sdk";
-import BannerCarousel from "@/components/BannerCarousel";
+import { Image } from 'astro:assets';
+import logo from '../images/bun.png';
+import bg from '../images/test.jpg';
+import BoardMemberCard from '../components/BoardMemberCard.astro';
+import EventCard from '../components/EventCard.astro';
+import { slide } from 'astro:transitions';
+import { Button } from '@/components/ui/button';
+import HomeLayout from '@/layouts/HomeLayout.astro';
+import { directus } from '@/lib/directus';
+import { readFiles, readItems } from '@directus/sdk';
+import BannerCarousel from '@/components/BannerCarousel';
 
 const banner_photos = await directus.request(
   readFiles({
-    fields: ["*"],
+    fields: ['*'],
     filter: {
-      folder: "214085bf-4479-41f4-995b-80d39a148182",
+      folder: '214085bf-4479-41f4-995b-80d39a148182',
     },
   })
 );
 
 const events = await directus.request(
-  readItems("events", {
-    fields: ["*"],
-    sort: ["-start_datetime"],
+  readItems('events', {
+    fields: ['*'],
+    sort: ['-start_datetime'],
     limit: 1,
-    filter: {
-      status: "published",
-    },
+    filter: import.meta.env.DEV // Only show published events in prod. Drafted events can be previewed in localhost.
+      ? { status: { _in: ['draft', 'published'] } }
+      : { status: 'published' },
   })
 );
 
 const featuredEvent = events[0];
 
 const board = await directus.request(
-  readItems("board", {
-    fields: ["name", "position", "image", "status", "slug"],
-    sort: ["sort", "name"],
+  readItems('board', {
+    fields: ['name', 'position', 'image', 'status', 'slug'],
+    sort: ['sort', 'name'],
   })
 );
 
@@ -71,16 +71,27 @@ console.log(banner_photos);
               welcoming new members.
             </p>
             <div class="flex flex-row gap-1">
-              <a href="https://discord.com/invite/W5kxJtE3a7" target="_blank">
-                <Button variant={"default"}> Join our community </Button>
+              <a
+                href="https://discord.com/invite/W5kxJtE3a7"
+                target="_blank"
+              >
+                <Button variant={'default'}> Join our community </Button>
               </a>
             </div>
           </div>
-          <Image src={logo} alt="Japanese Language Learners logo represented by the Kanji ぶん" class="hidden md:flex w-56" />
+          <Image
+            src={logo}
+            alt="Japanese Language Learners logo represented by the Kanji ぶん"
+            class="hidden md:flex w-56"
+          />
         </div>
       </div>
       <!-- Background image with opacity -->
-      <Image src={bg} alt="bg" class="w-full h-full object-cover opacity-10" />
+      <Image
+        src={bg}
+        alt="bg"
+        class="w-full h-full object-cover opacity-10"
+      />
       <!-- <BannerCarousel banners={banner_photos} client:load /> -->
     </div>
   </div>
@@ -88,7 +99,7 @@ console.log(banner_photos);
 
   <!-- Content -->
   <div
-    transition:animate={slide({ duration: "0.5s" })}
+    transition:animate={slide({ duration: '0.5s' })}
     class="flex flex-col md:max-w-3xl mx-auto my-16"
   >
     <!-- About -->
@@ -110,12 +121,16 @@ console.log(banner_photos);
         <p class="text-foreground mb-4 md:max-w-3xl text-left w-full mx-auto">
           Contact us or check us out through our <span
             class="text-blurple font-bold hover:underline"
-            ><a href="https://discord.com/invite/W5kxJtE3a7" target="_blank"
+            ><a
+              href="https://discord.com/invite/W5kxJtE3a7"
+              target="_blank"
               >Discord</a
             ></span
           > server or <span
             class="bg-gradient-to-r from-igOrange via-igRed to-igPurple bg-clip-text text-transparent font-bold decoration-igRed hover:underline"
-            ><a href="https://www.instagram.com/cppjll/" target="_blank"
+            ><a
+              href="https://www.instagram.com/cppjll/"
+              target="_blank"
               >Instagram</a
             ></span
           > page!
@@ -127,10 +142,12 @@ console.log(banner_photos);
             target="_blank"
           >
             <Button
-              variant={"outline"}
+              variant={'outline'}
               className="border-foreground hover:bg-blurple w-full h-10"
             >
-              <iconify-icon icon="simple-icons:discord" class="text-2xl mr-2"
+              <iconify-icon
+                icon="simple-icons:discord"
+                class="text-2xl mr-2"
               ></iconify-icon>
               Join the Discord
             </Button>
@@ -142,10 +159,12 @@ console.log(banner_photos);
             target="_blank"
           >
             <Button
-              variant={"outline"}
+              variant={'outline'}
               className="border-foreground hover:bg-gradient-to-r from-igOrange via-igRed to-igPurple w-full h-10"
             >
-              <iconify-icon icon="simple-icons:instagram" class="text-xl mr-2"
+              <iconify-icon
+                icon="simple-icons:instagram"
+                class="text-xl mr-2"
               ></iconify-icon>
               Follow our Instagram
             </Button>
@@ -157,16 +176,25 @@ console.log(banner_photos);
 
     <!-- Events -->
     <div class="flex flex-col mb-6 mx-6">
-      <a class="hover:translate-x-3 transition-transform" href="/events">
+      <a
+        class="hover:translate-x-3 transition-transform"
+        href="/events"
+      >
         <h1 class="text-5xl font-bold text-foreground mb-4 font-display">
           Events
         </h1>
       </a>
       {
         new Date(featuredEvent.start_datetime) > new Date() ? (
-          <EventCard event={featuredEvent} soonest />
+          <EventCard
+            event={featuredEvent}
+            soonest
+          />
         ) : (
-          <div class="flex flex-col" class="text-foreground mb-4">
+          <div
+            class="flex flex-col"
+            class="text-foreground mb-4"
+          >
             No upcoming events. Stay tuned! ٩(๑´∀ `๑ )
           </div>
         )
@@ -177,8 +205,8 @@ console.log(banner_photos);
       <!-- End Banner Carousel -->
       <a href="/events">
         <Button
-          size={"lg"}
-          variant={"outline"}
+          size={'lg'}
+          variant={'outline'}
           className="border-foreground w-full my-4"
         >
           See all events
@@ -200,7 +228,7 @@ console.log(banner_photos);
       <div class="flex flex-col">
         {
           board
-            .filter((boardMember) => boardMember.status === "active")
+            .filter((boardMember) => boardMember.status === 'active')
             .map((boardMember) => <BoardMemberCard member={boardMember} />)
         }
       </div>
