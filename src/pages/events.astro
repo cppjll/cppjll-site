@@ -4,6 +4,7 @@ import EventCard from '../components/EventCard.astro';
 import Layout from '../layouts/Layout.astro';
 import { directus } from '@/lib/directus';
 import { readItems } from '@directus/sdk';
+import { DateTime } from 'luxon';
 
 // TODO: Add pagination
 const events = await directus.request(
@@ -17,7 +18,7 @@ const events = await directus.request(
 );
 
 const upcomingEvents = events.filter(
-  (event) => new Date(event.end_datetime) > new Date()
+  (event) => DateTime.fromISO(event.end_datetime, { zone: 'America/Los_Angeles' }).toUTC() > DateTime.now().toUTC()
 );
 ---
 
