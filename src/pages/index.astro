@@ -9,6 +9,7 @@ import { Button } from '@/components/ui/button';
 import HomeLayout from '@/layouts/HomeLayout.astro';
 import { directus } from '@/lib/directus';
 import { readFiles, readItems } from '@directus/sdk';
+import { DateTime } from 'luxon';
 import BannerCarousel from '@/components/BannerCarousel';
 
 const banner_photos = await directus.request(
@@ -32,6 +33,8 @@ const events = await directus.request(
 );
 
 const featuredEvent = events[0];
+const featuredEventEndDate = DateTime.fromISO(featuredEvent.end_datetime, { zone: 'America/Los_Angeles' }).toUTC();
+const now = DateTime.now().toUTC();
 
 const board = await directus.request(
   readItems('board', {
@@ -185,7 +188,7 @@ console.log(banner_photos);
         </h1>
       </a>
       {
-        new Date(featuredEvent.start_datetime) > new Date() ? (
+        featuredEventEndDate > now ? (
           <EventCard
             event={featuredEvent}
             soonest
