@@ -80,7 +80,7 @@ const upcomingEvents = events.filter(
       <div class="flex flex-col sm:grid sm:grid-cols-2 sm:gap-4">
         {
           events
-            .filter((event) => new Date(event.end_datetime) < new Date())
+            .filter((event) => DateTime.fromISO(event.end_datetime, { zone: 'America/Los_Angeles' }).toUTC() < DateTime.now().toUTC())
             .map((event) => <EventCard event={event} />)
         }
       </div>
