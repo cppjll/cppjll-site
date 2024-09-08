@@ -22,19 +22,25 @@ const banner_photos = await directus.request(
 );
 
 const events = await directus.request(
-  readItems('events', {
-    fields: ['*'],
-    sort: ['-start_datetime'],
-    limit: 1,
+  readItems("events", {
+    fields: ["*"],
+    sort: ["-start_datetime"],
+    limit: 10,
     filter: import.meta.env.DEV // Only show published events in prod. Drafted events can be previewed in localhost.
-      ? { status: { _in: ['draft', 'published'] } }
-      : { status: 'published' },
+      ? { status: { _in: ["draft", "published"] } }
+      : { status: "published" },
   })
 );
 
-const featuredEvent = events[0];
-const featuredEventEndDate = DateTime.fromISO(featuredEvent.end_datetime, { zone: 'America/Los_Angeles' }).toUTC();
 const now = DateTime.now().toUTC();
+const featuredEvent = events
+  .filter(
+    (event) =>
+      DateTime.fromISO(event.start_datetime, {
+        zone: "America/Los_Angeles",
+      }).toUTC() > now
+  )
+  .slice(-1)[0];
 
 const board = await directus.request(
   readItems('board', {
@@ -188,7 +194,7 @@ console.log(banner_photos);
         </h1>
       </a>
       {
-        featuredEventEndDate > now ? (
+        featuredEvent ? (
           <EventCard
             event={featuredEvent}
             soonest
