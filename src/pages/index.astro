@@ -11,6 +11,7 @@ import { directus } from '@/lib/directus';
 import { readFiles, readItems } from '@directus/sdk';
 import { DateTime } from 'luxon';
 import BannerCarousel from '@/components/BannerCarousel';
+import { ComboboxDemo } from '@/components/ui/test';
 
 const banner_photos = await directus.request(
   readFiles({
@@ -119,6 +120,7 @@ console.log(banner_photos);
         About
       </h1>
       <div class="flex flex-col">
+        <ComboboxDemo client:load />
         <p class="text-foreground mb-4 md:max-w-3xl mx-auto">
           The Cal Poly Pomona Japanese Language Learners Club (CPP JLL) is a
           community dedicated to exploring Japanese language and culture in a
