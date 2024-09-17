@@ -34,7 +34,7 @@ const semesters = [
 
 export function SemesterCombobox() {
   const [open, setOpen] = React.useState(false);
-  const [value, setValue] = React.useState('');
+  const [value, setValue] = React.useState(semesters[0].value);
 
   return (
     <Popover
