@@ -17,26 +17,18 @@ import {
   PopoverTrigger,
 } from '@/components/ui/popover';
 
-const frameworks = [
+const semesters = [
   {
-    value: 'next.js',
-    label: 'Next.js',
+    value: 'Fall2024',
+    label: 'Fall 2024',
   },
   {
-    value: 'sveltekit',
-    label: 'SvelteKit',
+    value: 'Spring2024',
+    label: 'Spring 2024',
   },
   {
-    value: 'nuxt.js',
-    label: 'Nuxt.js',
-  },
-  {
-    value: 'remix',
-    label: 'Remix',
-  },
-  {
-    value: 'astro',
-    label: 'Astro',
+    value: 'Fall2023',
+    label: 'Fall 2023',
   },
 ];
 
@@ -57,8 +49,8 @@ export function SemesterCombobox() {
           className="w-[11rem] justify-between"
         >
           {value
-            ? frameworks.find((framework) => framework.value === value)?.label
-            : frameworks[0].label}
+            ? semesters.find((semester) => semester.value === value)?.label
+            : semesters[0]?.label}
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
@@ -68,10 +60,10 @@ export function SemesterCombobox() {
           <CommandList>
             <CommandEmpty>No semesters found.</CommandEmpty>
             <CommandGroup>
-              {frameworks.map((framework) => (
+              {semesters.map((semester) => (
                 <CommandItem
-                  key={framework.value}
-                  value={framework.value}
+                  key={semester.value}
+                  value={semester.value}
                   onSelect={(currentValue) => {
                     setValue(currentValue === value ? '' : currentValue);
                     setOpen(false);
@@ -80,12 +72,13 @@ export function SemesterCombobox() {
                   <Check
                     className={cn(
                       'mr-2 h-4 w-4',
-                      value === framework.value || (!value && framework.value === frameworks[0].value)
+                      value === semester.value ||
+                        (!value && semester.value === semesters[0]?.value)
                         ? 'opacity-100'
                         : 'opacity-0'
                     )}
                   />
-                  {framework.label}
+                  {semester.label}
                 </CommandItem>
               ))}
             </CommandGroup>
