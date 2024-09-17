@@ -7,6 +7,8 @@ import { readItems } from '@directus/sdk';
 import { DateTime } from 'luxon';
 
 // TODO: Add pagination
+import { SemesterCombobox } from '@/components/SemesterCombobox.tsx';
+
 const events = await directus.request(
   readItems('events', {
     fields: ['*'],
@@ -18,7 +20,10 @@ const events = await directus.request(
 );
 
 const upcomingEvents = events.filter(
-  (event) => DateTime.fromISO(event.end_datetime, { zone: 'America/Los_Angeles' }).toUTC() > DateTime.now().toUTC()
+  (event) =>
+    DateTime.fromISO(event.end_datetime, {
+      zone: 'America/Los_Angeles',
+    }).toUTC() > DateTime.now().toUTC()
 );
 ---
 
@@ -49,20 +54,26 @@ const upcomingEvents = events.filter(
         {upcomingEvents.map((event) => <EventCard event={event} />)}
       </div>
       <!-- One upcoming event case -->
-      {upcomingEvents.length === 1 && (
-        <div class={`hidden sm:flex flex-col items-center`}>
-          <EventCard
-            event={upcomingEvents[0]}
-            soonest
-          />
-        </div>
-      )}
+      {
+        upcomingEvents.length === 1 && (
+          <div class={`hidden sm:flex flex-col items-center`}>
+            <EventCard
+              event={upcomingEvents[0]}
+              soonest
+            />
+          </div>
+        )
+      }
       <!-- Multiple upcoming events case -->
-       {upcomingEvents.length > 1 && (
-         <div class={`hidden sm:grid grid-cols-2 gap-4`}> 
-           {upcomingEvents.map((event) => <EventCard event={event} />).reverse()}
-         </div>
-       )}
+      {
+        upcomingEvents.length > 1 && (
+          <div class={`hidden sm:grid grid-cols-2 gap-4`}>
+            {upcomingEvents
+              .map((event) => <EventCard event={event} />)
+              .reverse()}
+          </div>
+        )
+      }
     </div>
     <!-- Previous Events -->
     <div class="flex flex-col my-6">
@@ -72,11 +83,19 @@ const upcomingEvents = events.filter(
       >
         Previous Events
       </h1>
+      <div class="mb-4">
+        <SemesterCombobox client:load />
+      </div>
       <!-- Single column on smaller devices, two column grid on larger screens -->
       <div class="flex flex-col sm:grid sm:grid-cols-2 sm:gap-4">
         {
           events
-            .filter((event) => DateTime.fromISO(event.end_datetime, { zone: 'America/Los_Angeles' }).toUTC() < DateTime.now().toUTC())
+            .filter(
+              (event) =>
+                DateTime.fromISO(event.end_datetime, {
+                  zone: 'America/Los_Angeles',
+                }).toUTC() < DateTime.now().toUTC()
+            )
             .map((event) => <EventCard event={event} />)
         }
       </div>

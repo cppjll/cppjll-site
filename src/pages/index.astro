@@ -11,7 +11,6 @@ import { directus } from '@/lib/directus';
 import { readFiles, readItems } from '@directus/sdk';
 import { DateTime } from 'luxon';
 import BannerCarousel from '@/components/BannerCarousel';
-import { ComboboxDemo } from '@/components/ui/test';
 
 const banner_photos = await directus.request(
   readFiles({
@@ -23,13 +22,13 @@ const banner_photos = await directus.request(
 );
 
 const events = await directus.request(
-  readItems("events", {
-    fields: ["*"],
-    sort: ["-start_datetime"],
+  readItems('events', {
+    fields: ['*'],
+    sort: ['-start_datetime'],
     limit: 10,
     filter: import.meta.env.DEV // Only show published events in prod. Drafted events can be previewed in localhost.
-      ? { status: { _in: ["draft", "published"] } }
-      : { status: "published" },
+      ? { status: { _in: ['draft', 'published'] } }
+      : { status: 'published' },
   })
 );
 
@@ -38,7 +37,7 @@ const featuredEvent = events
   .filter(
     (event) =>
       DateTime.fromISO(event.start_datetime, {
-        zone: "America/Los_Angeles",
+        zone: 'America/Los_Angeles',
       }).toUTC() > now
   )
   .slice(-1)[0];
@@ -120,7 +119,6 @@ console.log(banner_photos);
         About
       </h1>
       <div class="flex flex-col">
-        <ComboboxDemo client:load />
         <p class="text-foreground mb-4 md:max-w-3xl mx-auto">
           The Cal Poly Pomona Japanese Language Learners Club (CPP JLL) is a
           community dedicated to exploring Japanese language and culture in a
