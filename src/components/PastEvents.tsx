@@ -1,3 +1,5 @@
+'use client';
+
 import * as React from 'react';
 import { Check, ChevronsUpDown } from 'lucide-react';
 
@@ -32,9 +34,9 @@ const semesters = [
   },
 ];
 
-export function SemesterCombobox() {
+export function PastEvents() {
   const [open, setOpen] = React.useState(false);
-  const [value, setValue] = React.useState(semesters[0].value);
+  const [value, setValue] = React.useState('');
 
   return (
     <Popover
@@ -46,7 +48,7 @@ export function SemesterCombobox() {
           variant="outline"
           role="combobox"
           aria-expanded={open}
-          className="w-[11rem] justify-between"
+          className="w-[200px] justify-between"
         >
           {value
             ? semesters.find((semester) => semester.value === value)?.label
@@ -54,11 +56,11 @@ export function SemesterCombobox() {
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-[11rem] p-0">
+      <PopoverContent className="w-[200px] p-0">
         <Command>
           <CommandInput placeholder="Search semester" />
           <CommandList>
-            <CommandEmpty>No semesters found.</CommandEmpty>
+            <CommandEmpty>No semester found.</CommandEmpty>
             <CommandGroup>
               {semesters.map((semester) => (
                 <CommandItem
