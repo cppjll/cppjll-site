@@ -19,6 +19,12 @@ import {
   PopoverTrigger,
 } from '@/components/ui/popover';
 
+import { directus } from '@/lib/directus';
+import { readItems } from '@directus/sdk';
+
+import EventCard from './EventCard.astro';
+import { DateTime } from 'luxon';
+
 const semesters = [
   {
     value: 'Fall2024',
@@ -34,9 +40,36 @@ const semesters = [
   },
 ];
 
-export function PastEvents() {
+export function PreviousEvents() {
   const [open, setOpen] = React.useState(false);
-  const [value, setValue] = React.useState('');
+  const [value, setValue] = React.useState('Fall2024');
+  const [events, setEvents] = React.useState<Record<string, any>[]>([]);
+
+  React.useEffect(() => {
+    const fetchEvents = async () => {
+      const fetchedEvents = await directus.request(
+        readItems('events', {
+          fields: ['*'],
+          sort: ['-start_datetime'],
+          filter: {
+            _and: [
+              {
+                semester: {
+                  _eq: value,
+                },
+              },
+              import.meta.env.DEV // Only show published events in prod. Drafted events can be previewed in localhost.
+                ? { status: { _in: ['draft', 'published'] } }
+                : { status: 'published' },
+            ],
+          },
+        })
+      );
+      setEvents(fetchedEvents);
+    };
+
+    fetchEvents();
+  }, [value]);
 
   return (
     <Popover
@@ -87,6 +120,20 @@ export function PastEvents() {
           </CommandList>
         </Command>
       </PopoverContent>
+      {/* Single column on smaller devices, two column grid on larger screens */}
+        <div className="flex flex-col sm:grid sm:grid-cols-2 sm:gap-4 my-6">
+          {events
+            .filter(
+              (event) =>
+                DateTime.fromISO(event.end_datetime, {
+                  zone: 'America/Los_Angeles',
+                }).toUTC() < DateTime.now().toUTC()
+            )
+            .map((event) => (
+              <EventCard key={event.slug} event={event} />
+            ))}
+        </div>
     </Popover>
   );
 }
+
