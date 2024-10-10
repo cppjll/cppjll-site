@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import * as React from 'react';
-import { Check, ChevronsUpDown } from 'lucide-react';
+import * as React from "react";
+import { Check, ChevronsUpDown } from "lucide-react";
 
-import { cn } from '@/lib/utils';
-import { Button } from '@/components/ui/button';
+import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
 import {
   Command,
   CommandEmpty,
@@ -12,45 +12,45 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
-} from '@/components/ui/command';
+} from "@/components/ui/command";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from '@/components/ui/popover';
+} from "@/components/ui/popover";
 
-import { directus } from '@/lib/directus';
-import { readItems } from '@directus/sdk';
+import { directus } from "@/lib/directus";
+import { readItems } from "@directus/sdk";
 
-import EventCard from './EventCard.astro';
-import { DateTime } from 'luxon';
+import { DateTime } from "luxon";
+import { EventCard } from "./EventCard";
 
 const semesters = [
   {
-    value: 'Fall2024',
-    label: 'Fall 2024',
+    value: "Fall2024",
+    label: "Fall 2024",
   },
   {
-    value: 'Spring2024',
-    label: 'Spring 2024',
+    value: "Spring2024",
+    label: "Spring 2024",
   },
   {
-    value: 'Fall2023',
-    label: 'Fall 2023',
+    value: "Fall2023",
+    label: "Fall 2023",
   },
 ];
 
 export function PreviousEvents() {
   const [open, setOpen] = React.useState(false);
-  const [value, setValue] = React.useState('Fall2024');
+  const [value, setValue] = React.useState("Fall2024");
   const [events, setEvents] = React.useState<Record<string, any>[]>([]);
 
   React.useEffect(() => {
     const fetchEvents = async () => {
       const fetchedEvents = await directus.request(
-        readItems('events', {
-          fields: ['*'],
-          sort: ['-start_datetime'],
+        readItems("events", {
+          fields: ["*"],
+          sort: ["-start_datetime"],
           filter: {
             _and: [
               {
@@ -59,8 +59,8 @@ export function PreviousEvents() {
                 },
               },
               import.meta.env.DEV // Only show published events in prod. Drafted events can be previewed in localhost.
-                ? { status: { _in: ['draft', 'published'] } }
-                : { status: 'published' },
+                ? { status: { _in: ["draft", "published"] } }
+                : { status: "published" },
             ],
           },
         })
@@ -72,10 +72,7 @@ export function PreviousEvents() {
   }, [value]);
 
   return (
-    <Popover
-      open={open}
-      onOpenChange={setOpen}
-    >
+    <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
         <Button
           variant="outline"
@@ -100,17 +97,17 @@ export function PreviousEvents() {
                   key={semester.value}
                   value={semester.value}
                   onSelect={(currentValue) => {
-                    setValue(currentValue === value ? '' : currentValue);
+                    setValue(currentValue === value ? "" : currentValue);
                     setOpen(false);
                   }}
                 >
                   <Check
                     className={cn(
-                      'mr-2 h-4 w-4',
+                      "mr-2 h-4 w-4",
                       value === semester.value ||
                         (!value && semester.value === semesters[0]?.value)
-                        ? 'opacity-100'
-                        : 'opacity-0'
+                        ? "opacity-100"
+                        : "opacity-0"
                     )}
                   />
                   {semester.label}
@@ -121,19 +118,18 @@ export function PreviousEvents() {
         </Command>
       </PopoverContent>
       {/* Single column on smaller devices, two column grid on larger screens */}
-        <div className="flex flex-col sm:grid sm:grid-cols-2 sm:gap-4 my-6">
-          {events
-            .filter(
-              (event) =>
-                DateTime.fromISO(event.end_datetime, {
-                  zone: 'America/Los_Angeles',
-                }).toUTC() < DateTime.now().toUTC()
-            )
-            .map((event) => (
-              <EventCard key={event.slug} event={event} />
-            ))}
-        </div>
+      <div className="flex flex-col sm:grid sm:grid-cols-2 sm:gap-4 my-6">
+        {events
+          .filter(
+            (event) =>
+              DateTime.fromISO(event.end_datetime, {
+                zone: "America/Los_Angeles",
+              }).toUTC() < DateTime.now().toUTC()
+          )
+          .map((event) => (
+            <EventCard key={event.slug} event={event} />
+          ))}
+      </div>
     </Popover>
   );
 }
-
