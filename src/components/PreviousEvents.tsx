@@ -42,7 +42,7 @@ const semesters = [
 
 export function PreviousEvents() {
   const [open, setOpen] = React.useState(false);
-  const [value, setValue] = React.useState("Fall2024");
+  const [value, setValue] = React.useState("Fall2024"); // Put default semester here
   const [events, setEvents] = React.useState<Record<string, any>[]>([]);
 
   React.useEffect(() => {
@@ -97,7 +97,7 @@ export function PreviousEvents() {
                   key={semester.value}
                   value={semester.value}
                   onSelect={(currentValue) => {
-                    setValue(currentValue === value ? "" : currentValue);
+                    setValue(currentValue === value ? "Fall2024" : currentValue); // Put default semester here
                     setOpen(false);
                   }}
                 >
