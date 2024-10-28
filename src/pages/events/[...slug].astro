@@ -5,15 +5,20 @@ import { readItems } from "@directus/sdk";
 
 const { slug } = Astro.params;
 
-const events = await directus.request(readItems("events", {
-  fields: ["*"]
-}));
+export async function getStaticPaths() {
+  const events = await directus.request(
+    readItems("events", {
+      fields: ["*"],
+    })
+  );
 
-const event = events.find((event) => event.slug === slug);
-
-if (!event) {
-  return Astro.redirect("/events");
+  return events.map((event) => ({
+    params: { slug: event.slug },
+    props: { event },
+  }));
 }
+
+const event = Astro.props.event;
 ---
 
 <EventsLayout event={event}>
