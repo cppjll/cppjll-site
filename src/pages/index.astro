@@ -12,14 +12,14 @@ import { readFiles, readItems } from "@directus/sdk";
 import { DateTime } from "luxon";
 import BannerCarousel from "@/components/BannerCarousel";
 
-const banner_photos = await directus.request(
-  readFiles({
-    fields: ["*"],
-    filter: {
-      folder: "214085bf-4479-41f4-995b-80d39a148182",
-    },
-  })
-);
+// const banner_photos = await directus.request(
+//   readFiles({
+//     fields: ["*"],
+//     filter: {
+//       folder: "214085bf-4479-41f4-995b-80d39a148182",
+//     },
+//   })
+// );
 
 const events = await directus.request(
   readItems("events", {
@@ -49,7 +49,7 @@ const board = await directus.request(
   })
 );
 
-console.log(banner_photos);
+// console.log(banner_photos);
 ---
 
 <HomeLayout title="CPP Japanese Language Learners">
@@ -108,10 +108,7 @@ console.log(banner_photos);
   <!-- End top section -->
 
   <!-- Content -->
-  <div
-    transition:animate={slide({ duration: "0.5s" })}
-    class="flex flex-col md:max-w-3xl mx-auto my-16"
-  >
+  <div class="flex flex-col md:max-w-3xl mx-auto my-16">
     <!-- About -->
     <div class="flex flex-col pb-10 px-4 w-auto">
       <h1

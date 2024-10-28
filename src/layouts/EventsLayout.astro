@@ -96,7 +96,6 @@ import BannerCarousel from "@/components/BannerCarousel";
         {
           event.image && (
             <Image
-              transition:name={event.slug}
               src={`${API_URL}/assets/${event.image}?width=512`}
               width={512}
               height={512}
@@ -157,7 +156,6 @@ import BannerCarousel from "@/components/BannerCarousel";
       </div>
       <!-- i have no idea why the important is needed here but it only works with it-->
       <article
-        transition:animate={slide({ duration: "0.5s" })}
         class="prose !prose-neutral dark:!prose-invert max-w-none prose-img:rounded-lg"
       >
         <slot />
