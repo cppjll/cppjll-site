@@ -7,14 +7,13 @@ import { Calendar } from "lucide-react";
 
 <a
   id={event.slug}
-  class=`card ${soonest && 'sm:card-side'} w-full border sm:hover:scale-[1.02] transition-all break-inside-avoid-column`
+  class=`${soonest && 'sm:card-side'} w-full border rounded-lg sm:hover:scale-[1.02] transition-all break-inside-avoid-column`
   href={`/events/${event.slug}`}
 >
   <figure class=`${soonest && 'sm:max-w-sm'}`>
     {
       event.image && (
         <Image
-          transition:name={event.slug}
           src={`${API_URL}/assets/${event.image}?width=512`}
           alt={event.title}
           width="512"
