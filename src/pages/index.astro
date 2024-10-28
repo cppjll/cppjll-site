@@ -12,14 +12,14 @@ import { readFiles, readItems } from "@directus/sdk";
 import { DateTime } from "luxon";
 import BannerCarousel from "@/components/BannerCarousel";
 
-const banner_photos = await directus.request(
-  readFiles({
-    fields: ["*"],
-    filter: {
-      folder: "214085bf-4479-41f4-995b-80d39a148182",
-    },
-  })
-);
+// const banner_photos = await directus.request(
+//   readFiles({
+//     fields: ["*"],
+//     filter: {
+//       folder: "214085bf-4479-41f4-995b-80d39a148182",
+//     },
+//   })
+// );
 
 const events = await directus.request(
   readItems("events", {
@@ -49,7 +49,7 @@ const board = await directus.request(
   })
 );
 
-console.log(banner_photos);
+// console.log(banner_photos);
 ---
 
 <HomeLayout title="CPP Japanese Language Learners">

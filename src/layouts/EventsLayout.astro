@@ -96,7 +96,6 @@ import BannerCarousel from "@/components/BannerCarousel";
         {
           event.image && (
             <Image
-              transition:name={event.slug}
               src={`${API_URL}/assets/${event.image}?width=512`}
               width={512}
               height={512}
