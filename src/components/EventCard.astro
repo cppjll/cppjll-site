@@ -7,7 +7,7 @@ import { Calendar } from "lucide-react";
 
 <a
   id={event.slug}
-  class=`${soonest && 'sm:card-side'} w-full border rounded-lg sm:hover:scale-[1.02] transition-all break-inside-avoid-column`
+  class=`card ${soonest && 'sm:card-side'} w-full border rounded-lg sm:hover:scale-[1.02] transition-all break-inside-avoid-column`
   href={`/events/${event.slug}`}
 >
   <figure class=`${soonest && 'sm:max-w-sm'}`>
