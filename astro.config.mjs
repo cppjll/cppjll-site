@@ -1,4 +1,8 @@
-import { defineConfig, passthroughImageService } from "astro/config";
+import {
+  defineConfig,
+  passthroughImageService,
+  sharpImageService,
+} from "astro/config";
 import tailwind from "@astrojs/tailwind";
 import react from "@astrojs/react";
 
@@ -10,8 +14,7 @@ export default defineConfig({
   integrations: [react(), tailwind(), sitemap()],
 
   image: {
-    domains: ["https://api.cpp-jll.com"],
-    service: passthroughImageService(),
+    domains: ["api.cpp-jll.com"],
   },
 
   output: "static",
