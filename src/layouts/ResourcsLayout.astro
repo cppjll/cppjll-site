@@ -1,0 +1,146 @@
+---
+import "../global.css";
+import Footer from "../components/Footer.astro";
+import { Image } from "astro:assets";
+import icon from "/favicon.ico";
+import { ViewTransitions } from "astro:transitions";
+import { slide } from "astro:transitions";
+import Navbar from "@/components/Navbar.astro";
+const { resource } = Astro.props;
+import { API_URL } from "@/lib/directus";
+import { Calendar, Clock, MapPin } from "lucide-react";
+import BannerCarousel from "@/components/BannerCarousel";
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{resource.title} - CPP Japanese Language Learners</title>
+    <link rel="icon" href={icon} type="image/x-icon" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=DM+Sans&family=DM+Serif+Display&display=swap"
+    />
+    <meta
+      property="og:title"
+      content=`${resource.title} - CPP Japanese Language Learners`
+    />
+    <meta property="og:description" content={resource.description} />
+    <meta
+      property="og:image"
+      content={`${API_URL}/assets/${resource.image}?width=512`}
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="theme-color" content="#204063" />
+    <!-- Cloudflare Web Analytics -->
+    <script
+      defer
+      src="https://static.cloudflareinsights.com/beacon.min.js"
+      data-cf-beacon='{"token": "3882184c8c9f429bb3bb04e4f5b4b669"}'></script>
+    <!-- End Cloudflare Web Analytics -->
+    <script is:inline>
+      function setDarkMode(document) {
+        const getThemePreference = () => {
+          if (
+            typeof localStorage !== "undefined" &&
+            localStorage.getItem("theme")
+          ) {
+            return localStorage.getItem("theme");
+          }
+          return window.matchMedia("(prefers-color-scheme: dark)").matches
+            ? "dark"
+            : "theme-light";
+        };
+        const isDark = getThemePreference() === "dark";
+        document.documentElement.classList[isDark ? "add" : "remove"]("dark");
+
+        if (typeof localStorage !== "undefined") {
+          const observer = new MutationObserver(() => {
+            const isDark = document.documentElement.classList.contains("dark");
+            localStorage.setItem("theme", isDark ? "dark" : "theme-light");
+          });
+          observer.observe(document.documentElement, {
+            attributes: true,
+            attributeFilter: ["class"],
+          });
+        }
+      }
+
+      setDarkMode(document);
+
+      document.addEventListener("astro:before-swap", (ev) => {
+        // Pass the incoming document to set the theme on it
+        setDarkMode(ev.newDocument);
+      });
+    </script>
+    <ViewTransitions />
+  </head>
+  <body>
+    <Navbar />
+    <div
+      class="flex flex-col mb-16 px-4 mx-6 min-h-screen md:max-w-4xl md:mx-auto"
+    >
+      <div class="breadcrumbs my-4 overflow-ellipsis">
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href={`/resources#${resource.slug}`}>Resources</a></li>
+          <li>{resource.title}</li>
+        </ul>
+      </div>
+      <div
+        class="flex flex-col md:flex-row md:justify-between w-full pb-6 border-b md:h-64"
+      >
+        {
+          resource.image && (
+            <Image
+              src={`${API_URL}/assets/${resource.image}?width=512`}
+              width={512}
+              height={512}
+              alt={resource.title}
+              class="md:hidden rounded-xl mb-6"
+            />
+          )
+        }
+        <div class="flex flex-col justify-between h-full">
+          <div class="prose !prose-neutral dark:!prose-invert max-w-xl">
+            <h1 class="font-display">
+              {resource.title}
+            </h1>
+
+            <p>
+              {resource.description}
+            </p>
+          </div>
+          <div class="flex flex-col gap-2 not-prose">
+            <div class="flex flex-row items-center gap-2">
+              <Calendar className="h-4 w-4" />
+              <p>{new Date(resource.date_created).toLocaleDateString()}</p>
+            </div>
+          </div>
+        </div>
+        {
+          resource.image && (
+            <Image
+              src={`${API_URL}/assets/${resource.image}?width=512`}
+              alt={resource.title}
+              transition:name={resource.slug}
+              width={512}
+              height={512}
+              class="hidden md:flex rounded-xl w-auto"
+            />
+          )
+        }
+      </div>
+      <!-- i have no idea why the important is needed here but it only works with it-->
+      <article
+        class="prose !prose-neutral dark:!prose-invert max-w-none prose-img:rounded-lg"
+      >
+        <slot />
+      </article>
+    </div>
+    <Footer />
+  </body>
+</html>

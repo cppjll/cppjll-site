@@ -12,7 +12,11 @@ export default function NavHamburger() {
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <Button className="md:hidden absolute right-4 top-2" variant="ghost" aria-label="Open hamburger menu">
+        <Button
+          className="md:hidden absolute right-4 top-2"
+          variant="ghost"
+          aria-label="Open hamburger menu"
+        >
           <Menu />
         </Button>
       </SheetTrigger>
@@ -29,6 +33,9 @@ export default function NavHamburger() {
           </a>
           <a className={buttonVariants({ variant: "ghost" })} href="/board">
             Board
+          </a>
+          <a className={buttonVariants({ variant: "ghost" })} href="/resources">
+            Resources
           </a>
         </div>
       </SheetContent>
