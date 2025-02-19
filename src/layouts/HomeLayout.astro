@@ -8,9 +8,7 @@ import HomeNavbar from "../components/HomeNavbar.astro";
 const { title } = Astro.props;
 ---
 
-<!-- There are two layouts cus I forgot props existed lol -->
- <!-- After build there's no difference but might be worth cleaning up in the future -->
-
+<!-- There are two layouts cus I forgot props existed lol --><!-- After build there's no difference but might be worth cleaning up in the future -->
 <html lang="en">
   <head>
     <meta charset="utf-8" />
@@ -21,6 +19,12 @@ const { title } = Astro.props;
     />
     <link rel="icon" href={icon} type="image/x-icon" />
     <link rel="sitemap" href="/sitemap-index.xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=DM+Sans&family=DM+Serif+Display&display=swap"
+    />
     <title>{title}</title>
     <meta property="og:title" content={title} />
     <meta
@@ -29,55 +33,59 @@ const { title } = Astro.props;
     />
     <meta property="og:image" content={bun.src} />
     <meta name="theme-color" content="#204063" />
-    <ViewTransitions />
-    <script
-      src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"
-    ></script>
-    <!-- Cloudflare Web Analytics -->
-    <script
-      defer
-      src="https://static.cloudflareinsights.com/beacon.min.js"
-      data-cf-beacon='{"token": "3882184c8c9f429bb3bb04e4f5b4b669"}'></script>
-    <!-- End Cloudflare Web Analytics -->
-    <script is:inline>
-      function setDarkMode(document) {
-        const getThemePreference = () => {
-          if (
-            typeof localStorage !== "undefined" &&
-            localStorage.getItem("theme")
-          ) {
-            return localStorage.getItem("theme");
-          }
-          return window.matchMedia("(prefers-color-scheme: dark)").matches
-            ? "dark"
-            : "theme-light";
-        };
-        const isDark = getThemePreference() === "dark";
-        document.documentElement.classList[isDark ? "add" : "remove"]("dark");
-
-        if (typeof localStorage !== "undefined") {
-          const observer = new MutationObserver(() => {
-            const isDark = document.documentElement.classList.contains("dark");
-            localStorage.setItem("theme", isDark ? "dark" : "theme-light");
-          });
-          observer.observe(document.documentElement, {
-            attributes: true,
-            attributeFilter: ["class"],
-          });
-        }
-      }
-
-      setDarkMode(document);
-
-      document.addEventListener("astro:before-swap", (ev) => {
-        // Pass the incoming document to set the theme on it
-        setDarkMode(ev.newDocument);
-      });
-    </script>
   </head>
+
+  <ViewTransitions />
+  <script
+    src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"
+  ></script>
+  <!-- Cloudflare Web Analytics -->
+  <script
+    defer
+    src="https://static.cloudflareinsights.com/beacon.min.js"
+    data-cf-beacon='{"token": "3882184c8c9f429bb3bb04e4f5b4b669"}'></script>
+  <!-- End Cloudflare Web Analytics -->
+  <script is:inline>
+    function setDarkMode(document) {
+      const getThemePreference = () => {
+        if (
+          typeof localStorage !== "undefined" &&
+          localStorage.getItem("theme")
+        ) {
+          return localStorage.getItem("theme");
+        }
+        return window.matchMedia("(prefers-color-scheme: dark)").matches
+          ? "dark"
+          : "theme-light";
+      };
+      const isDark = getThemePreference() === "dark";
+      document.documentElement.classList[isDark ? "add" : "remove"]("dark");
+
+      if (typeof localStorage !== "undefined") {
+        const observer = new MutationObserver(() => {
+          const isDark = document.documentElement.classList.contains("dark");
+          localStorage.setItem("theme", isDark ? "dark" : "theme-light");
+        });
+        observer.observe(document.documentElement, {
+          attributes: true,
+          attributeFilter: ["class"],
+        });
+      }
+    }
+
+    setDarkMode(document);
+
+    document.addEventListener("astro:before-swap", (ev) => {
+      // Pass the incoming document to set the theme on it
+      setDarkMode(ev.newDocument);
+    });
+  </script>
+
   <body>
     <HomeNavbar />
     <slot />
     <Footer />
   </body>
+
+
 </html>

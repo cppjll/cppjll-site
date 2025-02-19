@@ -1,21 +1,21 @@
 ---
 import { Image } from "astro:assets";
-const { event, soonest } = Astro.props;
+const { resource, soonest } = Astro.props;
 import { API_URL } from "@/lib/directus";
 import { Calendar } from "lucide-react";
 ---
 
 <a
-  id={event.slug}
+  id={resource.slug}
   class=`card ${soonest && 'sm:card-side'} w-full border rounded-lg sm:hover:scale-[1.02] transition-all break-inside-avoid-column`
-  href={`/events/${event.slug}`}
+  href={`/resources/${resource.slug}`}
 >
   <figure class=`${soonest && 'sm:max-w-sm'}`>
     {
-      event.image && (
+      resource.image && (
         <Image
-          src={`${API_URL}/assets/${event.image}?width=512`}
-          alt={event.title}
+          src={`${API_URL}/assets/${resource.image}?width=512`}
+          alt={resource.title}
           width="512"
           height="512"
           class="object-scale-down mx-auto rounded-lg"
@@ -25,12 +25,12 @@ import { Calendar } from "lucide-react";
   </figure>
   <div class="py-4 px-6">
     <h2 class="text-3xl font-bold mb-2 font-display">
-      {event.title}
+      {resource.title}
     </h2>
     <div class="flex flex-row items-center gap-2 mb-2">
       <Calendar className="h-4 w-4" />
-      {new Date(event.start_datetime).toLocaleDateString()}
+      {new Date(resource.date_created).toLocaleDateString()}
     </div>
-    <p class="mb-4">{event.description}</p>
+    <p class="mb-4">{resource.description}</p>
   </div>
 </a>

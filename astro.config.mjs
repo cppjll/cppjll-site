@@ -1,21 +1,21 @@
-import { defineConfig, passthroughImageService } from 'astro/config';
+import {
+  defineConfig,
+  passthroughImageService,
+  sharpImageService,
+} from "astro/config";
 import tailwind from "@astrojs/tailwind";
-import react from '@astrojs/react';
+import react from "@astrojs/react";
 
 import sitemap from "@astrojs/sitemap";
 
-import cloudflare from "@astrojs/cloudflare";
-
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://cpp-jll.com',
+  site: "https://cpp-jll.com",
   integrations: [react(), tailwind(), sitemap()],
 
   image: {
-    domains: ["https://api.cpp-jll.com"],
-    service: passthroughImageService(),
+    domains: ["api.cpp-jll.com"],
   },
 
-  output: "server",
-  adapter: cloudflare()
+  output: "static",
 });

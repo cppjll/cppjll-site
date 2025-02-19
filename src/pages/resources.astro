@@ -1,0 +1,31 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import { directus } from "@/lib/directus";
+import { readItems } from "@directus/sdk";
+import ResourceCard from "@/components/ResourceCard.astro";
+
+const resources = await directus.request(
+  readItems("resources", {
+    fields: ["*"],
+    sort: ["-date_created"],
+    filter: import.meta.env.DEV // Only show published events in prod. Drafted events can be previewed in localhost.
+      ? { status: { _in: ["draft", "published"] } }
+      : { status: "published" },
+  })
+);
+---
+
+<Layout title="Resources - CPP Japanese Language Learners">
+  <div class="mb-16 md:max-w-4xl px-4 mx-6 md:mx-auto flex flex-col">
+    <div class="breadcrumbs my-4">
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li>Resources</li>
+      </ul>
+    </div>
+    <h1 class="text-5xl font-bold mb-4 font-display">Resources</h1>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      {resources.map((resource) => <ResourceCard resource={resource} />)}
+    </div>
+  </div></Layout
+>

@@ -6,7 +6,7 @@ import icon from "/favicon.ico";
 import { ViewTransitions } from "astro:transitions";
 import { slide } from "astro:transitions";
 import Navbar from "@/components/Navbar.astro";
-const { event } = Astro.props;
+const { resource } = Astro.props;
 import { API_URL } from "@/lib/directus";
 import { Calendar, Clock, MapPin } from "lucide-react";
 import BannerCarousel from "@/components/BannerCarousel";
@@ -16,7 +16,7 @@ import BannerCarousel from "@/components/BannerCarousel";
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{event.title} - CPP Japanese Language Learners</title>
+    <title>{resource.title} - CPP Japanese Language Learners</title>
     <link rel="icon" href={icon} type="image/x-icon" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -26,12 +26,12 @@ import BannerCarousel from "@/components/BannerCarousel";
     />
     <meta
       property="og:title"
-      content=`${event.title} - CPP Japanese Language Learners`
+      content=`${resource.title} - CPP Japanese Language Learners`
     />
-    <meta property="og:description" content={event.description} />
+    <meta property="og:description" content={resource.description} />
     <meta
       property="og:image"
-      content={`${API_URL}/assets/${event.image}?width=512`}
+      content={`${API_URL}/assets/${resource.image}?width=512`}
     />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="theme-color" content="#204063" />
@@ -86,20 +86,20 @@ import BannerCarousel from "@/components/BannerCarousel";
       <div class="breadcrumbs my-4 overflow-ellipsis">
         <ul>
           <li><a href="/">Home</a></li>
-          <li><a href={`/events#${event.slug}`}>Events</a></li>
-          <li>{event.title}</li>
+          <li><a href={`/resources#${resource.slug}`}>Resources</a></li>
+          <li>{resource.title}</li>
         </ul>
       </div>
       <div
         class="flex flex-col md:flex-row md:justify-between w-full pb-6 border-b md:h-64"
       >
         {
-          event.image && (
+          resource.image && (
             <Image
-              src={`${API_URL}/assets/${event.image}?width=512`}
+              src={`${API_URL}/assets/${resource.image}?width=512`}
               width={512}
               height={512}
-              alt={event.title}
+              alt={resource.title}
               class="md:hidden rounded-xl mb-6"
             />
           )
@@ -107,46 +107,26 @@ import BannerCarousel from "@/components/BannerCarousel";
         <div class="flex flex-col justify-between h-full">
           <div class="prose !prose-neutral dark:!prose-invert max-w-xl">
             <h1 class="font-display">
-              {event.title}
+              {resource.title}
             </h1>
 
             <p>
-              {event.description}
+              {resource.description}
             </p>
           </div>
           <div class="flex flex-col gap-2 not-prose">
             <div class="flex flex-row items-center gap-2">
               <Calendar className="h-4 w-4" />
-              <p>{new Date(event.start_datetime).toLocaleDateString()}</p>
-            </div>
-            <div class="flex flex-row items-center gap-2">
-              <Clock className="h-4 w-4" />
-              <p>
-                {
-                  new Date(event.start_datetime).toLocaleTimeString([], {
-                    hour: "2-digit",
-                    minute: "2-digit",
-                  })
-                } — {
-                  new Date(event.end_datetime).toLocaleTimeString([], {
-                    hour: "2-digit",
-                    minute: "2-digit",
-                  })
-                }
-              </p>
-            </div>
-            <div class="flex flex-row items-center gap-2">
-              {(<MapPin className="h-4 w-4" />)}
-              <p>{event.location}</p>
+              <p>{new Date(resource.date_created).toLocaleDateString()}</p>
             </div>
           </div>
         </div>
         {
-          event.image && (
+          resource.image && (
             <Image
-              src={`${API_URL}/assets/${event.image}?width=512`}
-              alt={event.title}
-              transition:name={event.slug}
+              src={`${API_URL}/assets/${resource.image}?width=512`}
+              alt={resource.title}
+              transition:name={resource.slug}
               width={512}
               height={512}
               class="hidden md:flex rounded-xl w-auto"
@@ -159,21 +139,6 @@ import BannerCarousel from "@/components/BannerCarousel";
         class="prose !prose-neutral dark:!prose-invert max-w-none prose-img:rounded-lg"
       >
         <slot />
-        <!-- <div class=`${event.slidesEmbed ? '' : 'hidden'}`>
-          <h2>Event Presentation</h2>
-          <div class="aspect-video">
-            <iframe
-              src={event.slidesEmbed}
-              width="100%"
-              height="100%"
-              allowfullscreen="true"></iframe>
-          </div>
-          <a
-            class="btn btn-outline btn-accent w-full mt-4"
-            href={event.slidesEmbed}
-            target="_blank">Open Slides</a
-          >
-        </div> -->
       </article>
     </div>
     <Footer />
