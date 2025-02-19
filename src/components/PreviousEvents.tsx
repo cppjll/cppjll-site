@@ -27,6 +27,10 @@ import { EventCard } from "./EventCard";
 
 const semesters = [
   {
+    value: "Spring2025",
+    label: "Spring 2025"
+  },
+  {
     value: "Fall2024",
     label: "Fall 2024",
   },
@@ -42,7 +46,7 @@ const semesters = [
 
 export function PreviousEvents() {
   const [open, setOpen] = React.useState(false);
-  const [value, setValue] = React.useState("Fall2024"); // Put default semester here
+  const [value, setValue] = React.useState("Spring2025"); // Put default semester here
   const [events, setEvents] = React.useState<Record<string, any>[]>([]);
 
   React.useEffect(() => {
@@ -97,7 +101,7 @@ export function PreviousEvents() {
                   key={semester.value}
                   value={semester.value}
                   onSelect={(currentValue) => {
-                    setValue(currentValue === value ? "Fall2024" : currentValue); // Put default semester here
+                    setValue(currentValue === value ? "Spring2025" : currentValue); // Put default semester here
                     setOpen(false);
                   }}
                 >

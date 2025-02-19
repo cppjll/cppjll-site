@@ -15,11 +15,6 @@ const events = await directus.request(
     sort: ['-start_datetime'],
     filter: {
       _and: [
-        {
-          semester: {
-            _eq: 'Fall2024',
-          },
-        },
         import.meta.env.DEV // Only show published events in prod. Drafted events can be previewed in localhost.
           ? { status: { _in: ['draft', 'published'] } }
           : { status: 'published' },
