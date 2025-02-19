@@ -22,13 +22,13 @@ import BannerCarousel from "@/components/BannerCarousel";
 // );
 
 const events = await directus.request(
-  readItems("events", {
-    fields: ["*"],
-    sort: ["-start_datetime"],
+  readItems('events', {
+    fields: ['*'],
+    sort: ['-start_datetime'],
     limit: 10,
     filter: import.meta.env.DEV // Only show published events in prod. Drafted events can be previewed in localhost.
-      ? { status: { _in: ["draft", "published"] } }
-      : { status: "published" },
+      ? { status: { _in: ['draft', 'published'] } }
+      : { status: 'published' },
   })
 );
 
@@ -37,7 +37,7 @@ const featuredEvent = events
   .filter(
     (event) =>
       DateTime.fromISO(event.start_datetime, {
-        zone: "America/Los_Angeles",
+        zone: 'America/Los_Angeles',
       }).toUTC() > now
   )
   .slice(-1)[0];
