@@ -15,14 +15,11 @@ export const EventCard = ({ event, soonest }: EventCardProps) => {
       <figure className={`${soonest && "sm:max-w-sm"}`}>
         {event.image && (
           <img
-            src={`${API_URL}/assets/${event.image}?width=512`}
+            src={`${API_URL}/assets/${event.image}?width=512&format=webp`}
             alt={event.title}
             width="512"
             height="512"
             className={`object-scale-down mx-auto rounded-lg`}
-            style={{
-              viewTransitionName: event.slug, // prob needs more work elsewhere to work
-            }}
           />
         )}
       </figure>
