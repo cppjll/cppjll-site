@@ -1,6 +1,6 @@
 ---
 import { Image } from "astro:assets";
-const { event, soonest } = Astro.props;
+const { event, soonest, eager } = Astro.props;
 import { API_URL } from "@/lib/directus";
 import { Calendar } from "lucide-react";
 ---
@@ -19,6 +19,7 @@ import { Calendar } from "lucide-react";
           width="512"
           height="512"
           class="object-scale-down mx-auto rounded-lg"
+          loading={eager ? "eager" : "lazy"}
         />
       )
     }

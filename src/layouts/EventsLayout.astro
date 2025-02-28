@@ -4,12 +4,10 @@ import Footer from "../components/Footer.astro";
 import { Image } from "astro:assets";
 import icon from "/favicon.ico";
 import { ViewTransitions } from "astro:transitions";
-import { slide } from "astro:transitions";
 import Navbar from "@/components/Navbar.astro";
 const { event } = Astro.props;
 import { API_URL } from "@/lib/directus";
 import { Calendar, Clock, MapPin } from "lucide-react";
-import BannerCarousel from "@/components/BannerCarousel";
 ---
 
 <html lang="en">
@@ -143,13 +141,12 @@ import BannerCarousel from "@/components/BannerCarousel";
         </div>
         {
           event.image && (
-            <Image
-              src={`${API_URL}/assets/${event.image}?width=512`}
+            <img
+              src={`${API_URL}/assets/${event.image}?width=512&format=webp`}
               alt={event.title}
               transition:name={event.slug}
-              width={512}
-              height={512}
               class="hidden md:flex rounded-xl w-auto"
+              loading="eager"
             />
           )
         }

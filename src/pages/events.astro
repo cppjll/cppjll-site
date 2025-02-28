@@ -7,10 +7,10 @@ import { readItems } from "@directus/sdk";
 import { DateTime } from "luxon";
 
 // TODO: Add pagination
-import { PreviousEvents } from '@/components/PreviousEvents';
+import { PreviousEvents } from "@/components/PreviousEvents";
 
 const events = await directus.request(
-readItems("events", {
+  readItems("events", {
     fields: ["*"],
     sort: ["-start_datetime"],
     filter: import.meta.env.DEV // Only show published events in prod. Drafted events can be previewed in localhost.
@@ -64,13 +64,13 @@ const upcomingEvents = events.filter(
       <div
         class={`${upcomingEvents.length != 0 ? "flex flex-col items-center" : "hidden"} sm:hidden`}
       >
-        {upcomingEvents.map((event) => <EventCard event={event} />)}
+        {upcomingEvents.map((event) => <EventCard event={event} eager />)}
       </div>
       <!-- One upcoming event case -->
       {
         upcomingEvents.length === 1 && (
           <div class={`hidden sm:flex flex-col items-center`}>
-            <EventCard event={upcomingEvents[0]} soonest />
+            <EventCard event={upcomingEvents[0]} soonest eager />
           </div>
         )
       }
@@ -79,7 +79,7 @@ const upcomingEvents = events.filter(
         upcomingEvents.length > 1 && (
           <div class={`hidden sm:grid grid-cols-2 gap-4`}>
             {upcomingEvents
-              .map((event) => <EventCard event={event} />)
+              .map((event) => <EventCard event={event} eager />)
               .reverse()}
           </div>
         )
@@ -87,11 +87,7 @@ const upcomingEvents = events.filter(
     </div>
     <!-- Previous Events -->
     <div class="flex flex-col my-6">
-      <h1
-        class="text-5xl font-bold mb-4 font-display"
-      >
-        Previous Events
-      </h1>
+      <h1 class="text-5xl font-bold mb-4 font-display">Previous Events</h1>
       <div class="mb-4">
         <PreviousEvents client:load />
       </div>
