@@ -28,7 +28,7 @@ import { EventCard } from "./EventCard";
 const semesters = [
   {
     value: "Spring2025",
-    label: "Spring 2025"
+    label: "Spring 2025",
   },
   {
     value: "Fall2024",
@@ -46,34 +46,67 @@ const semesters = [
 
 export function PreviousEvents() {
   const [open, setOpen] = React.useState(false);
-  const [value, setValue] = React.useState("Spring2025"); // Put default semester here
+  const [value, setValue] = React.useState<string>();
   const [events, setEvents] = React.useState<Record<string, any>[]>([]);
 
-  React.useEffect(() => {
-    const fetchEvents = async () => {
-      const fetchedEvents = await directus.request(
-        readItems("events", {
-          fields: ["*"],
-          sort: ["-start_datetime"],
-          filter: {
-            _and: [
-              {
-                semester: {
-                  _eq: value,
-                },
+  // event fetching
+  const fetchEvents = async (semester: string) => {
+    const fetchedEvents = await directus.request(
+      readItems("events", {
+        fields: ["*"],
+        sort: ["-start_datetime"],
+        filter: {
+          _and: [
+            {
+              semester: {
+                _eq: semester,
               },
-              import.meta.env.DEV // Only show published events in prod. Drafted events can be previewed in localhost.
-                ? { status: { _in: ["draft", "published"] } }
-                : { status: "published" },
-            ],
-          },
-        })
-      );
-      setEvents(fetchedEvents);
-    };
+            },
+            import.meta.env.DEV
+              ? { status: { _in: ["draft", "published"] } }
+              : { status: "published" },
+          ],
+        },
+      })
+    );
 
-    fetchEvents();
+    return fetchedEvents;
+  };
+
+  const handleSemesterChange = (value: string) => {
+    setValue(value);
+
+    const url = new URL(location.href);
+    url.searchParams.set("semester", value);
+    history.pushState({}, "", url);
+  };
+
+  // initial effect on render, gets semester from url if it exists, otherwise defaults to first item in semesters array
+  React.useEffect(() => {
+    const searchParams = new URLSearchParams(location.search);
+    const semesterParam = searchParams.get("semester");
+    const semester = semesterParam || semesters[0]?.value;
+    setValue(semester);
+  }, []);
+
+  // fetch events when value changes
+  React.useEffect(() => {
+    if (!value) return;
+
+    fetchEvents(value).then(setEvents);
   }, [value]);
+
+  // effect for when events change, scrolls to corresponding event if hash is present
+  React.useEffect(() => {
+    if (!events.length) return;
+    const hash = location.hash;
+    if (hash) {
+      const element = document.getElementById(hash.slice(1));
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  }, [events]);
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -101,7 +134,7 @@ export function PreviousEvents() {
                   key={semester.value}
                   value={semester.value}
                   onSelect={(currentValue) => {
-                    setValue(currentValue === value ? "Spring2025" : currentValue); // Put default semester here
+                    handleSemesterChange(currentValue);
                     setOpen(false);
                   }}
                 >
