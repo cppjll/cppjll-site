@@ -33,12 +33,13 @@ const { title } = Astro.props;
     />
     <meta property="og:image" content={bun.src} />
     <meta name="theme-color" content="#204063" />
-  </head>
+    <script
+      src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"
+    ></script></head
+  >
 
-  <ViewTransitions />
-  <script
-    src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"
-  ></script>
+  <!-- <ViewTransitions /> -->
+
   <!-- Cloudflare Web Analytics -->
   <script
     defer
@@ -86,6 +87,4 @@ const { title } = Astro.props;
     <slot />
     <Footer />
   </body>
-
-
 </html>
