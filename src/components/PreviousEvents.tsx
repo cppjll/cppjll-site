@@ -87,16 +87,26 @@ export function PreviousEvents() {
     const semesterParam = searchParams.get("semester");
     const semester = semesterParam || semesters[0]?.value;
     setValue(semester);
-
-    fetchEvents(semester).then(setEvents);
   }, []);
 
-  // fetch events when value changes, only runs if value is set to avoid race condition
+  // fetch events when value changes
   React.useEffect(() => {
     if (!value) return;
 
     fetchEvents(value).then(setEvents);
   }, [value]);
+
+  // effect for when events change, scrolls to corresponding event if hash is present
+  React.useEffect(() => {
+    if (!events.length) return;
+    const hash = location.hash;
+    if (hash) {
+      const element = document.getElementById(hash.slice(1));
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  }, [events]);
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
