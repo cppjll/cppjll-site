@@ -158,7 +158,7 @@ export function PreviousEvents() {
         </Command>
       </PopoverContent>
       {/* Single column on smaller devices, two column grid on larger screens */}
-      <div className="sm:hidden">
+      <div className="sm:hidden flex flex-col gap-4">
         {events
           .filter(
             (event) =>
@@ -174,7 +174,7 @@ export function PreviousEvents() {
           ))}
       </div>
       <div className="hidden sm:visible sm:grid sm:grid-cols-2 sm:gap-4 my-4">
-        <div className="mb-4">
+        <div className="flex flex-col gap-4">
           {events
             .filter((event, index) => {
               const pastEvent =
@@ -193,7 +193,7 @@ export function PreviousEvents() {
               />
             ))}
         </div>
-        <div className="mb-4">
+        <div className="flex flex-col gap-4">
           {events
             .filter((event, index) => {
               const pastEvent =
