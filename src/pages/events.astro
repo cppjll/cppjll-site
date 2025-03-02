@@ -104,7 +104,7 @@ console.log(eventsBySemester);
           semesters.map((semester) => (
             <div
               id={`events-${semester.value}`}
-              class={`events grid grid-cols-1 sm:grid-cols-2 sm:gap-4 my-6`}
+              class={`events grid grid-cols-1 sm:grid-cols-2 gap-4 my-6`}
               style={`display: ${semester.value === semesters[0].value ? "grid" : "none"}`}
             >
               <PreviousEventsRenderer
