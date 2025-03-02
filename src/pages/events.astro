@@ -1,5 +1,4 @@
 ---
-import { slide } from "astro:transitions";
 import EventCard from "../components/EventCard.astro";
 import Layout from "../layouts/Layout.astro";
 import { directus } from "@/lib/directus";
@@ -7,7 +6,8 @@ import { readItems } from "@directus/sdk";
 import { DateTime } from "luxon";
 
 // TODO: Add pagination
-import { PreviousEvents } from "@/components/PreviousEvents";
+import SemesterSelector from "@/components/SemesterSelector";
+import PreviousEventsRenderer from "@/components/PreviousEventsRenderer";
 
 const events = await directus.request(
   readItems("events", {
@@ -19,30 +19,40 @@ const events = await directus.request(
   })
 );
 
-// const upcomingEvents = await directus.request(
-//   readItems('events', {
-//     fields: ['*'],
-//     filter: {
-//       _and: [
-//         {
-//           end_datetime: {
-//             _gt: DateTime.now().toUTC(),
-//           },
-//         },
-//         import.meta.env.DEV // Only show published events in prod. Drafted events can be previewed in localhost.
-//           ? { status: { _in: ['draft', 'published'] } }
-//           : { status: 'published' },
-//       ],
-//     },
-//   })
-// );
-
 const upcomingEvents = events.filter(
   (event) =>
     DateTime.fromISO(event.end_datetime, {
       zone: "America/Los_Angeles",
     }).toUTC() > DateTime.now().toUTC()
 );
+
+const semesters = [
+  {
+    name: "Spring 2025",
+    value: "Spring2025",
+  },
+  {
+    name: "Fall 2024",
+    value: "Fall2024",
+  },
+  {
+    name: "Spring 2024",
+    value: "Spring2024",
+  },
+  {
+    name: "Fall 2023",
+    value: "Fall2023",
+  },
+];
+
+const eventsBySemester: Record<string, any[]> = {};
+for (const semester of semesters) {
+  eventsBySemester[semester.value] = events.filter(
+    (event) => event.semester === semester.value
+  );
+}
+
+console.log(eventsBySemester);
 ---
 
 <Layout title="Events - CPP Japanese Language Learners">
@@ -88,8 +98,21 @@ const upcomingEvents = events.filter(
     <!-- Previous Events -->
     <div class="flex flex-col my-6">
       <h1 class="text-5xl font-bold mb-4 font-display">Previous Events</h1>
-      <div class="mb-4">
-        <PreviousEvents client:load />
+      <SemesterSelector semesters={semesters} client:load />
+      <div class="flex">
+        {
+          semesters.map((semester) => (
+            <div
+              id={`events-${semester.value}`}
+              class={`events grid grid-cols-1 sm:grid-cols-2 sm:gap-4 my-6`}
+              style={`display: ${semester.value === semesters[0].value ? "grid" : "none"}`}
+            >
+              <PreviousEventsRenderer
+                events={eventsBySemester[semester.value]}
+              />
+            </div>
+          ))
+        }
       </div>
     </div>
   </div>
