@@ -29,7 +29,7 @@ export const EventCard = ({ event, soonest }: EventCardProps) => {
           <Calendar className="h-4 w-4" />
           {new Date(event.start_datetime).toLocaleDateString()}
         </div>
-        <p className="mb-4 h-14">{event.description}</p>
+        <p className="mb-4 md:min-h-20">{event.description}</p>
       </div>
     </a>
   );
