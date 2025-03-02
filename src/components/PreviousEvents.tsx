@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
-import * as React from "react";
-import { Check, ChevronsUpDown } from "lucide-react";
+import * as React from 'react';
+import { Check, ChevronsUpDown } from 'lucide-react';
 
-import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
+import { cn } from '@/lib/utils';
+import { Button } from '@/components/ui/button';
 import {
   Command,
   CommandEmpty,
@@ -12,35 +12,35 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
-} from "@/components/ui/command";
+} from '@/components/ui/command';
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/components/ui/popover";
+} from '@/components/ui/popover';
 
-import { directus } from "@/lib/directus";
-import { readItems } from "@directus/sdk";
+import { directus } from '@/lib/directus';
+import { readItems } from '@directus/sdk';
 
-import { DateTime } from "luxon";
-import { EventCard } from "./EventCard";
+import { DateTime } from 'luxon';
+import { EventCard } from './EventCard';
 
 const semesters = [
   {
-    value: "Spring2025",
-    label: "Spring 2025",
+    value: 'Spring2025',
+    label: 'Spring 2025',
   },
   {
-    value: "Fall2024",
-    label: "Fall 2024",
+    value: 'Fall2024',
+    label: 'Fall 2024',
   },
   {
-    value: "Spring2024",
-    label: "Spring 2024",
+    value: 'Spring2024',
+    label: 'Spring 2024',
   },
   {
-    value: "Fall2023",
-    label: "Fall 2023",
+    value: 'Fall2023',
+    label: 'Fall 2023',
   },
 ];
 
@@ -52,9 +52,9 @@ export function PreviousEvents() {
   // event fetching
   const fetchEvents = async (semester: string) => {
     const fetchedEvents = await directus.request(
-      readItems("events", {
-        fields: ["*"],
-        sort: ["-start_datetime"],
+      readItems('events', {
+        fields: ['*'],
+        sort: ['-start_datetime'],
         filter: {
           _and: [
             {
@@ -63,8 +63,8 @@ export function PreviousEvents() {
               },
             },
             import.meta.env.DEV
-              ? { status: { _in: ["draft", "published"] } }
-              : { status: "published" },
+              ? { status: { _in: ['draft', 'published'] } }
+              : { status: 'published' },
           ],
         },
       })
@@ -77,14 +77,14 @@ export function PreviousEvents() {
     setValue(value);
 
     const url = new URL(location.href);
-    url.searchParams.set("semester", value);
-    history.pushState({}, "", url);
+    url.searchParams.set('semester', value);
+    history.pushState({}, '', url);
   };
 
   // initial effect on render, gets semester from url if it exists, otherwise defaults to first item in semesters array
   React.useEffect(() => {
     const searchParams = new URLSearchParams(location.search);
-    const semesterParam = searchParams.get("semester");
+    const semesterParam = searchParams.get('semester');
     const semester = semesterParam || semesters[0]?.value;
     setValue(semester);
   }, []);
@@ -103,13 +103,16 @@ export function PreviousEvents() {
     if (hash) {
       const element = document.getElementById(hash.slice(1));
       if (element) {
-        element.scrollIntoView({ behavior: "smooth" });
+        element.scrollIntoView({ behavior: 'smooth' });
       }
     }
   }, [events]);
 
   return (
-    <Popover open={open} onOpenChange={setOpen}>
+    <Popover
+      open={open}
+      onOpenChange={setOpen}
+    >
       <PopoverTrigger asChild>
         <Button
           variant="outline"
@@ -140,11 +143,11 @@ export function PreviousEvents() {
                 >
                   <Check
                     className={cn(
-                      "mr-2 h-4 w-4",
+                      'mr-2 h-4 w-4',
                       value === semester.value ||
                         (!value && semester.value === semesters[0]?.value)
-                        ? "opacity-100"
-                        : "opacity-0"
+                        ? 'opacity-100'
+                        : 'opacity-0'
                     )}
                   />
                   {semester.label}
@@ -155,17 +158,60 @@ export function PreviousEvents() {
         </Command>
       </PopoverContent>
       {/* Single column on smaller devices, two column grid on larger screens */}
-      <div className="flex flex-col sm:grid sm:grid-cols-2 sm:gap-4 my-6">
+      <div className="sm:hidden">
         {events
           .filter(
             (event) =>
               DateTime.fromISO(event.end_datetime, {
-                zone: "America/Los_Angeles",
+                zone: 'America/Los_Angeles',
               }).toUTC() < DateTime.now().toUTC()
           )
           .map((event) => (
-            <EventCard key={event.slug} event={event} />
+            <EventCard
+              key={event.slug}
+              event={event}
+            />
           ))}
+      </div>
+      <div className="hidden sm:visible sm:grid sm:grid-cols-2 sm:gap-4 my-4">
+        <div className="mb-4">
+          {events
+            .filter((event, index) => {
+              const pastEvent =
+                DateTime.fromISO(event.end_datetime, {
+                  zone: 'America/Los_Angeles',
+                }).toUTC() < DateTime.now().toUTC();
+
+              const evenIndex = index % 2 === 0;
+
+              return pastEvent && evenIndex;
+            })
+            .map((event) => (
+              <EventCard
+                key={event.slug}
+                event={event}
+              />
+            ))}
+        </div>
+        <div className="mb-4">
+          {events
+            .filter((event, index) => {
+              const pastEvent =
+                DateTime.fromISO(event.end_datetime, {
+                  zone: 'America/Los_Angeles',
+                }).toUTC() < DateTime.now().toUTC();
+
+              const oddIndex = index % 2 !== 0;
+
+              return pastEvent && oddIndex;
+            })
+            .map((event) => (
+              <EventCard
+                key={event.slug}
+                event={event}
+              />
+            ))}
+        </div>
       </div>
     </Popover>
   );
