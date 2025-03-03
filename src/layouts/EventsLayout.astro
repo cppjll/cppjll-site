@@ -145,10 +145,12 @@ import { Calendar, Clock, MapPin } from "lucide-react";
         </div>
         {
           event.image && (
-            <img
+            <Image
               src={`${API_URL}/assets/${event.image}?width=512&format=webp`}
               alt={event.title}
               transition:name={event.slug}
+              width={512}
+              height={512}
               class="hidden md:flex rounded-xl w-auto"
               loading="eager"
             />
