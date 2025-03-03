@@ -26,6 +26,37 @@ export default function SemesterSelector({ semesters }: SemesterSelectorProps) {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
+    // if semester is in url, set selectedSemester to that value
+    const url = new URL(window.location.href);
+    const semester = url.searchParams.get("semester");
+    if (semester) {
+      setSelectedSemester(semester);
+
+      // should be redundant but just in case
+      const selectedElement = document.getElementById(`events-${semester}`);
+      if (selectedElement) {
+        selectedElement.style.display = "grid";
+      }
+
+      // scroll to hash if it exists
+      const hash = window.location.hash;
+      if (hash) {
+        console.log(hash.slice(1));
+        const element = document.getElementById(hash.slice(1));
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth" });
+        }
+      }
+    }
+  }, []);
+
+  // effect handles updating url and display when selectedSemester changes
+  useEffect(() => {
+    // update url to reflect selected semester
+    const url = new URL(window.location.href);
+    url.searchParams.set("semester", selectedSemester);
+    window.history.pushState(null, "", url);
+
     document.querySelectorAll(".events").forEach((el) => {
       (el as HTMLElement).style.display = "none";
     });

@@ -48,11 +48,13 @@ const semesters = [
 const eventsBySemester: Record<string, any[]> = {};
 for (const semester of semesters) {
   eventsBySemester[semester.value] = events.filter(
-    (event) => event.semester === semester.value
+    (event) =>
+      event.semester === semester.value && !upcomingEvents.includes(event)
   );
 }
 
-console.log(eventsBySemester);
+const url = Astro.url;
+const initialSemester = url.searchParams.get("semester");
 ---
 
 <Layout title="Events - CPP Japanese Language Learners">
@@ -105,7 +107,7 @@ console.log(eventsBySemester);
             <div
               id={`events-${semester.value}`}
               class={`events grid grid-cols-1 sm:grid-cols-2 gap-4 my-6`}
-              style={`display: ${semester.value === semesters[0].value ? "grid" : "none"}`}
+              style={`display: ${semester.value === initialSemester ? "grid" : "none"}`}
             >
               <PreviousEventsRenderer
                 events={eventsBySemester[semester.value]}
