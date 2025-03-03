@@ -1,0 +1,7 @@
+---
+import EventCard from "./EventCard.astro";
+
+const { events } = Astro.props;
+---
+
+{events.map((event: any) => <EventCard key={event.slug} event={event} />)}

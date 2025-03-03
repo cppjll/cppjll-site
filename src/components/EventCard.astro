@@ -14,7 +14,7 @@ import { Calendar } from "lucide-react";
     {
       event.image && (
         <Image
-          src={`${API_URL}/assets/${event.image}?width=512`}
+          src={`${API_URL}/assets/${event.image}?width=512&format=webp`}
           alt={event.title}
           width="512"
           height="512"
@@ -25,13 +25,13 @@ import { Calendar } from "lucide-react";
     }
   </figure>
   <div class="py-4 px-6">
-    <h2 class="text-3xl font-bold mb-2 font-display">
+    <h2 class="text-3xl truncate font-bold mb-2 font-display">
       {event.title}
     </h2>
     <div class="flex flex-row items-center gap-2 mb-2">
       <Calendar className="h-4 w-4" />
       {new Date(event.start_datetime).toLocaleDateString()}
     </div>
-    <p class="mb-4">{event.description}</p>
+    <p class="mb-4 md:min-h-20">{event.description}</p>
   </div>
 </a>

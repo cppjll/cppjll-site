@@ -7,7 +7,7 @@ import { DateTime } from "luxon";
 
 // TODO: Add pagination
 import SemesterSelector from "@/components/SemesterSelector";
-import PreviousEventsRenderer from "@/components/PreviousEventsRenderer";
+import PreviousEventsRenderer from "@/components/PreviousEventsRenderer.astro";
 
 const events = await directus.request(
   readItems("events", {
