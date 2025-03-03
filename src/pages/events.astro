@@ -109,9 +109,26 @@ const initialSemester = url.searchParams.get("semester");
               class={`events grid grid-cols-1 sm:grid-cols-2 gap-4 my-6`}
               style={`display: ${semester.value === initialSemester ? "grid" : "none"}`}
             >
-              <PreviousEventsRenderer
-                events={eventsBySemester[semester.value]}
-              />
+              {/* even events */}
+              <div class="flex flex-col gap-4">
+                <PreviousEventsRenderer
+                  events={eventsBySemester[semester.value].filter(
+                    (_event, index) => {
+                      return index % 2 === 0;
+                    }
+                  )}
+                />
+              </div>
+              {/* odd events */}
+              <div class="flex flex-col gap-4">
+                <PreviousEventsRenderer
+                  events={eventsBySemester[semester.value].filter(
+                    (_event, index) => {
+                      return index % 2 !== 0;
+                    }
+                  )}
+                />
+              </div>
             </div>
           ))
         }
