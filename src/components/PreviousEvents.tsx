@@ -26,6 +26,10 @@ import { readItems } from "@directus/sdk";
 import { DateTime } from "luxon";
 import { EventCard } from "./EventCard";
 
+import { queryClient } from "@/stores/query";
+import { useStore } from "@nanostores/react";
+import { Skeleton } from "./ui/skeleton";
+
 const semesters = [
   {
     value: "Spring2025",
@@ -48,6 +52,8 @@ const semesters = [
 export function PreviousEvents() {
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState<string>();
+
+  const client = useStore(queryClient);
 
   // event fetching
   const fetchEvents = async (semester: string) => {
@@ -73,10 +79,14 @@ export function PreviousEvents() {
     return fetchedEvents;
   };
 
-  const { data: events, isPending } = useQuery({
-    queryKey: ["events", value],
-    queryFn: () => fetchEvents(value || "Spring2025"),
-  });
+  const { data: events, isPending } = useQuery(
+    {
+      queryKey: ["events", value],
+      queryFn: () => fetchEvents(value || "Spring2025"),
+      staleTime: 120000,
+    },
+    client
+  );
 
   const handleSemesterChange = (value: string) => {
     setValue(value);
@@ -106,7 +116,30 @@ export function PreviousEvents() {
     }
   }, [events]);
 
-  if (isPending) return <div>Loading...</div>;
+  if (isPending || events === undefined)
+    return (
+      <div className="flex flex-col gap-4">
+        <Skeleton className="w-40 h-10 rounded-lg" />
+        <div className="grid grid-cols-2 gap-4">
+          <div className="flex flex-col gap-4">
+            <Skeleton className="w-full h-32 rounded-lg" />
+            <Skeleton className="w-full h-60 rounded-lg" />
+            <Skeleton className="w-full h-20 rounded-lg" />
+            <Skeleton className="w-full h-32 rounded-lg" />
+            <Skeleton className="w-full h-60 rounded-lg" />
+            <Skeleton className="w-full h-20 rounded-lg" />
+          </div>
+          <div className="flex flex-col gap-4">
+            <Skeleton className="w-full h-60 rounded-lg" />
+            <Skeleton className="w-full h-20 rounded-lg" />
+            <Skeleton className="w-full h-32 rounded-lg" />
+            <Skeleton className="w-full h-60 rounded-lg" />
+            <Skeleton className="w-full h-20 rounded-lg" />
+            <Skeleton className="w-full h-32 rounded-lg" />
+          </div>
+        </div>
+      </div>
+    );
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
