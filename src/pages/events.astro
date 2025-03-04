@@ -4,8 +4,6 @@ import Layout from "../layouts/Layout.astro";
 import { directus } from "@/lib/directus";
 import { readItems } from "@directus/sdk";
 import { DateTime } from "luxon";
-
-// TODO: Add pagination
 import { PreviousEvents } from "@/components/PreviousEvents";
 
 const events = await directus.request(
@@ -17,24 +15,6 @@ const events = await directus.request(
       : { status: "published" },
   })
 );
-
-// const upcomingEvents = await directus.request(
-//   readItems('events', {
-//     fields: ['*'],
-//     filter: {
-//       _and: [
-//         {
-//           end_datetime: {
-//             _gt: DateTime.now().toUTC(),
-//           },
-//         },
-//         import.meta.env.DEV // Only show published events in prod. Drafted events can be previewed in localhost.
-//           ? { status: { _in: ['draft', 'published'] } }
-//           : { status: 'published' },
-//       ],
-//     },
-//   })
-// );
 
 const upcomingEvents = events.filter(
   (event) =>
