@@ -108,6 +108,7 @@ export function PreviousEvents() {
     setValue(semester);
   }, []);
 
+  // TODO: fix ts dont work
   // effect for when events change, scrolls to corresponding event if hash is present
   React.useEffect(() => {
     if (!isSuccess) return;
