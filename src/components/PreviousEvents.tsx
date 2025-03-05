@@ -67,6 +67,9 @@ export function PreviousEvents() {
               semester: {
                 _eq: semester,
               },
+              start_datetime: {
+                _lte: DateTime.now().toUTC()
+              }
             },
             import.meta.env.DEV
               ? { status: { _in: ["draft", "published"] } }
@@ -195,14 +198,7 @@ export function PreviousEvents() {
           {events ? (
             events
               .filter((event, index) => {
-                const pastEvent =
-                  DateTime.fromISO(event.end_datetime, {
-                    zone: "America/Los_Angeles",
-                  }).toUTC() < DateTime.now().toUTC();
-
-                const evenIndex = index % 2 === 0;
-
-                return pastEvent && evenIndex;
+                return event && index % 2 === 0;
               })
               .map((event) => <EventCard key={event.slug} event={event} />)
           ) : (
@@ -220,14 +216,7 @@ export function PreviousEvents() {
           {events ? (
             events
               .filter((event, index) => {
-                const pastEvent =
-                  DateTime.fromISO(event.end_datetime, {
-                    zone: "America/Los_Angeles",
-                  }).toUTC() < DateTime.now().toUTC();
-
-                const oddIndex = index % 2 !== 0;
-
-                return pastEvent && oddIndex;
+                return event && index % 2 !== 0;
               })
               .map((event) => <EventCard key={event.slug} event={event} />)
           ) : (
