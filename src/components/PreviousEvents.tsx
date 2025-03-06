@@ -58,9 +58,9 @@ export function PreviousEvents() {
   // event fetching
   const fetchEvents = async (semester: string) => {
     const fetchedEvents = await directus.request(
-      readItems("events", {
-        fields: ["*"],
-        sort: ["-start_datetime"],
+      readItems('events', {
+        fields: ['*'],
+        sort: ['-start_datetime'],
         filter: {
           _and: [
             {
@@ -68,16 +68,17 @@ export function PreviousEvents() {
                 _eq: semester,
               },
               start_datetime: {
-                _lte: DateTime.now().toUTC()
-              }
+                _lte: DateTime.local({ zone: 'America/Los_Angeles' })
+              },
             },
             import.meta.env.DEV
-              ? { status: { _in: ["draft", "published"] } }
-              : { status: "published" },
+              ? { status: { _in: ['draft', 'published'] } }
+              : { status: 'published' },
           ],
         },
       })
     );
+      console.log(fetchedEvents);
 
     return fetchedEvents;
   };
@@ -175,12 +176,6 @@ export function PreviousEvents() {
       <div className="sm:hidden flex flex-col gap-4">
         {events ? (
           events
-            .filter(
-              (event) =>
-                DateTime.fromISO(event.end_datetime, {
-                  zone: "America/Los_Angeles",
-                }).toUTC() < DateTime.now().toUTC()
-            )
             .map((event) => <EventCard key={event.slug} event={event} />)
         ) : (
           <>
