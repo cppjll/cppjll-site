@@ -11,7 +11,7 @@ import { readItems } from "@directus/sdk";
 const members = await directus.request(
   readItems("board", {
     fields: ["*"],
-    sort: ["sort", "name"],
+    sort: ["-sort", "-service"],
   })
 );
 ---
