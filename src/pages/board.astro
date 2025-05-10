@@ -1,6 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import BoardMemberCardDetailed from "../components/BoardMemberCardDetailed.astro";
+import RetiredBoardMemberCard from "@/components/RetiredBoardMemberCard.astro";
 import { getCollection } from "astro:content";
 import { directus } from "@/lib/directus";
 import { readItems } from "@directus/sdk";
@@ -38,7 +39,7 @@ const members = await directus.request(
       {
         members
           .filter((member) => member.status === "inactive")
-          .map((member) => <BoardMemberCardDetailed member={member} />)
+          .map((member) => <RetiredBoardMemberCard member={member} />)
       }
     </div>
   </div>

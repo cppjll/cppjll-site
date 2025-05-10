@@ -1,0 +1,27 @@
+---
+import { Image } from "astro:assets";
+const { member } = Astro.props;
+import { API_URL } from "@/lib/directus";
+---
+
+<!-- Same as BoardMemberCard but without bio and socials -->
+<div id=`${member.slug}` class="card w-full border mb-6">
+  <figure class="bg-secondary">
+    <Image
+      src={`${API_URL}/assets/${member.image}?width=256`}
+      alt={member.name}
+      width="256"
+      height="256"
+      class="rounded-full my-4 w-36"
+    />
+  </figure>
+  <div class="card-body">
+    <h2 class="text-3xl font-bold font-display mx-auto">
+      {member.name}
+    </h2>
+    <h3 class="text-center text-xl mb-2 mx-auto">
+      {member.position}
+      {member.service && <p>{member.service}</p>}
+    </h3>
+  </div>
+</div>
