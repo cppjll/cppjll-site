@@ -11,7 +11,7 @@ import { readItems } from "@directus/sdk";
 const members = await directus.request(
   readItems("board", {
     fields: ["*"],
-    sort: ["-sort", "-service"],
+    sort: ["sort", "name"],
   })
 );
 ---
@@ -39,6 +39,7 @@ const members = await directus.request(
       {
         members
           .filter((member) => member.status === "inactive")
+          .sort((a, b) => b.service.localeCompare(a.service))
           .map((member) => <RetiredBoardMemberCard member={member} />)
       }
     </div>
