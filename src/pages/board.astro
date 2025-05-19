@@ -1,19 +1,35 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import BoardMemberCardDetailed from "../components/BoardMemberCardDetailed.astro";
-import RetiredBoardMemberCard from "@/components/RetiredBoardMemberCard.astro";
-import { getCollection } from "astro:content";
-import { directus } from "@/lib/directus";
-import { readItems } from "@directus/sdk";
+import Layout from '../layouts/Layout.astro';
+import BoardMemberCardDetailed from '../components/BoardMemberCardDetailed.astro';
+import RetiredBoardMemberCard from '@/components/RetiredBoardMemberCard.astro';
+import { getCollection } from 'astro:content';
+import { directus } from '@/lib/directus';
+import { readItems } from '@directus/sdk';
 
 // const boardMembers = await getCollection("board");
 
 const members = await directus.request(
-  readItems("board", {
-    fields: ["*"],
-    sort: ["sort", "name"],
+  readItems('board', {
+    fields: ['*'],
+    sort: ['sort', 'name'],
   })
 );
+
+const semesterOrder = {
+  Spring: 1,
+  Fall: 2,
+};
+
+function parseService(service: string) {
+  // Example of service: "Fall 2023 - Spring 2024"
+  const parts = service.split(' - ');
+  const endPart = parts[1];
+  const [semester, yearString] = endPart.split(' ');
+  const year = parseInt(yearString);
+
+  return { year, semesterValue: semesterOrder[semester as keyof typeof semesterOrder] };
+}
+
 ---
 
 <Layout title="Board - CPP Japanese Language Learners">
@@ -27,19 +43,27 @@ const members = await directus.request(
     <!-- Current Board -->
     <h1 class="text-5xl font-bold mb-4 font-display">Board</h1>
     <div class="grid md:grid-cols-2 gap-4">
-      {
-        members
-          .filter((member) => member.status === "active")
-          .map((member) => <BoardMemberCardDetailed member={member} />)
-      }
+      {members.filter((member) => member.status === 'active').map((member) => <BoardMemberCardDetailed member={member} />)}
     </div>
     <!-- Past Board -->
     <h1 class="text-5xl font-bold mb-4 my-4 font-display">Past Board</h1>
     <div class="grid md:grid-cols-2 gap-4">
       {
         members
-          .filter((member) => member.status === "inactive")
-          .sort((a, b) => b.service.localeCompare(a.service))
+          .filter((member) => member.status === 'inactive')
+          // Sort service from most recent to oldest
+          .sort((a, b) => {
+            a = parseService(a.service);
+            b = parseService(b.service);
+
+            // Compare year
+            if (a.year !== b.year) {
+              return b.year - a.year;
+            }
+
+            // Compare semester
+            return b.semesterValue - a.semesterValue;
+          })
           .map((member) => <RetiredBoardMemberCard member={member} />)
       }
     </div>
