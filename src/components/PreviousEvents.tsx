@@ -31,6 +31,15 @@ import { useStore } from "@nanostores/react";
 import { Skeleton } from "./ui/skeleton";
 
 const semesters = [
+  // Figure out a way to automate the semesters instead of hardcoding it each time
+  // {
+  //   value: "Spring2026",
+  //   label: "Spring 2026",
+  // },
+  {
+    value: "Fall2025",
+    label: "Fall 2025",
+  },
   {
     value: "Spring2025",
     label: "Spring 2025",
