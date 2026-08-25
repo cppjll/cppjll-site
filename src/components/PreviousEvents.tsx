@@ -30,39 +30,90 @@ import { queryClient } from "@/stores/query";
 import { useStore } from "@nanostores/react";
 import { Skeleton } from "./ui/skeleton";
 
-const semesters = [
-  // Figure out a way to automate the semesters instead of hardcoding it each time
-  {
-    value: "Spring2026",
-    label: "Spring 2026",
-  },
-  {
-    value: "Fall2025",
-    label: "Fall 2025",
-  },
-  {
-    value: "Spring2025",
-    label: "Spring 2025",
-  },
-  {
-    value: "Fall2024",
-    label: "Fall 2024",
-  },
-  {
-    value: "Spring2024",
-    label: "Spring 2024",
-  },
-  {
-    value: "Fall2023",
-    label: "Fall 2023",
-  },
-];
+type SemesterOption = {
+  value: string;
+  label: string;
+};
+
+const termOrder: Record<string, number> = {
+  Spring: 0,
+  Fall: 1,
+};
+
+const parseSemester = (semester: string) => {
+  const match = semester.match(/^(Spring|Fall)\s*(\d{4})$/i);
+
+  if (!match) return null;
+
+  const term = match[1][0].toUpperCase() + match[1].slice(1).toLowerCase();
+  return { term, year: Number(match[2]) };
+};
+
+const createSemesterOption = (value: string): SemesterOption => {
+  const parsed = parseSemester(value);
+
+  return {
+    value,
+    label: parsed ? `${parsed.term} ${parsed.year}` : value,
+  };
+};
+
+const sortSemestersNewestFirst = (a: string, b: string) => {
+  const parsedA = parseSemester(a);
+  const parsedB = parseSemester(b);
+
+  if (!parsedA || !parsedB) return b.localeCompare(a);
+  if (parsedA.year !== parsedB.year) return parsedB.year - parsedA.year;
+
+  return termOrder[parsedB.term] - termOrder[parsedA.term];
+};
 
 export function PreviousEvents() {
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState<string>();
 
   const client = useStore(queryClient);
+
+  const fetchSemesters = async () => {
+    const fetchedEvents = await directus.request(
+      readItems("events", {
+        fields: ["semester"],
+        limit: -1,
+        filter: {
+          _and: [
+            {
+              start_datetime: {
+                _lte: DateTime.local({ zone: "America/Los_Angeles" }),
+              },
+            },
+            import.meta.env.DEV
+              ? { status: { _in: ["draft", "published"] } }
+              : { status: "published" },
+          ],
+        },
+      })
+    );
+
+    const semesterValues = fetchedEvents
+      .map((event) => event.semester)
+      .filter(
+        (semester): semester is string =>
+          Boolean(semester) && parseSemester(semester) !== null
+      );
+
+    return [...new Set(semesterValues)]
+      .sort(sortSemestersNewestFirst)
+      .map(createSemesterOption);
+  };
+
+  const { data: semesters = [], isPending: semestersPending } = useQuery(
+    {
+      queryKey: ["event-semesters"],
+      queryFn: fetchSemesters,
+      staleTime: 120000,
+    },
+    client
+  );
 
   // event fetching
   const fetchEvents = async (semester: string) => {
@@ -87,19 +138,18 @@ export function PreviousEvents() {
         },
       })
     );
-      console.log(fetchedEvents);
-
+    
     return fetchedEvents;
   };
 
   const {
     data: events,
-    isPending,
     isSuccess,
   } = useQuery(
     {
       queryKey: ["events", value],
-      queryFn: () => fetchEvents(value || "Spring2025"),
+      queryFn: () => fetchEvents(value!),
+      enabled: Boolean(value),
       staleTime: 120000,
     },
     client
@@ -113,13 +163,17 @@ export function PreviousEvents() {
     history.pushState({}, "", url);
   };
 
-  // initial effect on render, gets semester from url if it exists, otherwise defaults to first item in semesters array
+  // Use the URL semester when valid, otherwise default to the newest Directus value
   React.useEffect(() => {
+    if (value || semesters.length === 0) return;
+
     const searchParams = new URLSearchParams(location.search);
     const semesterParam = searchParams.get("semester");
-    const semester = semesterParam || semesters[0]?.value;
+    const semester = semesters.some(({ value }) => value === semesterParam)
+      ? semesterParam!
+      : semesters[0].value;
     setValue(semester);
-  }, []);
+  }, [semesters, value]);
 
   // TODO: fix ts dont work
   // effect for when events change, scrolls to corresponding event if hash is present
@@ -142,11 +196,14 @@ export function PreviousEvents() {
           variant="outline"
           role="combobox"
           aria-expanded={open}
+          disabled={semestersPending || semesters.length === 0}
           className="w-[200px] justify-between"
         >
-          {value
+          {semestersPending
+            ? "Loading semesters..."
+            : value
             ? semesters.find((semester) => semester.value === value)?.label
-            : semesters[0]?.label}
+            : semesters[0]?.label || "No semesters"}
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
